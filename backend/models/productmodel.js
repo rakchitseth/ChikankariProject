@@ -8,10 +8,11 @@ const mySchema = new Schema({
     material: String,
     embroidery: String,
     price: {type : Number, required: true},
-    stiched: Boolean,
+    stitched: Boolean,
     discount: {type : Number, default: 0},
     gender: {type: String, required: true},
     stock: {type: Number},
+    sizes: {type: String , required: true},
 })
 
 module.exports = model('chikanproducts',mySchema);

@@ -19,7 +19,7 @@ export function DropzoneButton() {
         maxSize={30 * 1024 ** 2}
       >
         <div style={{ pointerEvents: 'none' }}>
-          <Group justify="center">
+          {/* <Group justify="center">
             <Dropzone.Accept>
               <IconDownload
                 style={{ width: rem(50), height: rem(50) }}
@@ -37,16 +37,12 @@ export function DropzoneButton() {
             <Dropzone.Idle>
               <IconCloudUpload style={{ width: rem(50), height: rem(50) }} stroke={1.5} />
             </Dropzone.Idle>
-          </Group>
+          </Group> */}
 
           <Text ta="center" fw={700} fz="lg" mt="xl">
             <Dropzone.Accept>Drop files here</Dropzone.Accept>
             <Dropzone.Reject>Pdf file less than 30mb</Dropzone.Reject>
-            <Dropzone.Idle>Upload resume</Dropzone.Idle>
-          </Text>
-          <Text ta="center" fz="sm" mt="xs" c="dimmed">
-            Drag&apos;n&apos;drop files here to upload. We can accept only <i>.pdf</i> files that
-            are less than 30mb in size.
+            {/* <Dropzone.Idle>Upload resume</Dropzone.Idle> */}
           </Text>
         </div>
       </Dropzone>
