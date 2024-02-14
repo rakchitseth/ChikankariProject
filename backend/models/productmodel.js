@@ -2,13 +2,17 @@ const {Schema,model} = require('../connection')
 
 // import Schema from 'mongoose'
 const mySchema = new Schema({
-    productname:String,
-    image : String,
-    description : String,
+    title: {type : String, required: true},
+    image: [{type : String, required: true}],
+    description : {type : String, required: true},
     material: String,
-    price: Number
-
+    embroidery: String,
+    price: {type : Number, required: true},
+    stiched: Boolean,
+    discount: {type : Number, default: 0},
+    gender: {type: String, required: true},
+    stock: {type: Number},
 })
 
-module.exports = model('productmodel',mySchema);
+module.exports = model('chikanproducts',mySchema);
 

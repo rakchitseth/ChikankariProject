@@ -1,6 +1,6 @@
 const express = require('express');
 
-const model = require('../models/handicraftmodel');
+const model = require('../models/productmodel');
 
 const router = express.Router();
 router.post('/add', (req, res) => {
@@ -46,7 +46,7 @@ router.get('/update', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-    
+
     model.findByIdAndDelete(req.params.id)
         .then((result) => {
             res.json(result);

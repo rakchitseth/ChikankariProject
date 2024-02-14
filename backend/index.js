@@ -1,7 +1,7 @@
 // import express
 const express = require('express');
 const userrouter= require('./routers/userrouter');
-const handicraftrouter = require('./routers/handicraftrouter')
+const productrouter = require('./routers/productrouter')
 const cors = require('cors')
 // initialize express app
 
