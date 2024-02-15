@@ -1,5 +1,4 @@
 import { useToggle, upperFirst } from '@mantine/hooks';
-import { useForm } from '@mantine/form';
 import {
   TextInput,
   PasswordInput,
@@ -14,18 +13,17 @@ import {
   Stack,
 } from '@mantine/core';
 import { GoogleButton } from './GoogleButton';
-// import { TwitterButton } from './TwitterButton';
+import { useFormik } from 'formik';
 
 const Login = () => {
   // const [type, toggle] = useToggle(['login', 'register']);
-  const form = useForm({
+  const form = useFormik({
     initialValues: {
       email: '',
       name: '',
       password: '',
       terms: true,
     },
-
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
@@ -33,7 +31,7 @@ const Login = () => {
   });
 
   const loginSubmit = (values) => {
-    
+    console.log(values);
   }
 
   return (
@@ -96,9 +94,7 @@ const Login = () => {
               ? 'Already have an account? Login'
               : "Don't have an account? Register"}
           </Anchor>
-          <Button type="submit" radius="xl">
-            {upperFirst(type)}
-          </Button>
+
         </Group>
       </form>
     </Paper>

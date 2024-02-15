@@ -14,11 +14,7 @@ router.post('/add', (req, res) => {
             console.log(err);
             res.json(err);
         });
-
-    // res.send("add response from user ")
 });
-
-
 
 router.get('/getall', (req, res) => {
     model.find()
@@ -46,7 +42,7 @@ router.get('/update', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-    
+
     model.findByIdAndDelete(req.params.id)
         .then((result) => {
             res.json(result);
@@ -57,17 +53,17 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.post('/authenticate',(req,res)=>{
+router.post('/authenticate', (req, res) => {
     model.findOne(req.body)
-    .then((result) => {
-      if(result) res.json(result);
-      else res.status(401).json({message:'Invalid credentials'})
-        
-      }  
-    ).catch((err) => {
-        console.log(err);
-        res.json(err);
-    });
+        .then((result) => {
+            if (result) res.json(result);
+            else res.status(401).json({ message: 'Invalid credentials' })
+
+        }
+        ).catch((err) => {
+            console.log(err);
+            res.json(err);
+        });
 });
 module.exports = router;
 //getall
