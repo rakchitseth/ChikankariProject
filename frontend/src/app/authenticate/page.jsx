@@ -25,7 +25,8 @@ const Authenticate = () => {
         console.log(values);
     }
 
-    return (
+    return ( 
+    
         <Paper radius="md" p="xl" withBorder>
             <Text size="lg" fw={500}>
                 Welcome to Mantine, {type} with
