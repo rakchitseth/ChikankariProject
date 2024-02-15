@@ -56,7 +56,7 @@ function AddProduct() {
 
                     </div>
 
-                    <form className={classes.form} onSubmit={(event) => event.preventDefault()}>
+                    <form className={classes.form} onSubmit={formik.handleSubmit}>
                         <Text fz="lg" fw={700} className={classes.title}>
                             Add the product
                         </Text>
