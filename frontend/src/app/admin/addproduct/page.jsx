@@ -42,6 +42,9 @@ function AddProduct() {
         validationSchema: LoginSchema,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
+
+            
+
         },
     });
     return (

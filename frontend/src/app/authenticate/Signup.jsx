@@ -1,9 +1,10 @@
 'use client';
-import { Anchor, Checkbox, Group, PasswordInput, Stack, TextInput } from '@mantine/core';
+import { Anchor, Button, Checkbox, Group, PasswordInput, Stack, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { enqueueSnackbar } from 'notistack';
 import React from 'react'
 
-const Signup = ({setType}) => {
+const Signup = ({ setType }) => {
 
     const signupForm = useForm({
         initialValues: {
@@ -21,14 +22,20 @@ const Signup = ({setType}) => {
     const signupSubmit = async (values) => {
         console.log(values);
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`);
+        if (res.status === 200) {
+            enqueueSnackbar('User added successfully', { variant: 'success' });
+        } else {
+            enqueueSnackbar('Some Error occured', { variant: 'error' });
+        }
 
     }
 
     return (
         <div>
+            
             <form onSubmit={signupForm.onSubmit(signupSubmit)}>
-                <Stack>
+                <Stack gap={'xl'}>
                     <TextInput
                         label="Name"
                         placeholder="Your name"
@@ -62,6 +69,9 @@ const Signup = ({setType}) => {
                         checked={signupForm.values.terms}
                         onChange={(event) => signupForm.setFieldValue('terms', event.currentTarget.checked)}
                     />
+
+                    <Button color='pink' type='submit'>Submit</Button>
+
                 </Stack>
 
                 <Group justify="space-between" mt="xl">
