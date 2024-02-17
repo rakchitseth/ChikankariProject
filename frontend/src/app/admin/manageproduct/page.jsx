@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react';
 import {
   Table,
@@ -15,7 +16,7 @@ import classes from './TableSort.module.css';
 
 
 function Th({ children, reversed, sorted, onSort }) {
-  const Icon = sorted ? (reversed ? IconChevronUp); 
+  const Icon = sorted ? (reversed ? IconChevronUp: IconChevronDown) : IconSelector;
   return (
     <Table.Th className={classes.th}>
       <UnstyledButton onClick={onSort} className={classes.control}>

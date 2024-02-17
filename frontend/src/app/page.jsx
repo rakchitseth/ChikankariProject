@@ -2,10 +2,13 @@
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import { Paper, Text, Title, Button, useMantineTheme, rem } from '@mantine/core';
-import classes from './carousel.module.css';
+import classes from './CardsCarousel.module.css';
 import React from 'react'
+ 
+
 
 function Card({ image, title, category }) {
+
   return (
     <Paper
       shadow="md"

@@ -3,7 +3,7 @@ import { Anchor, Checkbox, Divider, Group, Paper, PasswordInput, Stack, Text, Te
 import { useForm } from '@mantine/form';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
-
+import './auth.css';
 const Authenticate = () => {
 
     const [type, setType] = useState('register');
@@ -25,10 +25,12 @@ const Authenticate = () => {
         console.log(values);
     }
 
-    return (
+    return ( 
+        <div className='card'>
+
         <Paper radius="md" p="xl" withBorder>
             <Text size="lg" fw={500}>
-                Welcome to Mantine, {type} with
+                Welcome to CK Sewa Chikan Industries , {type} with
             </Text>
 
             <Group grow mb="md" mt="md">
@@ -89,6 +91,7 @@ const Authenticate = () => {
                 </Group>
             </form>
         </Paper>
+      </div>
     )
 }
 
