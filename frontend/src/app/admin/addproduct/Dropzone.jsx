@@ -19,6 +19,7 @@ export function DropzoneButton() {
         maxSize={30 * 1024 ** 2}
       >
         <div style={{ pointerEvents: 'none' }}>
+          
           {/* <Group justify="center">
             <Dropzone.Accept>
               <IconDownload
