@@ -12,7 +12,7 @@ router.post('/add', (req, res) => {
             res.json(result);
         }).catch((err) => {
             console.log(err);
-            res.json(err);
+            res.status(500).json(err);
         });
 
     // res.send("add response from user ")
