@@ -91,18 +91,18 @@ export function Navbar() {
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}
-          <h3>ChikanKari</h3>
+          <a href="./" className={classes.link}>ChikanKari</a>
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="#" className={classes.link}>
+            {/* <a href="./" className={classes.link}>
               Home
-            </a>
+            </a> */}
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
                 <a href="#" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Features
+                      Women
                     </Box>
                     <IconChevronDown
                       style={{ width: rem(16), height: rem(16) }}
@@ -142,10 +142,10 @@ export function Navbar() {
               </HoverCard.Dropdown>
             </HoverCard>
             <a href="#" className={classes.link}>
-              Learn
+              Mens
             </a>
             <a href="#" className={classes.link}>
-              Academy
+              Kids
             </a>
           </Group>
 

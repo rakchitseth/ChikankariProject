@@ -5,6 +5,7 @@ import classes from './addproduct.module.css';
 import { DropzoneButton } from './Dropzone';
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup'; 
+import { enqueueSnackbar } from 'notistack';
 
 
 const LoginSchema = Yup.object().shape({
@@ -40,12 +41,28 @@ function AddProduct() {
             sizes: '',
         },
         validationSchema: LoginSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values, { resetForm }) => {
+            console.log(values);
+            // setTimeout(() => {
 
-            
+            //   resetForm();
+            // },3000);
+            const res = await fetch('http://localhost:5500/handicraft/add', {
+                method: 'POST',
+                body: JSON.stringify(values),
+                headers: { 'Content-type': 'application/json' }
+            });
+
+            console.log(res.status);
+            if (res.status === 200) {
+                enqueueSnackbar('Succesfully Registered', { variant: 'success' })
+            }
+            else {
+                enqueueSnackbar("Error Occured", { variant: "error" })
+            }
 
         },
+
     });
     return (
         <Container>
