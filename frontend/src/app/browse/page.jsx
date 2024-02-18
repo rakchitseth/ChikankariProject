@@ -26,13 +26,16 @@ const Browse = () => {
 
   const showDetails = async () => {
     return (
-
+      <div>
+        <h1>Product Details</h1>
+        
+      </div>
     )
   }
 
   return (
     <div>
-      
+
     </div>
   )
 }
