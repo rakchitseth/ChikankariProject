@@ -60,9 +60,7 @@ function AddProduct() {
             else {
                 enqueueSnackbar("Error Occured", { variant: "error" })
             }
-
         },
-
     });
 
     // console.log(formik.errors);
