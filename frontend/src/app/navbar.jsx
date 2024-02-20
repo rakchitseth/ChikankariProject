@@ -29,6 +29,7 @@ import {
   IconChevronDown,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
+import Link from 'next/link';
 
 const mockdata = [
   {
@@ -195,7 +196,7 @@ export function Navbar() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+            <Link content={Button} href="/authenticate" variant="default">Log in</Link>
             <Button>Sign up</Button>
           </Group>
         </ScrollArea>
