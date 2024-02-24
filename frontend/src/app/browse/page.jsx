@@ -12,19 +12,25 @@ const Browse = () => {
   const [loading, setLoading] = useState(false);
 
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`);
-    console.log(res.status);
-    const data = await res.json();
+  const fetchProducts = () => {
+    if (window !== undefined) {
+      setLoading(true);
+      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+        .then((result) => result.json())
+        .then(data => {
+          console.log(data);
+          setProductList(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-    console.log(data);
-    setProductList(data);
-    setLoading(false);
+    }
   }
 
   useEffect(() => {
-    fetchProducts();
+    // fetchProducts();
   }, []);
 
 
@@ -44,6 +50,7 @@ const Browse = () => {
 
   return (
     <div>
+      <h1>Browse Product</h1>
       <Container>
 
         <Grid>
