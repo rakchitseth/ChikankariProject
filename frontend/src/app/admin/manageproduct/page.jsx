@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import {
   Table,
   ScrollArea,
@@ -10,13 +10,15 @@ import {
   TextInput,
   rem,
   keys,
+  Container,
+  Title,
 } from '@mantine/core';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './TableSort.module.css';
 
 
 function Th({ children, reversed, sorted, onSort }) {
-  const Icon = sorted ? (reversed ? IconChevronUp: IconChevronDown) : IconSelector;
+  const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
   return (
     <Table.Th className={classes.th}>
       <UnstyledButton onClick={onSort} className={classes.control}>
@@ -151,6 +153,30 @@ function ManageProduct() {
   const [sortBy, setSortBy] = useState(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
+  const [productList, setProductList] = useState([]);
+  const [masterList, setMasterList] = useState([]);
+
+
+  const fetchProducts = () => {
+    if (window !== undefined) {
+      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+        .then((result) => result.json())
+        .then(data => {
+          console.log(data);
+          setProductList(data);
+          setMasterList(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const setSorting = (field) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
@@ -173,55 +199,64 @@ function ManageProduct() {
   ));
 
   return (
-    <ScrollArea>
-      <TextInput
-        placeholder="Search by any field"
-        mb="md"
-        leftSection={<IconSearch style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
-        value={search}
-        onChange={handleSearchChange}
-      />
-      <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
-        <Table.Tbody>
-          <Table.Tr>
-            <Th
-              sorted={sortBy === 'name'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('name')}
-            >
-              Name
-            </Th>
-            <Th
-              sorted={sortBy === 'email'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('email')}
-            >
-              Email
-            </Th>
-            <Th
-              sorted={sortBy === 'company'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('company')}
-            >
-              Company
-            </Th>
-          </Table.Tr>
-        </Table.Tbody>
-        <Table.Tbody>
-          {rows.length > 0 ? (
-            rows
-          ) : (
-            <Table.Tr>
-              <Table.Td colSpan={Object.keys(data[0]).length}>
-                <Text fw={500} ta="center">
-                  Nothing found
-                </Text>
-              </Table.Td>
-            </Table.Tr>
-          )}
-        </Table.Tbody>
-      </Table>
-    </ScrollArea>
+    <div>
+      <Container size="lg">
+
+        <header>
+          <Title order={1} align="center" my={20}>Manage Product</Title>
+        </header>
+
+        <ScrollArea>
+          <TextInput
+            placeholder="Search by any field"
+            mb="md"
+            leftSection={<IconSearch style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
+            value={search}
+            onChange={handleSearchChange}
+          />
+          <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
+            <Table.Tbody>
+              <Table.Tr>
+                <Th
+                  sorted={sortBy === 'name'}
+                  reversed={reverseSortDirection}
+                  onSort={() => setSorting('name')}
+                >
+                  Name
+                </Th>
+                <Th
+                  sorted={sortBy === 'email'}
+                  reversed={reverseSortDirection}
+                  onSort={() => setSorting('email')}
+                >
+                  Email
+                </Th>
+                <Th
+                  sorted={sortBy === 'company'}
+                  reversed={reverseSortDirection}
+                  onSort={() => setSorting('company')}
+                >
+                  Company
+                </Th>
+              </Table.Tr>
+            </Table.Tbody>
+            <Table.Tbody>
+              {rows.length > 0 ? (
+                rows
+              ) : (
+                <Table.Tr>
+                  <Table.Td colSpan={Object.keys(data[0]).length}>
+                    <Text fw={500} ta="center">
+                      Nothing found
+                    </Text>
+                  </Table.Td>
+                </Table.Tr>
+              )}
+            </Table.Tbody>
+          </Table>
+        </ScrollArea>
+      </Container>
+    </div>
   );
 }
 

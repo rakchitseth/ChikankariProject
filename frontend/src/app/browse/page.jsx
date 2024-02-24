@@ -30,15 +30,17 @@ const Browse = () => {
   }
 
   useEffect(() => {
-    // fetchProducts();
+    fetchProducts();
   }, []);
 
 
-  const showDetails = async () => {
+  const showDetails = () => {
     if (!loading) {
       return (
         productList.map(product => (
-          <ProductCard productData={product} key={product._id} />
+          <Grid.Col span={{ xs: 12, sm: 6, md: 3 }} key={product._id}>
+            <ProductCard productData={product} key={product._id} />
+          </Grid.Col>
         ))
       )
     } else {
@@ -51,8 +53,7 @@ const Browse = () => {
   return (
     <div>
       <h1>Browse Product</h1>
-      <Container>
-
+      
         <Grid>
           <Grid.Col span={{ md: 3 }}>
             <Card shadow="xs" radius="md">
@@ -60,11 +61,12 @@ const Browse = () => {
             </Card>
           </Grid.Col>
           <Grid.Col span={{ md: 9 }}>
-            {showDetails()}
+            <Grid>
+              {showDetails()}
+            </Grid>
           </Grid.Col>
         </Grid>
 
-      </Container>
     </div>
   )
 }

@@ -12,6 +12,7 @@ const theme = createTheme({
 const Template = ({ children }) => {
   return (
     <MantineProvider
+    defaultColorScheme="light"
       theme={theme}>
       <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
         <Navbar />
