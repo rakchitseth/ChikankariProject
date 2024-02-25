@@ -2,7 +2,7 @@ const {Schema,model} = require('../connection')
 
 // import Schema from 'mongoose'
 const mySchema = new Schema({
-    title: {type : String, required: true},
+    title: {type : String, required: true, unique: true},
     image: [{type : String, required: true}],
     description : {type : String, required: true},
     material: String,

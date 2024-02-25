@@ -190,11 +190,12 @@ function ManageProduct() {
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
-  const rows = sortedData.map((row) => (
-    <Table.Tr key={row.name}>
-      <Table.Td>{row.name}</Table.Td>
-      <Table.Td>{row.email}</Table.Td>
-      <Table.Td>{row.company}</Table.Td>
+  const rows = productList.map((product) => (
+    <Table.Tr key={product._id}>
+      <Table.Td>{product.title}</Table.Td>
+      <Table.Td>{product.material}</Table.Td>
+      <Table.Td>{product.embroidery}</Table.Td>
+      <Table.Td>{product.embroidery}</Table.Td>
     </Table.Tr>
   ));
 
@@ -230,6 +231,13 @@ function ManageProduct() {
                   onSort={() => setSorting('email')}
                 >
                   Email
+                </Th>
+                <Th
+                  sorted={sortBy === 'company'}
+                  reversed={reverseSortDirection}
+                  onSort={() => setSorting('company')}
+                >
+                  Embroidery
                 </Th>
                 <Th
                   sorted={sortBy === 'company'}
