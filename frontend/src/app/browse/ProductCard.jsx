@@ -2,6 +2,7 @@
 
 import { Badge, Button, Card, Grid, Group, Text } from "@mantine/core";
 import classes from './browse.module.css';
+import Link from "next/link";
 
 const ProductCard = ({ productData }) => {
   return (
@@ -41,10 +42,11 @@ const ProductCard = ({ productData }) => {
                 per day
               </Text>
             </div>
-
-            <Button radius="xl" style={{ flex: 1 }}>
-              Rent now
+            <Link href='/productdetails'>
+            <Button radius="xl" style={{ flex: 1 }}  >
+              More details
             </Button>
+            </Link>
           </Group>
         </Card.Section>
       </Card>
