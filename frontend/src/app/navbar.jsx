@@ -151,7 +151,7 @@ export function Navbar() {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
+            <Link variant="default" href="/authenticate">Log in</Link>
             <Button>Sign up</Button>
           </Group>
 
