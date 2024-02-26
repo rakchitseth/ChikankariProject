@@ -20,12 +20,7 @@ import {
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import { useDisclosure } from '@mantine/hooks';
 import {
-  IconNotification,
-  IconCode,
-  IconBook,
-  IconChartPie3,
-  IconFingerprint,
-  IconCoin,
+
   IconChevronDown,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
@@ -33,34 +28,34 @@ import Link from 'next/link';
 
 const mockdata = [
   {
-    // icon: IconCode,
+    
     title: 'Kurtis',
-    // description: 'This Pokémon’s cry is very loud and distracting',
+    
   },
   {
-    // icon: IconCoin,
+    
     title: 'Sarees',
-    // description: 'The fluid of Smeargle’s tail secretions changes',
+    
   },
   {
-    // icon: IconBook,
+    
     title: 'Suits',
-    // description: 'Yanma is capable of seeing 360 degrees without',
+    
   },
   {
-    // icon: IconFingerprint,
+    
     title: 'suit length',
-    // description: 'The shell’s rounded shape and the grooves on its.',
+    
   },
   {
-    // icon: IconChartPie3,
+    
     title: 'Sharara',
-    // description: 'This Pokémon uses its flying ability to quickly chase',
+    
   },
   {
-    // icon: IconNotification,
+    
     title: 'Nighty',
-    // description: 'Combusken battles with the intensely hot flames it spews',
+  
   },
 ];
 
