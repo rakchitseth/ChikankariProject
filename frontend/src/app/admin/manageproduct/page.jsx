@@ -115,6 +115,15 @@ function ManageProduct() {
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
+  const deleteproduct = async (id) => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/delete`+id, {method: 'DELETE'});
+    console.log(res.status);
+    if(res.status === 200){
+        fetchProducts();
+        enqueueSnackbar('User Delete', {variant: 'success'});
+    }
+} 
+
   const rows = productList.map((product) => (
     <Table.Tr key={product._id}>
       <Table.Td>{product.title}</Table.Td>
@@ -122,7 +131,7 @@ function ManageProduct() {
       <Table.Td>{product.embroidery}</Table.Td>
       <Table.Td>{product.embroidery}</Table.Td>
       <Table.Td> 
-        <button className='btn btn-danger'>Delete</button>
+      <button onClick={ () => {deleteproduct(product._id)} } className='btn btn-danger'>Delete</button>
       </Table.Td>
     </Table.Tr>
   ));
