@@ -33,34 +33,34 @@ import Link from 'next/link';
 
 const mockdata = [
   {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
+    // icon: IconCode,
+    title: 'Kurtis',
+    // description: 'This Pokémon’s cry is very loud and distracting',
   },
   {
-    icon: IconCoin,
-    title: 'Free for everyone',
-    description: 'The fluid of Smeargle’s tail secretions changes',
+    // icon: IconCoin,
+    title: 'Sarees',
+    // description: 'The fluid of Smeargle’s tail secretions changes',
   },
   {
-    icon: IconBook,
-    title: 'Documentation',
-    description: 'Yanma is capable of seeing 360 degrees without',
+    // icon: IconBook,
+    title: 'Suits',
+    // description: 'Yanma is capable of seeing 360 degrees without',
   },
   {
-    icon: IconFingerprint,
-    title: 'Security',
-    description: 'The shell’s rounded shape and the grooves on its.',
+    // icon: IconFingerprint,
+    title: 'suit length',
+    // description: 'The shell’s rounded shape and the grooves on its.',
   },
   {
-    icon: IconChartPie3,
-    title: 'Analytics',
-    description: 'This Pokémon uses its flying ability to quickly chase',
+    // icon: IconChartPie3,
+    title: 'Sharara',
+    // description: 'This Pokémon uses its flying ability to quickly chase',
   },
   {
-    icon: IconNotification,
-    title: 'Notifications',
-    description: 'Combusken battles with the intensely hot flames it spews',
+    // icon: IconNotification,
+    title: 'Nighty',
+    // description: 'Combusken battles with the intensely hot flames it spews',
   },
 ];
 
