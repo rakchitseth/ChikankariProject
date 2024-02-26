@@ -237,7 +237,7 @@ function ManageProduct() {
                   reversed={reverseSortDirection}
                   onSort={() => setSorting('company')}
                 >
-                  Embroidery
+                  Embroidery 
                 </Th>
                 <Th
                   sorted={sortBy === 'company'}
