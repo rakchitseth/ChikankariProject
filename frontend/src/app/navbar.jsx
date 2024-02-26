@@ -1,3 +1,4 @@
+'use client';
 import {
   HoverCard,
   Group,
@@ -25,51 +26,53 @@ import {
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const mockdata = [
   {
-    
+
     title: 'Kurtis',
-    
+    link: "/browse"
   },
   {
-    
+
     title: 'Sarees',
-    
+    link: "/browse"
   },
   {
-    
+
     title: 'Suits',
-    
+    link: "/browse"
   },
   {
-    
+
     title: 'suit length',
-    
+    link: "/browse"
   },
   {
-    
+
     title: 'Sharara',
-    
+    link: "/browse"
   },
   {
-    
+
     title: 'Nighty',
-  
+    link: "/browse"
   },
 ];
 
-export function Navbar() {
+export const Navbar = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
+  const router = useRouter();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
-      <Group wrap="nowrap" align="flex-start">
-        <ThemeIcon size={34} variant="default" radius="md">
+      <Group wrap="nowrap" align="flex-start" onClick={e => router.push(item.link)}>
+        {/* <ThemeIcon size={34} variant="default" radius="md">
           <item.icon style={{ width: rem(22), height: rem(22) }} color={theme.colors.blue[6]} />
-        </ThemeIcon>
+        </ThemeIcon> */}
         <div>
           <Text size="sm" fw={500}>
             {item.title}
