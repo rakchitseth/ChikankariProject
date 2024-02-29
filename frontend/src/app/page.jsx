@@ -6,14 +6,19 @@ import classes from './CardsCarousel.module.css';
 import React from 'react'
  
 
+const CardProps = {
+  image: '',
+  title: '',
+  category: ''
+};
 
 function Card({ image, title, category }) {
 
   return (
     <Paper
       shadow="md"
-      p="xl"
-      radius="md"
+      p="md"
+      radius="sm"
       style={{ backgroundImage: `url(${image})` }}
       className={classes.card}
     >
