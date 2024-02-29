@@ -4,6 +4,7 @@ import '@mantine/core/styles.css';
 import { Navbar } from './navbar';
 import React from 'react';
 import { SnackbarProvider } from 'notistack';
+import Footer from './footer';
 
 
 const theme = createTheme({
@@ -17,6 +18,7 @@ const Template = ({ children }) => {
       <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
         <Navbar />
         {children}
+        <Footer />
       </SnackbarProvider>
     </MantineProvider>
 

@@ -1,6 +1,6 @@
 import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
-import { MantineLogo } from '@mantinex/mantine-logo';
+
 import classes from './FooterLinks.module.css';
 
 const data = [
@@ -33,7 +33,7 @@ const data = [
   },
 ];
 
-export function FooterLinks() {
+const  FooterLinks = () => {
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text
@@ -59,7 +59,7 @@ export function FooterLinks() {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          <MantineLogo size={30} />
+          {/* <MantineLogo size={30} /> */}
           <Text size="xs" c="dimmed" className={classes.description}>
             Build fully functional accessible web applications faster than ever
           </Text>
@@ -86,3 +86,5 @@ export function FooterLinks() {
     </footer>
   );
 }
+
+export default FooterLinks;
