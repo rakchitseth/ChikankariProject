@@ -46,9 +46,9 @@ const ProductCard = ({ productData }) => {
               </Text>
             </div>
             
-            <Link href={'/productdetails/'+productData._id} radius="xl" style={{ flex: 1 }} className={Button}>
+            <Button component={Link} href={'/productdetails/'+productData._id} radius="xl" style={{ flex: 1 }} className={Button}>
               View More
-            </Link>
+            </Button>
           </Group>
         </Card.Section>
       </Card>
