@@ -1,5 +1,5 @@
 'use client';
-import { Paper, Text, TextInput, Textarea, Button, Group, SimpleGrid, Container } from '@mantine/core';
+import { Paper, Text, TextInput, Textarea, Button, Group, SimpleGrid, Container,NativeSelect } from '@mantine/core';
 // import bg from './bg.svg';
 import classes from './addproduct.module.css';
 import { DropzoneButton } from './Dropzone';
@@ -99,7 +99,7 @@ function AddProduct() {
                                 <TextInput label="Embroidery type" placeholder="Type of embroidery" id="embroidery"   onChange={formik.handleChange} value={formik.values.embroidery}  error={ formik.touched.embroidery && formik.errors.embroidery} />
                                 <TextInput label="Price" id="price"   onChange={formik.handleChange} value={formik.values.price} error={ formik.touched.price && formik.errors.price} />
                                 {/* <TextInput label="Stitched" placeholder="stitching type" id="stitched"   onChange={formik.handleChange} value={formik.values.stitched} error={ formik.touched.stitched && formik.errors.stitched} /> */}
-                                <TextInput label="gender"   id="gender"   onChange={formik.handleChange} value={formik.values.gender } error={ formik.touched.gender && formik.errors.gender} />
+                                <NativeSelect label="gender"   id="gender" data={['men', 'women']}   onChange={formik.handleChange} value={formik.values.gender } error={ formik.touched.gender && formik.errors.gender} />
                                 <TextInput label="stock" placeholder="Quantity of product" id="stock"  onChange={formik.handleChange} value={formik.values.stock} error={ formik.touched.stock && formik.errors.stock} />
                                 <TextInput label="Sizes" placeholder="Sizes available" id="sizes" onChange={formik.handleChange} value={formik.values.sizes} error={ formik.touched.sizes && formik.errors.sizes} />
                                 <TextInput label="discount" placeholder="Discount code" id="discount"   onChange={formik.handleChange} value={formik.values.discount} error={ formik.touched.discount && formik.errors.discount} />
