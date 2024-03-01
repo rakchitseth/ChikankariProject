@@ -6,16 +6,20 @@ import 'swiper/css/pagination';
 
 import './styles.css';
 
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 
-const  Home=()=> {
+const Home = () => {
   return (
     <>
       <Swiper
         pagination={{
           dynamicBullets: true,
         }}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide><img src="https://morachikankari.com/wp-content/uploads/2023/12/Homepage-BannerNY.jpg" alt="" /></SwiperSlide>
@@ -25,6 +29,6 @@ const  Home=()=> {
   );
 }
 
-  
+
 
 export default Home;
