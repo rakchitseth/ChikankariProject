@@ -1,13 +1,14 @@
 "use client";
 import { Badge, Button, Card, Container, Grid, Group, Image, Text } from '@mantine/core';
 import React, { useEffect, useState } from 'react'
-import ProductCard from './ProductCard';
+import ProductCard from '../ProductCard';
+import { useParams } from 'next/navigation';
 
 
 
 const Browse = () => {
 
-  // const { id } = useParams();
+  const { gender } = useParams();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +16,7 @@ const Browse = () => {
   const fetchProducts = () => {
     if (window !== undefined) {
       setLoading(true);
-      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getbygender/${gender}`)
         .then((result) => result.json())
         .then(data => {
           console.log(data);

@@ -41,8 +41,24 @@ router.get('/getbyid/:id', (req, res) => {
         });
 });
 
-router.get('/update', (req, res) => {
-    res.send("add response from user")
+router.get('/getbygender/:gender', (req, res) => {
+    model.find({gender : req.params.gender})
+        .then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            console.log(err)
+            res.json(err)
+        });
+});
+
+router.get('/update/:id', (req, res) => {
+    model.findByIdAndUpdate(req.params.id, req.body, {new : true})
+        .then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+            res.json(err)
+        });
 });
 
 router.delete('/delete/:id', (req, res) => {
