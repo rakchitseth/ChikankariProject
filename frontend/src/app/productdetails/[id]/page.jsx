@@ -14,6 +14,7 @@ const ArticleCardVertical = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getbyid/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setProductDetails(data);
       });
   }
@@ -27,7 +28,7 @@ const ArticleCardVertical = () => {
       return (
         <Group wrap="nowrap" gap={0}>
         <img
-          src={productDetails.image}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/${productDetails.image[0]}`}
           height={400}
             width={400}
         />

@@ -1,5 +1,5 @@
 "use client";
-import { Badge, Button, Card, Container, Grid, Group, Image, Text } from '@mantine/core';
+import { Badge, Button, Card, Container, Grid, Group, Image, Text , Slider, DEFAULT_THEME, ColorPicker} from '@mantine/core';
 import React, { useEffect, useState } from 'react'
 import ProductCard from './ProductCard';
 import { useParams } from 'next/navigation';
@@ -11,6 +11,7 @@ const Browse = () => {
   const { gender } = useParams();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [value, onChange] = useState('#fff');
 
 
   const fetchProducts = () => {
@@ -57,8 +58,33 @@ const Browse = () => {
       
         <Grid>
           <Grid.Col span={{ md: 3 }}>
-            <Card shadow="xs" radius="md">
-
+            <Text size='lg'>Filters</Text>
+            <Card shadow="xs" radius="md" mt="xs" mb="xs" >
+              <Text mb="xl">Price</Text>
+            <Slider
+              color="blue"
+              labelAlwaysOn
+              marks={[
+              { value: 0, label: '0' },
+              { value: 50, label: '5K' },
+              { value: 80, label: '10K' },
+              { value: 100, label: '15K' },
+      ]}
+    />      
+       <Text mt="lg">Color</Text>    
+      <ColorPicker
+        
+        format="hex"
+        value={value}
+        onChange={onChange}
+        withPicker={false}
+        fullWidth
+        swatches={[
+          ...DEFAULT_THEME.colors.red.slice(0, 7),
+          ...DEFAULT_THEME.colors.green.slice(0, 7),
+          ...DEFAULT_THEME.colors.blue.slice(0, 7),
+        ]}
+      />
             </Card>
           </Grid.Col>
           <Grid.Col span={{ md: 9 }}>
