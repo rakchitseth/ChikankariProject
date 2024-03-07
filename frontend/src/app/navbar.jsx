@@ -32,32 +32,32 @@ const mockdata = [
   {
 
     title: 'Kurtis',
-    link: "/browse"
+    link: "/browse/women"
   },
   {
 
     title: 'Sarees',
-    link: "/browse"
+    link: "/browse/women"
   },
   {
 
     title: 'Suits',
-    link: "/browse"
+    link: "/browse/women"
   },
   {
 
     title: 'suit length',
-    link: "/browse"
+    link: "/browse/women"
   },
   {
 
     title: 'Sharara',
-    link: "/browse"
+    link: "/browse/women"
   },
   {
 
     title: 'Nighty',
-    link: "/browse"
+    link: "/browse/women"
   },
 ];
 
@@ -89,8 +89,8 @@ export const Navbar = () => {
     <Box>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          {/* <MantineLogo size={30} /> */}
-          <a href="./" className={classes.link}>ChikanKari</a>
+          
+          <a href="./" className={classes.link}><img src="/logo.png" alt="" width={400} />  </a>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             {/* <a href="./" className={classes.link}>
@@ -114,7 +114,7 @@ export const Navbar = () => {
               <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
                   <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
+                  <Anchor href="/browse" fz="xs">
                     View all
                   </Anchor>
                 </Group>
@@ -140,7 +140,7 @@ export const Navbar = () => {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="#" className={classes.link}>
+            <a href="/browse/men" className={classes.link}>
               Mens
             </a>
             <a href="#" className={classes.link}>

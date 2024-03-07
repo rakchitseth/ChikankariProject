@@ -24,9 +24,9 @@ app.use('/util', utilROuter);
 
 app.use(express.static('./static/uploads'));
 
-app.get('/', (req, res) => {
-    res.send("Response from express");
+// app.get('/', (req, res) => {
+//     res.send("Response from express");
 
-});
+// });
 
 app.listen(port, () => { console.log('server started'); });
