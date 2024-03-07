@@ -12,7 +12,6 @@ const Browse = () => {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const fetchProducts = () => {
     if (window !== undefined) {
       setLoading(true);
