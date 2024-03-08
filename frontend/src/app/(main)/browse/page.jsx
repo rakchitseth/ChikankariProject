@@ -3,40 +3,26 @@ import { Badge, Button, Card, Container, Grid, Group, Image, Text , Slider, DEFA
 import React, { useEffect, useState } from 'react'
 import ProductCard from './ProductCard';
 import { useParams } from 'next/navigation';
+import useBrowseContext from '@/context/BrowseContext';
 
 
 
 const Browse = () => {
 
+  const { selPriceRange, filterByPrice, fetchWomenProducts, productList } = useBrowseContext();
+
+  // console.log(selPriceRange);
+
   const { gender } = useParams();
-  const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [value, onChange] = useState('#fff');
 
-
-  const fetchProducts = () => {
-    if (window !== undefined) {
-      setLoading(true);
-      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall/`)
-        .then((result) => result.json())
-        .then(data => {
-          console.log(data);
-          setProductList(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-    }
-  }
-
   useEffect(() => {
-    fetchProducts();
+    fetchWomenProducts();
   }, []);
 
-
   const showDetails = () => {
+
     if (!loading) {
       return (
         productList.map(product => (
