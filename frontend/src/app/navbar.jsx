@@ -30,33 +30,37 @@ import { useRouter } from 'next/navigation';
 
 const mockdata = [
   {
+    title:'Shop By Categories',
+    link:"/"
+  },
+  {
 
-    title: 'Kurtis',
+    title: ' Chikan Kurtas',
     link: "/browse/women"
   },
   {
 
-    title: 'Sarees',
+    title: 'Chikan Short Tops',
     link: "/browse/women"
   },
   {
 
-    title: 'Suits',
+    title: ' Chikan Unstitched Kurta',
     link: "/browse/women"
   },
   {
 
-    title: 'suit length',
+    title: 'Chikan Kurta Sets',
     link: "/browse/women"
   },
   {
 
-    title: 'Sharara',
+    title: 'Chikan Angrakha',
     link: "/browse/women"
   },
   {
 
-    title: 'Nighty',
+    title: 'Slips',
     link: "/browse/women"
   },
 ];
@@ -86,11 +90,11 @@ export const Navbar = () => {
   ));
 
   return (
-    <Box>
       <header className={classes.header}>
+    <Box>
         <Group justify="space-between" h="100%">
           
-          <a href="./" className={classes.link}><img src="/logo.png" alt="" width={400} />  </a>
+          <a href="../" className={classes.link}><img src="/logo.png" alt="" width={400} />  </a>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             {/* <a href="./" className={classes.link}>
@@ -101,7 +105,7 @@ export const Navbar = () => {
                 <a href="#" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Women
+                      Shop For Womens
                     </Box>
                     <IconChevronDown
                       style={{ width: rem(16), height: rem(16) }}
@@ -121,11 +125,11 @@ export const Navbar = () => {
 
                 <Divider my="sm" />
 
-                <SimpleGrid cols={2} spacing={0}>
+                <SimpleGrid cols={3} spacing={0}>
                   {links}
                 </SimpleGrid>
 
-                <div className={classes.dropdownFooter}>
+                {/* <div className={classes.dropdownFooter}>
                   <Group justify="space-between">
                     <div>
                       <Text fw={500} fz="sm">
@@ -137,7 +141,7 @@ export const Navbar = () => {
                     </div>
                     <Button variant="default">Get started</Button>
                   </Group>
-                </div>
+                </div> */}
               </HoverCard.Dropdown>
             </HoverCard>
             <a href="/browse/men" className={classes.link}>
@@ -153,20 +157,17 @@ export const Navbar = () => {
             <Button>Sign up</Button>
           </Group>
 
-          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
-        </Group>
-      </header>
-
+          <Burger opened={drawerOpened} onClick={toggleDrawer} visibleFrom="sm" />
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
-        hiddenFrom="sm"
+        title="Menu"
+        visibleFrom="sm"
         zIndex={1000000}
       >
-        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
+        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="md">
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
@@ -175,7 +176,7 @@ export const Navbar = () => {
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
-                Features
+                Shop For Womens
               </Box>
               <IconChevronDown
                 style={{ width: rem(16), height: rem(16) }}
@@ -185,20 +186,23 @@ export const Navbar = () => {
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
-            Learn
+            Mens
           </a>
           <a href="#" className={classes.link}>
-            Academy
+            Kids
           </a>
 
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
             <Link content={Button} href="/authenticate" variant="default">Log in</Link>
-            <Button>Sign up</Button>
+            <Button>Sign Up</Button>
           </Group>
         </ScrollArea>
       </Drawer>
-    </Box>
+        </Group>
+
+     </Box>
+    </header>
   );
 }
