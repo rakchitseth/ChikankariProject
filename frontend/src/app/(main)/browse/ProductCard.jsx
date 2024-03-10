@@ -3,8 +3,13 @@
 import { Badge, Button, Card, Container, Grid, Group, Text, useHovered } from "@mantine/core";
 import classes from './browse.module.css';
 import Link from "next/link";
+import { IconShoppingCart } from "@tabler/icons-react";
+import useCartContext from "@/context/CartContext";
 
 const ProductCard = ({ productData }) => {
+
+  const { cartItems, addItem } = useCartContext();
+
   return (
 
       <Card withBorder radius="md" className={classes.card}>
@@ -50,6 +55,9 @@ const ProductCard = ({ productData }) => {
               View More
             </Button>
           </Group>
+            <Button radius="xl" style={{ flex: 1 }} onClick={() => addItem(productData)}>
+              Add to Cart <IconShoppingCart />
+            </Button>
         </Card.Section>
       </Card>
   );

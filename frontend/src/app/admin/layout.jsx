@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
             }}
             padding="md"
         >
-            {/* <NavbarNested /> */}
+            <NavbarNested />
 
             <AppShell.Navbar p="md">
                 <Title order={1}>Admin Options</Title>

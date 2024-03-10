@@ -1,19 +1,25 @@
 "use client";
-import { Badge, Button, Card, Container, Grid, Group, Image, Text } from '@mantine/core';
+import { ActionIcon, Badge, Box, Button, Card, Container, Grid, Group, Image, Text, TextInput, rem, useMantineTheme } from '@mantine/core';
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../ProductCard';
 import { useParams } from 'next/navigation';
 import useBrowseContext from '@/context/BrowseContext';
+import { IconSearch } from '@tabler/icons-react';
+import { IconArrowRight } from '@tabler/icons-react';
+import useCartContext from '@/context/CartContext';
 
 
 
 const Browse = () => {
 
   const { selPriceRange, filterByPrice, fetchWomenProducts, productList } = useBrowseContext();
+  const { cartItems, addItem } = useCartContext();
 
 
   const { gender } = useParams();
   const [loading, setLoading] = useState(false);
+
+  const theme = useMantineTheme();
 
 
   useEffect(() => {
@@ -40,13 +46,25 @@ const Browse = () => {
 
   return (
     <div>
-      
+      <Box py={30}>
+        <Container size='lg'>
+          <TextInput
+            radius="xl"
+            size="md"
+            placeholder="Search questions"
+            rightSectionWidth={42}
+            leftSection={<IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
+            rightSection={
+              <ActionIcon size={32} radius="xl" color={theme.primaryColor} variant="filled">
+                <IconArrowRight style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+              </ActionIcon>
+            }
+          />
+        </Container>
+      </Box>
 
       <Grid>
-        <Grid.Col span={{ md: 3 }}>
-          
-        </Grid.Col>
-        <Grid.Col span={{ md: 9 }}>
+        <Grid.Col span={{ md: 12 }}>
           <Grid>
             {showDetails()}
           </Grid>
