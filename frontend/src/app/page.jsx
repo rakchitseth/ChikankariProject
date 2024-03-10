@@ -7,10 +7,12 @@ import 'swiper/css/pagination';
 import './styles.css';
 
 import { Pagination, Autoplay } from 'swiper/modules';
+import { Navbar } from './navbar';
 
 const Home = () => {
   return (
     <>
+    <Navbar />
       <Swiper
         pagination={{
           dynamicBullets: true,

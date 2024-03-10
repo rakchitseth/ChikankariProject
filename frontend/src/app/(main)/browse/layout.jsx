@@ -1,9 +1,10 @@
 'use client';
 import useBrowseContext from '@/context/BrowseContext';
-import { AppShell, Burger, RangeSlider, Title } from '@mantine/core'
+import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
 import appConfig from '@/utils/constants'
+import { Navbar } from '@/app/navbar';
 
 const { minPrice, maxPrice } = appConfig;
 
@@ -22,12 +23,13 @@ const Layout = ({ children }) => {
         <AppShell
             header={{ height: 60 }}
             navbar={{
-                width: 300,
+                width: 400,
                 breakpoint: 'sm',
                 collapsed: { mobile: false },
             }}
             padding="md"
         >
+            <Navbar />
 
             <AppShell.Navbar p="md">
                 <Title order={1}>Filter Options</Title>
@@ -38,8 +40,24 @@ const Layout = ({ children }) => {
                     max={maxPrice}
                     marks={priceMarks} defaultValue={[minPrice, maxPrice]}
                     onChangeEnd={v => setSelPriceRange([...v])}
-                    
+
                 />
+
+                <Title order={4} mt={20}>Category</Title>
+                <Checkbox.Group
+                    defaultValue={['react']}
+                    label="Select your favorite frameworks/libraries"
+                    description="This is anonymous"
+                    withAsterisk
+                >
+                    <Group mt="xs">
+                        <Checkbox value="react" label="React" />
+                        <Checkbox value="svelte" label="Svelte" />
+                        <Checkbox value="ng" label="Angular" />
+                        <Checkbox value="vue" label="Vue" />
+                    </Group>
+                </Checkbox.Group>
+
             </AppShell.Navbar>
 
             <AppShell.Main>{children}</AppShell.Main>

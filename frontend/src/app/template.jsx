@@ -12,7 +12,7 @@ const Template = ({ children }) => {
   return (
     
       <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
         <Footer />
       </SnackbarProvider>
