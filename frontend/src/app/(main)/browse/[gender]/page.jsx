@@ -40,13 +40,11 @@ const Browse = () => {
 
   return (
     <div>
-      <h1>Browse Product</h1>
+      
 
       <Grid>
         <Grid.Col span={{ md: 3 }}>
-          <Card shadow="xs" radius="md">
-
-          </Card>
+          
         </Grid.Col>
         <Grid.Col span={{ md: 9 }}>
           <Grid>
