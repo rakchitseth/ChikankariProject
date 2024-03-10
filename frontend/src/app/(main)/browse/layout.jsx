@@ -51,10 +51,11 @@ const Layout = ({ children }) => {
                     withAsterisk
                 >
                     <Group mt="xs">
-                        <Checkbox value="react" label="React" />
-                        <Checkbox value="svelte" label="Svelte" />
-                        <Checkbox value="ng" label="Angular" />
-                        <Checkbox value="vue" label="Vue" />
+                        <Checkbox value="react" label="Khadi Cotton" />
+                        <Checkbox value="svelte" label="Shiffon" />
+                        <Checkbox value="ng" label="Cotton" />
+                        <Checkbox value="vue" label="Vescose" />
+                        <Checkbox value="vue" label="Premium" />
                     </Group>
                 </Checkbox.Group>
 
