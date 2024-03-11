@@ -12,15 +12,13 @@ import useCartContext from '@/context/CartContext';
 
 const Browse = () => {
 
-  const { selPriceRange, filterByPrice, fetchWomenProducts, productList } = useBrowseContext();
+  const { selPriceRange, filterByPrice, fetchWomenProducts, productList, setProductList, masterList } = useBrowseContext();
   const { cartItems, addItem } = useCartContext();
-
 
   const { gender } = useParams();
   const [loading, setLoading] = useState(false);
 
   const theme = useMantineTheme();
-
 
   useEffect(() => {
     if (gender === 'women')
@@ -44,11 +42,16 @@ const Browse = () => {
     }
   }
 
+  const searchProduct = (e) => {
+    setProductList(masterList.filter(product => product.title.toLowerCase().includes(e.target.value.toLowerCase())));
+  }
+
   return (
     <div>
       <Box py={30}>
         <Container size='lg'>
           <TextInput
+            onChange={searchProduct}
             radius="xl"
             size="md"
             placeholder="Search questions"

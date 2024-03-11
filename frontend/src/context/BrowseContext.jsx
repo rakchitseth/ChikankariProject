@@ -46,7 +46,8 @@ export const BrowseProvider = ({ children }) => {
             filterByPrice, 
             fetchWomenProducts, 
             productList, 
-            setProductList
+            setProductList,
+            masterList
          }}>
             {children}
         </BrowseContext.Provider>

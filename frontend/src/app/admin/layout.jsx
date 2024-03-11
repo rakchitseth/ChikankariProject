@@ -1,33 +1,14 @@
 'use client';
-import { Icon2fa, IconBellRinging, IconDatabaseImport, IconSettings } from '@tabler/icons-react';
+import { Icon2fa, IconBellRinging, IconDatabaseImport, IconFingerprint, IconSettings } from '@tabler/icons-react';
 import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
 import { NavbarNested } from './navbar';
-import { link } from 'fs/promises';
-import { IconKey} from '@tabler/icons-react';
-import { IconReceipt2, IconBellRinging } from '@tabler/icons-react';
+import { IconKey } from '@tabler/icons-react';
+import { IconReceipt2 } from '@tabler/icons-react';
+import classes from './sidebar.module.css';
 
-
-
-const Layout = ({ children }) => {
-
-
-    return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 400,
-                breakpoint: 'sm',
-                collapsed: { mobile: false },
-            }}
-            padding="md"
-        >
-            <NavbarNested />
-
-            <AppShell.Navbar p="md">
-                <Title order={1}>Admin Options</Title>
-                const data = [
+const data = [
     { link: '', label: 'Notifications', icon: IconBellRinging },
     { link: '', label: 'Billing', icon: IconReceipt2 },
     { link: '', label: 'Security', icon: IconFingerprint },
@@ -37,12 +18,11 @@ const Layout = ({ children }) => {
     { link: '', label: 'Other Settings', icon: IconSettings },
 ];
 
-
-export function NavbarNested() {
+const Layout = ({ children }) => {
 
     const [active, setActive] = useState('Billing');
-    const links = data.map((item) => (
 
+    const links = data.map((item) => (
         <a
             className={classes.link}
             data-active={item.label === active || undefined}
@@ -59,17 +39,21 @@ export function NavbarNested() {
     ));
 
     return (
-        <nav className={classes.navbar}>
-            <div className={classes.header}>
+        <AppShell
+            header={{ height: 60 }}
+            navbar={{
+                width: 400,
+                breakpoint: 'sm',
+                collapsed: { mobile: false },
+            }}
+            padding="md"
+        >
+            <NavbarNested />
+
+            <AppShell.Navbar p="md">
+                <Title order={1}>Admin Options</Title>
+
                 {links}
-
-            </div>
-            <div className={classes.footer}>
-            </div>
-        </nav>
-    );
-}
-
 
             </AppShell.Navbar>
 
