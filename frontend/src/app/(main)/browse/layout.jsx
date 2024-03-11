@@ -72,7 +72,7 @@ const Layout = ({ children }) => {
                      ...DEFAULT_THEME.colors.blue.slice(0, 7),
                      ]}
                 />
-                <Title order={4} mt={30}>Category</Title>
+                <Title order={4} mt={30}>Size</Title>
                 <Checkbox.Group
                     defaultValue={['react']}
                     // label="Select your favorite frameworks/libraries"

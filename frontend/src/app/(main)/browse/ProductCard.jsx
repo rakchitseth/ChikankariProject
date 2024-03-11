@@ -54,8 +54,8 @@ const ProductCard = ({ productData }) => {
             <Button component={Link} href={'/productdetails/'+productData._id} radius="xl" style={{ flex: 1 }} className={Button}>
               View More
             </Button>
-          </Group>
-            <Button radius="xl" style={{ flex: 1 }} onClick={() => addItem(productData)}>
+          </Group >
+            <Button radius="xl"  mt={2} style={{ flex: 1 }} onClick={() => addItem(productData)}>
               Add to Cart <IconShoppingCart />
             </Button>
         </Card.Section>
