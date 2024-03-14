@@ -16,8 +16,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         const totalAmount = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
         setCartTotalAmount(totalAmount);
-    }, [])
-    
+    }, []);
 
     useEffect(() => {
         const storedCartItems = sessionStorage.getItem('cartItems');
@@ -29,8 +28,6 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
-
-    
 
     const addItem = (item) => {
         const existingItem = cartItems.find((cartItem) => cartItem._id === item._id);

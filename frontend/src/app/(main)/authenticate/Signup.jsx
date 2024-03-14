@@ -15,14 +15,20 @@ const Signup = ({ setType }) => {
         },
         validate: {
             email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
-            password: (val) => (val.length <= 6 ? 'Password should include at least 6 characters' : null),
+            password: (val) => (val.length < 6 ? 'Password should include at least 6 characters' : null),
         },
     })
 
     const signupSubmit = async (values) => {
         console.log(values);
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        });
         if (res.status === 200) {
             enqueueSnackbar('User added successfully', { variant: 'success' });
         } else {

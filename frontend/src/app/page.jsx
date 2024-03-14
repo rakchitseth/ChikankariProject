@@ -8,11 +8,64 @@ import './styles.css';
 
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Navbar } from './navbar';
+import { Container, Grid } from '@mantine/core';
+import classes from './page.module.css';
+
+const categoryData = [
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+  {
+    name: 'Kurti',
+    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    link: ''
+  },
+]
 
 const Home = () => {
   return (
     <>
-    <Navbar />
+      <Navbar />
+
+      <Container p={10} size={'xl'}>
+        <Grid gutter="lg">
+          {
+            categoryData.map(category => (
+              <Grid.Col span={{md: 2, sm: 6}}>
+                <img className={classes.categoryIcon} src={category.image} alt="" />
+                <h4>{category.name}</h4>
+              </Grid.Col>
+            ))
+          }
+        </Grid>
+      </Container>
       <Swiper
         pagination={{
           dynamicBullets: true,

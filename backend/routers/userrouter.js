@@ -37,8 +37,15 @@ router.get('/getbyid/:id', (req, res) => {
         });
 });
 
-router.get('/update', (req, res) => {
-    res.send("add response from user")
+router.put('/update/:id', (req, res) => {
+    model.findByIdAndUpdate(req.params._id, req.body, { new: true })
+        .then((result) => {
+            res.json(result);
+
+        }).catch((err) => {
+            console.log(err);
+            res.json(err)
+        });
 });
 
 router.delete('/delete/:id', (req, res) => {
