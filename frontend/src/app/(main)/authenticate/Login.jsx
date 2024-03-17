@@ -3,7 +3,7 @@ import { Anchor, Button, Checkbox, Group, PasswordInput, Stack, TextInput } from
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { enqueueSnackbar } from 'notistack';
-import React from 'react'
+import React from 'react';
 
 const Login = ({ setType }) => {
 
@@ -15,7 +15,7 @@ const Login = ({ setType }) => {
             password: ''
         },
         validate: {
-            email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email' ),
+            email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
             password: (val) => (!val.length ? 'Password is required' : null),
         },
     })
@@ -23,25 +23,31 @@ const Login = ({ setType }) => {
     const LoginSubmit = async (values) => {
         console.log(values);
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/authenticate`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/authenticate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(values)
+        }).then((res) => {
+            if (res.status === 200) {
+                enqueueSnackbar('Logged in successfully', { variant: 'success' });
+                res.json()
+                    .then((data) => {
+                        sessionStorage.setItem('user', JSON.stringify(data));
+                        router.push('/browse');
+                    })
+            } else {
+                enqueueSnackbar('Some Error occured', { variant: 'error' });
+            }
+        }).catch((err) => {
+            console.log(err);
         });
-        if (res.status === 200) {
-            enqueueSnackbar('Logged in successfully', { variant: 'success' });
-            router.push('/browse');
-        } else {
-            enqueueSnackbar('Some Error occured', { variant: 'error' });
-        }
 
     }
 
     return (
         <div>
-
             <form onSubmit={LoginForm.onSubmit(LoginSubmit)}>
                 <Stack gap={'xl'}>
 
@@ -70,9 +76,8 @@ const Login = ({ setType }) => {
 
                 <Group justify="space-between" mt="xl">
                     <Anchor component="button" type="button" c="dimmed" onClick={() => setType('Signup')} size="xs">
-                        'dont't have an account? Signup'
+                        Dont't have an account? Signup
                     </Anchor>
-
                 </Group>
             </form>
         </div>

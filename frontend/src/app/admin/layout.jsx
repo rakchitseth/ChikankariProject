@@ -3,7 +3,7 @@ import { Icon2fa, IconBellRinging, IconDatabaseImport, IconFingerprint, IconSett
 import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
-import { NavbarNested } from './navbar';
+import AdminNavbar from './navbar';
 import { IconKey } from '@tabler/icons-react';
 import { IconReceipt2 } from '@tabler/icons-react';
 import classes from './sidebar.module.css';
@@ -40,21 +40,23 @@ const Layout = ({ children }) => {
 
     return (
         <AppShell
-            header={{ height: 60 }}
+            header={{ height: 0 }}
             navbar={{
-                width: 400,
+                width: 300,
                 breakpoint: 'sm',
                 collapsed: { mobile: false },
             }}
             padding="md"
+            layout="alt"
         >
-            <NavbarNested />
+
+            <AppShell.Header>
+                <AdminNavbar />
+            </AppShell.Header>
 
             <AppShell.Navbar p="md">
-                <Title order={1}>Admin Options</Title>
-
+                <Title order={3}>Admin Options</Title>
                 {links}
-
             </AppShell.Navbar>
 
             <AppShell.Main>{children}</AppShell.Main>

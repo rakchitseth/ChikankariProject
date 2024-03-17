@@ -11,7 +11,7 @@ const Signup = ({ setType }) => {
             email: '',
             name: '',
             password: '',
-            terms: true,
+            terms: true
         },
         validate: {
             email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),

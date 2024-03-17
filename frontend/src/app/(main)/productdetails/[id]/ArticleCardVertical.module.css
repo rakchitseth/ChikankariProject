@@ -1,3 +1,4 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
 .card {
     background-color: var(--mantine-color-body);
   }

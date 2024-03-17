@@ -14,10 +14,18 @@ export const BrowseProvider = ({ children }) => {
         return products.filter(product => product.price >= priceRange[0] && product.price <= priceRange[1]);
     }
 
-    const fetchWomenProducts = () => {
-        if (window !== undefined) {
+    const filterByColor = (products, color) => {
+        return products.filter(product => product.color.toLowerCase() === color.toLowerCase());
+    }
+
+    const filterBySize = (products, size) => {
+        return products.filter(product => product.size.toLowerCase() === size.toLowerCase());
+    }
+
+    const fetchProduct = (category) => {
+      if (window !== undefined) {
         //   setLoading(true);
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getbygender/women`)
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getbygender/${category}`)
             .then((result) => result.json())
             .then(data => {
               console.log(data);
@@ -30,7 +38,12 @@ export const BrowseProvider = ({ children }) => {
             });
     
         }
-      }
+    }
+
+    const fetchWomenProducts = () => fetchProduct('women');
+    const fetchMenProducts = () => fetchProduct('men');
+    const fetchKidProducts = () => fetchProduct('kid');
+
 
       useEffect(() => {
         if (masterList.length > 0) {
@@ -44,7 +57,11 @@ export const BrowseProvider = ({ children }) => {
             selPriceRange, 
             setSelPriceRange, 
             filterByPrice, 
+            filterByColor,
+            filterBySize,
             fetchWomenProducts, 
+            fetchMenProducts,
+            fetchKidProducts,
             productList, 
             setProductList,
             masterList

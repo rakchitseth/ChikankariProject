@@ -5,8 +5,9 @@ const mySchema = new Schema({
     username:String,
     email : String,
     password : String,
-    age: Number
-
+    age: Number,
+    role : {type: String, default: 'user'},
+    avatar: {type : String , default: 'avatar_placeholder.webp'}
 })
 
 module.exports = model('users',mySchema);

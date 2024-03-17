@@ -23,7 +23,7 @@ const LoginSchema = Yup.object().shape({
     // stiched: Yup.boolean().required('Required'),
     discount: Yup.number(),
     gender: Yup.string().required('Required'),
-    stock: Yup.number().required('Required'),
+    stock: Yup.number().required('Required')
   });
 
 function AddProduct() {
@@ -53,7 +53,6 @@ function AddProduct() {
             }
             console.log(values);
             // setTimeout(() => {
-
             //   resetForm();
             // },3000);
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/add`, {

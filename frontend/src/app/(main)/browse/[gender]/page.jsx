@@ -12,7 +12,7 @@ import useCartContext from '@/context/CartContext';
 
 const Browse = () => {
 
-  const { selPriceRange, filterByPrice, fetchWomenProducts, productList, setProductList, masterList } = useBrowseContext();
+  const { selPriceRange, filterByPrice, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
   const { cartItems, addItem } = useCartContext();
 
   const { gender } = useParams();
@@ -23,6 +23,10 @@ const Browse = () => {
   useEffect(() => {
     if (gender === 'women')
       fetchWomenProducts();
+    else if (gender === 'men')
+      fetchMenProducts();
+    else if (gender === 'kid')
+      fetchKidProducts();
   }, [gender]);
 
 

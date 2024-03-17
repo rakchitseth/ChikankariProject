@@ -17,21 +17,25 @@ import {
   ScrollArea,
   rem,
   useMantineTheme,
+  Menu,
+  Avatar,
 } from '@mantine/core';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import { useDisclosure } from '@mantine/hooks';
 import {
 
-  IconChevronDown,
+  IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconStar, IconSwitchHorizontal,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import cx from 'clsx';
 
 const mockdata = [
   {
-    title:'Shop By Categories',
-    link:"/"
+    title: 'Shop By Categories',
+    link: "/"
   },
   {
 
@@ -70,6 +74,9 @@ export const Navbar = () => {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
   const router = useRouter();
+  const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null);
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -90,10 +97,10 @@ export const Navbar = () => {
   ));
 
   return (
-      <header className={classes.header}>
-    <Box>
+    <header className={classes.header}>
+      <Box>
         <Group justify="space-between" h="100%">
-          
+
           <a href="../" className={classes.link}><img src="/logo.png" alt="" width={400} />  </a>
 
           <Group h="100%" gap={0} visibleFrom="sm">
@@ -153,56 +160,143 @@ export const Navbar = () => {
           </Group>
 
           <Group visibleFrom="sm">
-            <Link variant="default" href="/authenticate">Log in</Link>
+            <Button component={Link} variant="default" href="/authenticate">Log in</Button>
             <Button>Sign up</Button>
+            <Button component={Link} variant="default" href="/authenticate">Log in</Button>
           </Group>
+
+          {
+            currentUser !== null && (
+              <Menu
+                width={260}
+                position="bottom-end"
+                transitionProps={{ transition: 'pop-top-right' }}
+                onClose={() => setUserMenuOpened(false)}
+                onOpen={() => setUserMenuOpened(true)}
+                withinPortal
+              >
+                <Menu.Target>
+                  <UnstyledButton
+                    className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
+                  >
+                    <Group gap={7}>
+                      <Avatar src={currentUser.avatar} alt={currentUser.name} radius="xl" size={20} />
+                      <Text fw={500} size="sm" lh={1} mr={3}>
+                        {currentUser.name}
+                      </Text>
+                      <IconChevronDown style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
+                    </Group>
+                  </UnstyledButton>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Item
+                    leftSection={
+                      <IconHeart
+                        style={{ width: rem(16), height: rem(16) }}
+                        color={theme.colors.red[6]}
+                        stroke={1.5}
+                      />
+                    }
+                  >
+                    Liked posts
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconStar
+                        style={{ width: rem(16), height: rem(16) }}
+                        color={theme.colors.yellow[6]}
+                        stroke={1.5}
+                      />
+                    }
+                  >
+                    Saved posts
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconMessage
+                        style={{ width: rem(16), height: rem(16) }}
+                        color={theme.colors.blue[6]}
+                        stroke={1.5}
+                      />
+                    }
+                  >
+                    Your comments
+                  </Menu.Item>
+
+                  <Menu.Label>Settings</Menu.Label>
+                  <Menu.Item
+                    leftSection={
+                      <IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                    }
+                  >
+                    Account settings
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconSwitchHorizontal style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                    }
+                  >
+                    Change account
+                  </Menu.Item>
+                  <Menu.Item
+                    leftSection={
+                      <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                    }
+                  >
+                    Logout
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            )
+          }
+
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} visibleFrom="sm" />
-      <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Menu"
-        visibleFrom="sm"
-        zIndex={1000000}
-      >
-        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="md">
-          <Divider my="sm" />
+          <Drawer
+            opened={drawerOpened}
+            onClose={closeDrawer}
+            size="100%"
+            padding="md"
+            title="Menu"
+            visibleFrom="sm"
+            zIndex={1000000}
+          >
+            <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="md">
+              <Divider my="sm" />
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Shop For Womens
-              </Box>
-              <IconChevronDown
-                style={{ width: rem(16), height: rem(16) }}
-                color={theme.colors.blue[6]}
-              />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Mens
-          </a>
-          <a href="#" className={classes.link}>
-            Kids
-          </a>
+              <a href="#" className={classes.link}>
+                Home
+              </a>
+              <UnstyledButton className={classes.link} onClick={toggleLinks}>
+                <Center inline>
+                  <Box component="span" mr={5}>
+                    Shop For Womens
+                  </Box>
+                  <IconChevronDown
+                    style={{ width: rem(16), height: rem(16) }}
+                    color={theme.colors.blue[6]}
+                  />
+                </Center>
+              </UnstyledButton>
+              <Collapse in={linksOpened}>{links}</Collapse>
+              <a href="#" className={classes.link}>
+                Mens
+              </a>
+              <a href="#" className={classes.link}>
+                Kids
+              </a>
 
-          <Divider my="sm" />
+              <Divider my="sm" />
 
-          <Group justify="center" grow pb="xl" px="md">
-            <Link content={Button} href="/authenticate" variant="default">Log in</Link>
-            <Button>Sign Up</Button>
-          </Group>
-        </ScrollArea>
-      </Drawer>
+              <Group justify="center" grow pb="xl" px="md">
+                <Link content={Button} href="/authenticate" variant="default">Log in</Link>
+                <Button>Sign Up</Button>
+              </Group>
+            </ScrollArea>
+          </Drawer>
         </Group>
 
-     </Box>
+      </Box>
     </header>
   );
 }

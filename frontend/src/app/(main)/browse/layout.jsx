@@ -1,10 +1,12 @@
 'use client';
 import useBrowseContext from '@/context/BrowseContext';
-import { AppShell, Burger, Checkbox, Group, RangeSlider, Title, ColorPicker , DEFAULT_THEME } from '@mantine/core'
+import { AppShell, Burger, Checkbox, Group, RangeSlider, Title, ColorPicker, DEFAULT_THEME, ActionIcon, Grid, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
 import appConfig from '@/utils/constants'
 import { Navbar } from '@/app/navbar';
+import { IconCheck } from '@tabler/icons-react';
+import checkboxClasses from './checkbox.module.css';
 
 const { minPrice, maxPrice } = appConfig;
 
@@ -15,10 +17,58 @@ const priceMarks = [
     { value: 10000, label: '₹10000' },
 ];
 
+const sizeOptions = [
+    'SX', 'S', 'M', 'L', 'XL', 'XXL'
+]
+
+const availableColors = [
+    {
+        name: 'Red',
+        color: '#FF0000'
+    },
+    {
+
+        name: 'Green',
+        color: '#008000'
+    },
+    {
+        name: 'Blue',
+        color: '#0000FF'
+    },
+    {
+        name: 'Yellow',
+        color: '#FFFF00'
+    },
+    {
+        name: 'Pink',
+        color: '#FFC0CB'
+    },
+    {
+
+        name: 'LightGreen',
+        color: '#90EE90'
+    },
+    {
+        name: 'LightBlue',
+        color: '#ADD8E6'
+    },
+    {
+        name: 'LightYellow',
+        color: '#FFFFE0'
+    },
+]
+
 const Layout = ({ children }) => {
 
-    const { setSelPriceRange } = useBrowseContext();
+    const {
+        setSelPriceRange,
+        filterBySize,
+        filterByColor,
+    } = useBrowseContext();
     const [value, onChange] = useState('#fff');
+
+    const [selColor, setSelColor] = useState(null);
+    const [selSizes, setSelSizes] = useState([]);
 
     return (
         <AppShell
@@ -60,18 +110,25 @@ const Layout = ({ children }) => {
                     </Group>
                 </Checkbox.Group>
                 <Title order={4} mt={20}>Select Color</Title>
-                <ColorPicker
-                     format="hex"
-                     value={value}
-                     onChange={onChange}
-                     withPicker={false}
-                     fullWidth
-                     swatches={[
-                     ...DEFAULT_THEME.colors.red.slice(0, 7),
-                     ...DEFAULT_THEME.colors.green.slice(0, 7),
-                     ...DEFAULT_THEME.colors.blue.slice(0, 7),
-                     ]}
-                />
+                <Grid mt={10}>
+                    {
+                        availableColors.map(colorOpt => (
+                            <Grid.Col span={{ md: 2 }}>
+                                <Tooltip label={colorOpt.name} color={colorOpt.color}>
+
+                                    <ActionIcon variant="filled" color={colorOpt.color} aria-label="Settings" onClick={() => {
+                                        setSelColor(colorOpt.name);
+                                        filterByColor(colorOpt.name);
+                                    }}>
+                                        {
+                                            selColor === colorOpt.name && <IconCheck style={{ width: '70%', height: '70%' }} stroke={1.5} />
+                                        }
+                                    </ActionIcon>
+                                </Tooltip>
+                            </Grid.Col>
+                        ))
+                    }
+                </Grid>
                 <Title order={4} mt={30}>Size</Title>
                 <Checkbox.Group
                     defaultValue={['react']}
@@ -80,15 +137,20 @@ const Layout = ({ children }) => {
                     withAsterisk
                 >
                     <Group mt="xs">
-                        <Checkbox value="react" label="XS" />
-                        <Checkbox value="svelte" label="S" />
-                        <Checkbox value="ng" label="L" />
-                        <Checkbox value="vue" label="XL" />
-                        <Checkbox value="vue" label="XXL" />
+                        {
+                            sizeOptions.map(size => (
+                                <Checkbox value={size} label={size} checked={selSizes.includes(size)} onChange={(e) => {
+                                    if (e.target.checked) {
+                                        setSelSizes([...selSizes, size]);
+                                    } else {
+                                        setSelSizes(selSizes.filter(s => s !== size));
+                                    }
+                                    // filterBySize(selSizes);
+                                }} />
+                            ))
+                        }
                     </Group>
                 </Checkbox.Group>
-                
-
             </AppShell.Navbar>
 
             <AppShell.Main>{children}</AppShell.Main>

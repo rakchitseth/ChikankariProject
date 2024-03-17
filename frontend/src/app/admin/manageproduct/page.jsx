@@ -12,9 +12,12 @@ import {
   keys,
   Container,
   Title,
+  Button,
+  Drawer,
 } from '@mantine/core';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './TableSort.module.css';
+import { useDisclosure } from '@mantine/hooks';
 
 
 function Th({ children, reversed, sorted, onSort }) {
@@ -64,22 +67,17 @@ function sortData(
   );
 }
 
-const data = [
-  {
-    name: 'Athena Weissnat',
-    company: 'Little - Rippin',
-    email: 'Elouise.Prohaska@yahoo.com',
-  },
-];
-
 function ManageProduct() {
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(data);
+  const [sortedData, setSortedData] = useState([]);
   const [sortBy, setSortBy] = useState(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
   const [productList, setProductList] = useState([]);
   const [masterList, setMasterList] = useState([]);
+
+
+  const [detailsOpen, toggleDetails] = useDisclosure(false);
 
 
   const fetchProducts = () => {
@@ -89,6 +87,7 @@ function ManageProduct() {
         .then(data => {
           console.log(data);
           setProductList(data);
+          setSortedData(data);
           setMasterList(data);
         })
         .catch((err) => {
@@ -106,7 +105,7 @@ function ManageProduct() {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
+    setSortedData(sortData(productList, { sortBy: field, reversed, search }));
   };
 
   const handleSearchChange = (event) => {
@@ -116,13 +115,13 @@ function ManageProduct() {
   };
 
   const deleteproduct = async (id) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/delete`+id, {method: 'DELETE'});
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/delete` + id, { method: 'DELETE' });
     console.log(res.status);
-    if(res.status === 200){
-        fetchProducts();
-        enqueueSnackbar('User Delete', {variant: 'success'});
+    if (res.status === 200) {
+      fetchProducts();
+      enqueueSnackbar('User Delete', { variant: 'success' });
     }
-} 
+  }
 
   const rows = productList.map((product) => (
     <Table.Tr key={product._id}>
@@ -130,14 +129,18 @@ function ManageProduct() {
       <Table.Td>{product.material}</Table.Td>
       <Table.Td>{product.embroidery}</Table.Td>
       <Table.Td>{product.embroidery}</Table.Td>
-      <Table.Td> 
-      <button onClick={ () => {deleteproduct(product._id)} } className='btn btn-danger'>Delete</button>
+      <Table.Td>
+        <Button color='red' variant='filled' onClick={() => { deleteproduct(product._id) }} className='btn btn-danger'>Delete</Button>
       </Table.Td>
     </Table.Tr>
   ));
 
+
   return (
     <div>
+      <Drawer opened={detailsOpen} onClose={toggleDetails.close} title="Product Details">
+        {/* Drawer content */}
+      </Drawer>
       <Container size="lg">
 
         <header>
@@ -156,44 +159,46 @@ function ManageProduct() {
             <Table.Tbody>
               <Table.Tr>
                 <Th
-                  sorted={sortBy === 'name'}
+                  sorted={sortBy === 'title'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('name')}
+                  onSort={() => setSorting('title')}
                 >
-                  Name
+                  Title
                 </Th>
                 <Th
-                  sorted={sortBy === 'email'}
+                  sorted={sortBy === 'material'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('email')}
+                  onSort={() => setSorting('material')}
                 >
-                  Email
+                  Material
                 </Th>
                 <Th
-                  sorted={sortBy === 'company'}
+                  sorted={sortBy === 'embroidery'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('company')}
+                  onSort={() => setSorting('embroidery')}
                 >
-                  Embroidery 
+                  Embroidery
                 </Th>
                 <Th
-                  sorted={sortBy === 'company'}
+                  sorted={sortBy === 'gender'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('company')}
+                  onSort={() => setSorting('gender')}
                 >
-                  Company
+                  Gender
                 </Th>
                 <Th>
-                  Action
+                  Actions
                 </Th>
               </Table.Tr>
             </Table.Tbody>
             <Table.Tbody>
-              {rows.length > 0 ? (
+              {rows.length > 0 && productList.length > 0 ? (
                 rows
               ) : (
                 <Table.Tr>
-                  <Table.Td colSpan={Object.keys(data[0]).length}>
+                  <Table.Td
+                  // colSpan={Object.keys(productList[0]).length}
+                  >
                     <Text fw={500} ta="center">
                       Nothing found
                     </Text>
