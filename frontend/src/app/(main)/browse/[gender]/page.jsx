@@ -27,6 +27,8 @@ const Browse = () => {
       fetchMenProducts();
     else if (gender === 'kid')
       fetchKidProducts();
+    else
+      fetchAllProducts();
   }, [gender]);
 
 

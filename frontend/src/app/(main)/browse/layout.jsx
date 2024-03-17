@@ -27,7 +27,6 @@ const availableColors = [
         color: '#FF0000'
     },
     {
-
         name: 'Green',
         color: '#008000'
     },
@@ -56,6 +55,15 @@ const availableColors = [
         name: 'LightYellow',
         color: '#FFFFE0'
     },
+    {
+        name: 'Black',
+        color: '#000000'
+    },
+    {
+        name: 'purple',
+        color: '#800080'
+    
+    }
 ]
 
 const Layout = ({ children }) => {
@@ -64,6 +72,7 @@ const Layout = ({ children }) => {
         setSelPriceRange,
         filterBySize,
         filterByColor,
+        setProductList,
     } = useBrowseContext();
     const [value, onChange] = useState('#fff');
 
@@ -89,7 +98,8 @@ const Layout = ({ children }) => {
                 <RangeSlider
                     min={minPrice}
                     max={maxPrice}
-                    marks={priceMarks} defaultValue={[minPrice, maxPrice]}
+                    marks={priceMarks}
+                    defaultValue={[minPrice, maxPrice]}
                     onChangeEnd={v => setSelPriceRange([...v])}
 
                 />
@@ -118,7 +128,7 @@ const Layout = ({ children }) => {
 
                                     <ActionIcon variant="filled" color={colorOpt.color} aria-label="Settings" onClick={() => {
                                         setSelColor(colorOpt.name);
-                                        filterByColor(colorOpt.name);
+                                        setProductList(filterByColor(colorOpt.name));
                                     }}>
                                         {
                                             selColor === colorOpt.name && <IconCheck style={{ width: '70%', height: '70%' }} stroke={1.5} />
@@ -145,7 +155,7 @@ const Layout = ({ children }) => {
                                     } else {
                                         setSelSizes(selSizes.filter(s => s !== size));
                                     }
-                                    // filterBySize(selSizes);
+                                    setProductList(filterBySize(size));
                                 }} />
                             ))
                         }

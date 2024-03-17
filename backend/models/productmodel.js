@@ -5,6 +5,7 @@ const mySchema = new Schema({
     title: { type: String, required: true, unique: true },
     image: [{ type: String, required: true }],
     description: { type: String, required: true },
+    color: String,
     material: String,
     embroidery: String,
     price: { type: Number, required: true },

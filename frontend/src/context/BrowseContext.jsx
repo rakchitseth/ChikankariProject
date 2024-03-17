@@ -10,16 +10,16 @@ export const BrowseProvider = ({ children }) => {
     const [masterList, setMasterList] = useState([]);
     const [productList, setProductList] = useState([]);
 
-    const filterByPrice = (products, priceRange) => {
-        return products.filter(product => product.price >= priceRange[0] && product.price <= priceRange[1]);
+    const filterByPrice = (priceRange) => {
+        return masterList.filter(product => product.price >= priceRange[0] && product.price <= priceRange[1]);
     }
 
-    const filterByColor = (products, color) => {
-        return products.filter(product => product.color.toLowerCase() === color.toLowerCase());
+    const filterByColor = (color) => {
+        return masterList.filter(product => product.color.toLowerCase() === color.toLowerCase());
     }
 
-    const filterBySize = (products, size) => {
-        return products.filter(product => product.size.toLowerCase() === size.toLowerCase());
+    const filterBySize = (size) => {
+        return masterList.filter(product => product.size.toLowerCase() === size.toLowerCase());
     }
 
     const fetchProduct = (category) => {
@@ -37,6 +37,22 @@ export const BrowseProvider = ({ children }) => {
               console.log(err);
             });
     
+        }
+    }
+
+    const fetchAllProducts = () => {
+        if (window !== undefined) {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+                .then((result) => result.json())
+                .then(data => {
+                    console.log(data);
+                    setProductList(data);
+                    setMasterList(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
         }
     }
 
@@ -62,6 +78,7 @@ export const BrowseProvider = ({ children }) => {
             fetchWomenProducts, 
             fetchMenProducts,
             fetchKidProducts,
+            fetchAllProducts,
             productList, 
             setProductList,
             masterList
