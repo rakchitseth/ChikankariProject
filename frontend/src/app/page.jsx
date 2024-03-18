@@ -75,6 +75,16 @@ const Home = () => {
         <SwiperSlide><img src="https://morachikankari.com/wp-content/uploads/2023/12/Homepage-BannerNY.jpg" alt="" /></SwiperSlide>
         <SwiperSlide><img src="https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp" alt="" /></SwiperSlide>
       </Swiper>
+
+      <div>
+        <Container p={10} size={'xl'}>
+          <Title order={1} align="center">The World's #1 Embroidery On A Fabric -"ChikanKari"</Title>
+          <Text align="center">From #1 Chikankari Brand- CK Sewa Chikan Industries</Text>
+          <Grid gutter="lg">
+
+          </Grid>
+        </Container>
+      </div>
     </>
   );
 }

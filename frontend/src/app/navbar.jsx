@@ -31,6 +31,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import cx from 'clsx';
+import useAppContext from '@/context/AppContext';
 
 const mockdata = [
   {
@@ -75,6 +76,8 @@ export const Navbar = () => {
   const theme = useMantineTheme();
   const router = useRouter();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+  const { logout, loggedIn } = useAppContext();
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null);
 
@@ -163,12 +166,12 @@ export const Navbar = () => {
             <Button component={Link} variant="default" href="/authenticate">Log in</Button>
             <Button>Sign up</Button>
             <Button component={Link} variant="gradient" gradient={{ from: 'yellow', to: 'red', deg: 90 }} href="/user/cartpage">
-            <IconShoppingCart />
+              <IconShoppingCart />
             </Button>
           </Group>
 
           {
-            currentUser !== null && (
+            loggedIn && (
               <Menu
                 width={260}
                 position="bottom-end"
@@ -241,6 +244,8 @@ export const Navbar = () => {
                     Change account
                   </Menu.Item>
                   <Menu.Item
+                    color='red'
+                    onClick={logout}
                     leftSection={
                       <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
                     }
