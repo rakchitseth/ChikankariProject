@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import appConfig from '@/utils/constants'
 import { Navbar } from '@/app/navbar';
 import { IconCheck } from '@tabler/icons-react';
-import checkboxClasses from './checkbox.module.css';
+// import checkboxClasses from './checkbox.module.css';
 
 const { minPrice, maxPrice } = appConfig;
 
@@ -62,7 +62,7 @@ const availableColors = [
     {
         name: 'purple',
         color: '#800080'
-    
+
     }
 ]
 
@@ -81,17 +81,20 @@ const Layout = ({ children }) => {
 
     return (
         <AppShell
-            header={{ height: 60 }}
+            header={{ height: 0 }}
             navbar={{
                 width: 400,
                 breakpoint: 'sm',
                 collapsed: { mobile: false },
             }}
             padding="md"
+            layout="alt"
         >
-            <Navbar />
+            <AppShell.Header>
+                <Navbar />
+            </AppShell.Header>
 
-            <AppShell.Navbar p="md">
+            <AppShell.Navbar p="xl" >
                 <Title order={1}>Filter Options</Title>
 
                 <Title order={4}>Price</Title>
@@ -122,8 +125,8 @@ const Layout = ({ children }) => {
                 <Title order={4} mt={20}>Select Color</Title>
                 <Grid mt={10}>
                     {
-                        availableColors.map(colorOpt => (
-                            <Grid.Col span={{ md: 2 }}>
+                        availableColors.map((colorOpt, index) => (
+                            <Grid.Col key={index} span={{ md: 2 }}>
                                 <Tooltip label={colorOpt.name} color={colorOpt.color}>
 
                                     <ActionIcon variant="filled" color={colorOpt.color} aria-label="Settings" onClick={() => {
@@ -148,8 +151,8 @@ const Layout = ({ children }) => {
                 >
                     <Group mt="xs">
                         {
-                            sizeOptions.map(size => (
-                                <Checkbox value={size} label={size} checked={selSizes.includes(size)} onChange={(e) => {
+                            sizeOptions.map((size, index) => (
+                                <Checkbox key={index} value={size} label={size} checked={selSizes.includes(size)} onChange={(e) => {
                                     if (e.target.checked) {
                                         setSelSizes([...selSizes, size]);
                                     } else {
@@ -163,7 +166,7 @@ const Layout = ({ children }) => {
                 </Checkbox.Group>
             </AppShell.Navbar>
 
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Main mt={40}>{children}</AppShell.Main>
         </AppShell>
     )
 }

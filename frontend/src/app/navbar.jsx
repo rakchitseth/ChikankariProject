@@ -24,7 +24,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
 
-  IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconStar, IconSwitchHorizontal,
+  IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconShoppingCart, IconStar, IconSwitchHorizontal,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Link from 'next/link';
@@ -162,7 +162,9 @@ export const Navbar = () => {
           <Group visibleFrom="sm">
             <Button component={Link} variant="default" href="/authenticate">Log in</Button>
             <Button>Sign up</Button>
-            <Button component={Link} variant="default" href="/authenticate">Log in</Button>
+            <Button component={Link} variant="gradient" gradient={{ from: 'yellow', to: 'red', deg: 90 }} href="/user/cartpage">
+            <IconShoppingCart />
+            </Button>
           </Group>
 
           {

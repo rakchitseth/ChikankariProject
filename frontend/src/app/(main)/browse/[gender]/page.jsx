@@ -12,8 +12,10 @@ import useCartContext from '@/context/CartContext';
 
 const Browse = () => {
 
-  const { selPriceRange, filterByPrice, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
+  const { selPriceRange, filterByPrice, fetchAllProducts, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
   const { cartItems, addItem } = useCartContext();
+
+  console.log(cartItems);
 
   const { gender } = useParams();
   const [loading, setLoading] = useState(false);

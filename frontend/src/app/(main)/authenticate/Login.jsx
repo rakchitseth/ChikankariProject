@@ -35,7 +35,11 @@ const Login = ({ setType }) => {
                 res.json()
                     .then((data) => {
                         sessionStorage.setItem('user', JSON.stringify(data));
-                        router.push('/browse');
+                        if(data.role === 'admin'){
+                            router.push('/admin/manageproduct');
+                        }else if(data.role === 'user'){
+                            router.push('/browse');
+                        }
                     })
             } else {
                 enqueueSnackbar('Some Error occured', { variant: 'error' });

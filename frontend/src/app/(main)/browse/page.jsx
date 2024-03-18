@@ -15,7 +15,6 @@ const Browse = () => {
   const { selPriceRange, filterByPrice, fetchAllProducts, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
   const { cartItems, addItem } = useCartContext();
 
-  const { gender } = useParams();
   const [loading, setLoading] = useState(false);
 
   const theme = useMantineTheme();

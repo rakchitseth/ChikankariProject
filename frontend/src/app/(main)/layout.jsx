@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
     return (
         <CartProvider>
             <BrowseProvider>
+                {/* <Navbar /> */}
                 {children}
             </BrowseProvider>
         </CartProvider>

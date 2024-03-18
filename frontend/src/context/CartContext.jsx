@@ -26,6 +26,7 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        console.log(cartItems);
         sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
 

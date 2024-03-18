@@ -63,9 +63,9 @@ export const BrowseProvider = ({ children }) => {
 
       useEffect(() => {
         if (masterList.length > 0) {
-          setProductList(filterByPrice(masterList, selPriceRange));
+          setProductList(filterByPrice(selPriceRange));
         }
-      }, [selPriceRange, masterList])
+      }, [selPriceRange])
       
 
     return (

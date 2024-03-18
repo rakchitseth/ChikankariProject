@@ -55,8 +55,8 @@ const ProductCard = ({ productData }) => {
               View More
             </Button>
           </Group >
-            <Button radius="xl"  mt={2} style={{ flex: 1 }} onClick={() => addItem(productData)}>
-              Add to Cart <IconShoppingCart />
+            <Button fullWidth radius="xl"  mt={10} style={{ flex: 1 }} onClick={() => addItem(productData)}>
+            <IconShoppingCart /> Add to Cart 
             </Button>
         </Card.Section>
       </Card>

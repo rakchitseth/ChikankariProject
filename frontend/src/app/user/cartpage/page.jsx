@@ -1,3 +1,4 @@
+'use client';
 import React, { useContext } from 'react';
 import { 
   Container, 
@@ -16,6 +17,7 @@ import useCartContext from '@/context/CartContext';
 const CartPage = () => {
   const { cartItems, cartTotalAmount, addItem, removeItem, clearItem, clearCart } = useCartContext();
 
+  console.log(cartItems);
   const handleRemoveItem = (itemId) => {
     removeItem(itemId);
   };

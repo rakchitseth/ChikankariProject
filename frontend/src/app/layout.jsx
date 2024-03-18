@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { MantineProvider, createTheme } from "@mantine/core";
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({ children }) {
         <MantineProvider
           defaultColorScheme="light"
           theme={theme}>
+            <CartProvider>
+
           {children}
+            </CartProvider>
         </MantineProvider>
       </body>
     </html>
