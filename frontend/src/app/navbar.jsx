@@ -19,6 +19,7 @@ import {
   useMantineTheme,
   Menu,
   Avatar,
+  Badge,
 } from '@mantine/core';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import { useDisclosure } from '@mantine/hooks';
@@ -31,6 +32,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import cx from 'clsx';
+import useCartContext from '@/context/CartContext';
 
 const mockdata = [
   {
@@ -75,8 +77,10 @@ export const Navbar = () => {
   const theme = useMantineTheme();
   const router = useRouter();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
-
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null);
+
+  const { cartItems } = useCartContext();
+
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -135,20 +139,6 @@ export const Navbar = () => {
                 <SimpleGrid cols={3} spacing={0}>
                   {links}
                 </SimpleGrid>
-
-                {/* <div className={classes.dropdownFooter}>
-                  <Group justify="space-between">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                      <Text size="xs" c="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
-                    </div>
-                    <Button variant="default">Get started</Button>
-                  </Group>
-                </div> */}
               </HoverCard.Dropdown>
             </HoverCard>
             <a href="/browse/men" className={classes.link}>
@@ -162,8 +152,11 @@ export const Navbar = () => {
           <Group visibleFrom="sm">
             <Button component={Link} variant="default" href="/authenticate">Log in</Button>
             <Button>Sign up</Button>
-            <Button component={Link} variant="gradient" gradient={{ from: 'yellow', to: 'red', deg: 90 }} href="/user/cartpage">
-            <IconShoppingCart />
+            <Button component={Link} variant="filled" color='yellow' href="/user/cartpage">
+              <IconShoppingCart />
+              <Badge variant="filled" color="red" radius="xl">
+                {cartItems.length}
+              </Badge>
             </Button>
           </Group>
 

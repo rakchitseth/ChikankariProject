@@ -21,6 +21,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         const storedCartItems = sessionStorage.getItem('cartItems');
         if (storedCartItems) {
+            console.log('cart item exists');
             setCartItems(JSON.parse(storedCartItems));
         }
     }, []);
@@ -71,6 +72,10 @@ export const CartProvider = ({ children }) => {
         setCartItems([]);
     }
 
+    const checkItemExists = (id) => {
+        return cartItems.some((item) => item._id === id);
+    }
+
     return (
         <CartContext.Provider value={{
             cartItems,
@@ -78,7 +83,8 @@ export const CartProvider = ({ children }) => {
             addItem,
             removeItem,
             clearItem,
-            clearCart
+            clearCart,
+            checkItemExists
         }}>
             {children}
         </CartContext.Provider>
