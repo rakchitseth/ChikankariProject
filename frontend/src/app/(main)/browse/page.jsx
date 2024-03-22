@@ -20,15 +20,8 @@ const Browse = () => {
   const theme = useMantineTheme();
 
   useEffect(() => {
-    if (gender === 'women')
-      fetchWomenProducts();
-    else if (gender === 'men')
-      fetchMenProducts();
-    else if (gender === 'kid')
-      fetchKidProducts();
-    else
       fetchAllProducts();
-  }, [gender]);
+  }, []);
 
 
   const showDetails = () => {

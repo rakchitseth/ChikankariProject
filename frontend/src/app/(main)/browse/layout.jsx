@@ -63,7 +63,113 @@ const availableColors = [
         name: 'purple',
         color: '#800080'
 
-    }
+    },
+    {
+        name: 'Orange',
+        color: '#FFA500'
+    },
+    {
+        name: 'White',
+        color: '#FFFFFF'
+    },
+    {
+        name: 'Grey',
+        color: '#808080'
+    },
+    {
+        name: 'Brown',
+        color: '#A52A2A'
+    },
+    {
+        name: 'Maroon',
+        color: '#800000'
+    },
+    {
+        name: 'Navy',
+        color: '#000080'
+    },
+    {
+        name: 'Teal',
+        color: '#008080'
+    },
+    {
+        name: 'Olive',
+        color: '#808000'
+    },
+    {
+        name: 'Lime',
+        color: '#00FF00'
+    },
+    {
+        name: 'Aqua',
+        color: '#00FFFF'
+    },
+    {
+        name: 'Fuchsia',
+        color: '#FF00FF'
+    },
+    {
+        name: 'Silver',
+        color: '#C0C0C0'
+    },
+    {
+        name: 'Gold',
+        color: '#FFD700'
+    },
+    {
+        name: 'Beige',
+        color: '#F5F5DC'
+    },
+    {
+        name: 'Tan',
+        color: '#D2B48C'
+    },
+    {
+        name: 'Cyan',
+        color: '#00FFFF'
+    },
+    {
+        name: 'Magenta',
+        color: '#FF00FF'
+    },
+    {
+        name: 'Indigo',
+        color: '#4B0082'
+    },
+    {
+        name: 'Violet',
+        color: '#8A2BE2'
+    },
+    {
+        name: 'Turquoise',
+        color: '#40E0D0'
+    },
+    {
+        name: 'Salmon',
+        color: '#FA8072'
+    },
+    {
+        name: 'Plum',
+        color: '#DDA0DD'
+    },
+    {
+        name: 'Khaki',
+        color: '#F0E68C'
+    },
+    {
+        name: 'Ivory',
+        color: '#FFFFF0'
+    },
+    {
+        name: 'Coral',
+        color: '#FF7F50'
+    },
+    {
+        name: 'Crimson',
+        color: '#DC143C'
+    },
+    
+
 ]
 
 const Layout = ({ children }) => {

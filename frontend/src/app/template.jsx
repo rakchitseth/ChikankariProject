@@ -5,18 +5,21 @@ import { Navbar } from './navbar';
 import React from 'react';
 import { SnackbarProvider } from 'notistack';
 import Footer from './footer';
+import { AppProvider } from '@/context/AppContext';
 
 
 
 const Template = ({ children }) => {
   return (
-    
-      <SnackbarProvider maxSnack={3} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+
+    <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+      <AppProvider>
         {/* <Navbar /> */}
         {children}
-        <Footer />
-      </SnackbarProvider>
-    
+      </AppProvider>
+      <Footer />
+    </SnackbarProvider>
+
 
   )
 }

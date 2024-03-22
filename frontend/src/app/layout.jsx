@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
           defaultColorScheme="light"
           theme={theme}>
             <CartProvider>
-
           {children}
             </CartProvider>
         </MantineProvider>

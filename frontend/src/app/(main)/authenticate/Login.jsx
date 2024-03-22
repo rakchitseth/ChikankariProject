@@ -4,10 +4,13 @@ import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { enqueueSnackbar } from 'notistack';
 import React from 'react';
+import useAppContext from '@/context/AppContext';
 
 const Login = ({ setType }) => {
 
     const router = useRouter();
+
+    const { setLoggedIn } = useAppContext();
 
     const LoginForm = useForm({
         initialValues: {
@@ -34,6 +37,7 @@ const Login = ({ setType }) => {
                 enqueueSnackbar('Logged in successfully', { variant: 'success' });
                 res.json()
                     .then((data) => {
+                        setLoggedIn(true);
                         sessionStorage.setItem('user', JSON.stringify(data));
                         if(data.role === 'admin'){
                             router.push('/admin/manageproduct');
@@ -54,7 +58,6 @@ const Login = ({ setType }) => {
         <div>
             <form onSubmit={LoginForm.onSubmit(LoginSubmit)}>
                 <Stack gap={'xl'}>
-
                     <TextInput
                         label="Email"
                         placeholder="hello@mantine.dev"
@@ -71,7 +74,6 @@ const Login = ({ setType }) => {
 
                     <Checkbox
                         label="Keep me logged in"
-                        {...LoginForm.getInputProps('terms')}
                     />
 
                     <Button color='pink' type='submit'>Login</Button>
