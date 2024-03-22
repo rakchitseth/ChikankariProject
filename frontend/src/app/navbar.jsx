@@ -33,6 +33,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import cx from 'clsx';
 import useCartContext from '@/context/CartContext';
+import useAppContext from '@/context/AppContext';
 
 const mockdata = [
   {
@@ -80,7 +81,7 @@ export const Navbar = () => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')) || null);
 
   const { cartItems } = useCartContext();
-
+  const { loggedIn, setLoggedIn } = useAppContext();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>

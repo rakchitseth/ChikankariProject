@@ -1,16 +1,15 @@
 'use client';
 import React, { useContext } from 'react';
-import { 
-  Container, 
-  Group, 
-  Text, 
-  Title, 
-  Divider, 
-  Button, 
-  Card, 
-  Image, 
-  TextInput, 
-  Spacer, 
+import {
+  Container,
+  Group,
+  Text,
+  Title,
+  Divider,
+  Button,
+  Card,
+  TextInput,
+  Spacer,
 } from '@mantine/core';
 import useCartContext from '@/context/CartContext';
 
@@ -27,7 +26,7 @@ const CartPage = () => {
   };
 
   return (
-    <Container fluid size="md">
+    <Container size="md">
       <Title>Shopping Cart</Title>
       {cartItems.length === 0 ? (
         <Text>Your cart is currently empty.</Text>
@@ -35,9 +34,9 @@ const CartPage = () => {
         <>
           <Group direction="column">
             {cartItems.map((item) => (
-              <Card key={item.id} shadow="sm" radius="md" withBorder>
+              <Card key={item._id} shadow="sm" radius="md" withBorder>
                 <Group direction="row" spacing="md">
-                  <Image src={item.imageUrl} alt={item.name} width={80} height={80} />
+                  <img src={item.imageUrl} alt={item.name} width={80} height={80} />
                   <Group direction="column">
                     <Text weight="bold">{item.name}</Text>
                     <Text size="sm">Price: ${item.price.toFixed(2)}</Text>
@@ -60,7 +59,6 @@ const CartPage = () => {
             <Text>Total: ${cartTotalAmount.toFixed(2)}</Text>
             <Group>
               <Button onClick={clearCart} variant="outline">Clear Cart</Button>
-              <Spacer size="md" />
               <Button variant="filled">Checkout</Button>
             </Group>
           </Group>

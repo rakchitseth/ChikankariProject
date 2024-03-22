@@ -20,6 +20,7 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         const storedCartItems = sessionStorage.getItem('cartItems');
+        console.log(storedCartItems);
         if (storedCartItems) {
             console.log('cart item exists');
             setCartItems(JSON.parse(storedCartItems));
@@ -28,7 +29,8 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         console.log(cartItems);
-        sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+        if (cartItems.length)
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
 
     const addItem = (item) => {
