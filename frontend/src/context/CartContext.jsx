@@ -54,6 +54,7 @@ export const CartProvider = ({ children }) => {
         if (existingItem.quantity === 1) {
             const updatedCartItems = cartItems.filter((cartItem) => cartItem._id !== item._id);
             setCartItems(updatedCartItems);
+            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         } else {
             const updatedCartItems = cartItems.map((cartItem) => {
                 if (cartItem._id === item._id) {
@@ -62,6 +63,7 @@ export const CartProvider = ({ children }) => {
                 return cartItem;
             });
             setCartItems(updatedCartItems);
+            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
         }
     }
 

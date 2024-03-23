@@ -36,7 +36,7 @@ const CartPage = () => {
             {cartItems.map((item) => (
               <Card key={item._id} shadow="sm" radius="md" withBorder>
                 <Group direction="row" spacing="md">
-                  <img src={item.imageUrl} alt={item.name} width={80} height={80} />
+                  <img src={`${process.env.NEXT_PUBLIC_API_URL}/${item.image[0]}`} alt={item.name} width={80} height={80} />
                   <Group direction="column">
                     <Text weight="bold">{item.name}</Text>
                     <Text size="sm">Price: ${item.price.toFixed(2)}</Text>
@@ -44,9 +44,9 @@ const CartPage = () => {
                       label="Quantity"
                       placeholder="1"
                       value={item.quantity.toString()}
-                      onChange={(e) => handleInputChange(item.id, parseInt(e.target.value))}
+                      onChange={(e) => handleInputChange(item._id, parseInt(e.target.value))}
                     />
-                    <Button size="xs" variant="outline" onClick={() => handleRemoveItem(item.id)}>
+                    <Button size="xs" variant="outline" onClick={() => handleRemoveItem(item)}>
                       Remove
                     </Button>
                   </Group>
