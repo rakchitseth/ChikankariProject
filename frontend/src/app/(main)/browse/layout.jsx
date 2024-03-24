@@ -187,14 +187,14 @@ const Layout = ({ children }) => {
 
     return (
         <AppShell
-            header={{ height: 0 }}
+            header={{ height: 60 }}
             navbar={{
                 width: 400,
                 breakpoint: 'sm',
                 collapsed: { mobile: false },
             }}
             padding="md"
-            layout="alt"
+            // layout="alt"
         >
             <AppShell.Header>
                 <Navbar />
