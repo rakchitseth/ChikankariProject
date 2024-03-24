@@ -22,6 +22,7 @@ const Signup = ({ setType }) => {
     const signupSubmit = async (values) => {
         console.log(values);
 
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/add`, {
             method: 'POST',
             headers: {
@@ -30,6 +31,7 @@ const Signup = ({ setType }) => {
             body: JSON.stringify(values)
         });
         if (res.status === 200) {
+            sendOTP();
             enqueueSnackbar('User added successfully', { variant: 'success' });
         } else {
             enqueueSnackbar('Some Error occured', { variant: 'error' });
@@ -37,9 +39,26 @@ const Signup = ({ setType }) => {
 
     }
 
+    const sendOTP = () => {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/util/sendotp`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: signupForm.values.email })
+        }).then((res) => {
+            if (res.status === 201) {
+                enqueueSnackbar('OTP Sent', { variant: 'success' });
+            } else {
+                enqueueSnackbar('Some Error occured', { variant: 'error' });
+            }
+
+        })
+    }
+
     return (
         <div>
-            
+
             <form onSubmit={signupForm.onSubmit(signupSubmit)}>
                 <Stack gap={'xl'}>
                     <TextInput

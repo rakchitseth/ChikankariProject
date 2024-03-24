@@ -44,7 +44,7 @@ router.post('/sendotp', (req, res) => {
     generatedOTP[req.body.email] = otp;
     console.log(generatedOTP);
     transporter.sendMail({
-        from : 'hoodhgn@gmail.com',
+        from : process.env.EMAIL_ID,
         to : req.body.email,
         subject : 'OTP for Password Reset',
         html: `<p> OTP for password reset is <b>${otp}</b> </p>`

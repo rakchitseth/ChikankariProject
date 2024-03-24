@@ -6,6 +6,7 @@ const mySchema = new Schema({
     email : String,
     password : String,
     age: Number,
+    verified : {type: Boolean, default: false},
     role : {type: String, default: 'user'},
     avatar: {type : String , default: 'avatar_placeholder.webp'}
 })
