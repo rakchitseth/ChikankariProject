@@ -1,11 +1,11 @@
-// import NextAuth from 'next-auth';
-// import { authConfig } from './auth.config';
-import { NextResponse, NextRequest } from 'next/server'
-
-export function middleware(request) {
-    return NextResponse.redirect(new URL('/home', request.url))
-}
+export { default } from "next-auth/middleware"
 
 export const config = {
-    matcher: '/about/:path*',
+    matcher: '/login',
+    callbacks: {
+        authorized({ req, token }) {
+            console.log(token);
+            if (token) return true // If there is a token, the user is authenticated
+        }
+    }
 }
