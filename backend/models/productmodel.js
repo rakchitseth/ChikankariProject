@@ -14,6 +14,7 @@ const mySchema = new Schema({
     gender: { type: String, required: true },
     stock: { type: Number },
     sizes: { type: String, required: true },
+    offer: { type: Number, default: 0 },
 })
 
 module.exports = model('chikanproducts', mySchema);

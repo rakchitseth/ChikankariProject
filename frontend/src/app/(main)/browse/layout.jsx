@@ -2,7 +2,7 @@
 import useBrowseContext from '@/context/BrowseContext';
 import { AppShell, Burger, Checkbox, Group, RangeSlider, Title, ColorPicker, DEFAULT_THEME, ActionIcon, Grid, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import appConfig from '@/utils/constants'
 import { Navbar } from '@/app/navbar';
 import { IconCheck } from '@tabler/icons-react';
@@ -18,7 +18,7 @@ const priceMarks = [
 ];
 
 const sizeOptions = [
-    'SX', 'S', 'M', 'L', 'XL', 'XXL'
+    38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60
 ]
 
 const availableColors = [
@@ -185,6 +185,11 @@ const Layout = ({ children }) => {
     const [selColor, setSelColor] = useState(null);
     const [selSizes, setSelSizes] = useState([]);
 
+    useEffect(() => {
+        filterBySize(selSizes);
+    }, [selSizes])
+    
+
     return (
         <AppShell
             header={{ height: 60 }}
@@ -264,7 +269,7 @@ const Layout = ({ children }) => {
                                     } else {
                                         setSelSizes(selSizes.filter(s => s !== size));
                                     }
-                                    setProductList(filterBySize(size));
+
                                 }} />
                             ))
                         }

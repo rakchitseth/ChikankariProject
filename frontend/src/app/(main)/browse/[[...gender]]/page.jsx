@@ -15,20 +15,22 @@ const Browse = () => {
   const { selPriceRange, filterByPrice, fetchAllProducts, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
   const { cartItems, addItem } = useCartContext();
 
-  console.log(cartItems);
 
   const { gender } = useParams();
+  // console.log(gender);
   const [loading, setLoading] = useState(false);
 
   const theme = useMantineTheme();
 
   useEffect(() => {
-    if (gender === 'women')
-      fetchWomenProducts();
-    else if (gender === 'men')
-      fetchMenProducts();
-    else if (gender === 'kid')
-      fetchKidProducts();
+    if (gender) {
+      if (gender[0] === 'women')
+        fetchWomenProducts();
+      else if (gender[0] === 'men')
+        fetchMenProducts();
+      else if (gender[0] === 'kid')
+        fetchKidProducts();
+    }
     else
       fetchAllProducts();
   }, [gender]);
@@ -38,7 +40,7 @@ const Browse = () => {
     if (!loading) {
       return (
         productList.map(product => (
-          <Grid.Col span={{ xs: 12, sm: 6, md: 3 }} key={product._id}>
+          <Grid.Col span={{ xs: 12, sm: 6, lg: 4, xl: 3 }} key={product._id}>
             <ProductCard productData={product} key={product._id} />
           </Grid.Col>
         ))
