@@ -1,14 +1,19 @@
 'use client';
-import { Card, Image, Avatar, Text, Group, Loader, Box, Grid } from '@mantine/core';
+import { Card, Image, Avatar, Text, Group, Loader, Box, Grid, Button } from '@mantine/core';
 import classes from './ArticleCardVertical.module.css';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { IconBluetoothConnected } from '@tabler/icons-react';
+import useCartContext from '@/context/CartContext';
+import { IconShoppingCart } from '@tabler/icons-react';
 
 const ArticleCardVertical = () => {
 
   const { id } = useParams();
 
   const [productDetails, setProductDetails] = useState(null);
+
+  const { cartItems, addItem, checkItemExists } = useCartContext();
 
   const getProductDetails = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getbyid/${id}`)
@@ -30,7 +35,7 @@ const ArticleCardVertical = () => {
           <img
             src={`${process.env.NEXT_PUBLIC_API_URL}/${productDetails.image[0]}`}
             height={400}
-            width={400}
+            // width={400}
           />
           <div className={classes.body}>
             <Text tt="uppercase" c="dimmed" fw={700} size="xs">
@@ -45,6 +50,13 @@ const ArticleCardVertical = () => {
             <Text className={classes.price} mt="xs" mb="md">
               ₹{productDetails.price}
             </Text>
+            <Button disabled={
+            checkItemExists(productDetails._id)
+            } fullWidth radius="xl" mt={10} style={{ flex: 1 }} onClick={() => addItem(productDetails)}>
+            <IconShoppingCart /> {
+            checkItemExists(productDetails._id) ? 'Added to cart' : 'Add to cart'
+            }
+        </Button>
             <Group wrap="nowrap" gap="xs">
               <Group gap="xs" wrap="nowrap">
                 <Avatar
