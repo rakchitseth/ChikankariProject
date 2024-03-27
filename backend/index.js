@@ -22,6 +22,14 @@ app.use('/user', userrouter);
 app.use('/product', productrouter);
 app.use('/util', utilROuter);
 
+app.get('/get-permission', (req, res) => {
+    const token = req.header('x-auth-token');
+    console.log(token);
+    if(token === 'admin'){
+        res.json({allowed: false});
+    }
+})
+
 app.use(express.static('./static/uploads'));
 
 // app.get('/', (req, res) => {
