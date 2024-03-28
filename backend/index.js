@@ -3,13 +3,14 @@ const express = require('express');
 const userrouter = require('./routers/userrouter');
 const productrouter = require('./routers/productrouter')
 const utilROuter = require('./routers/utils')
+const reviewRouter = require('./routers/reviewRouter')
+
 const cors = require('cors')
 // initialize express app
 
 const app = express();
 
 const port = 5000;
-
 
 //middleware
 app.use(cors(
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use('/user', userrouter);
 app.use('/product', productrouter);
 app.use('/util', utilROuter);
+app.use('/review', reviewRouter);
 
 app.get('/get-permission', (req, res) => {
     const token = req.header('x-auth-token');
