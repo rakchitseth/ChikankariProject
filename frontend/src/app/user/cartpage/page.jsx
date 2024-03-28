@@ -10,8 +10,10 @@ import {
   Card,
   TextInput,
   Spacer,
+  Grid,
 } from '@mantine/core';
 import useCartContext from '@/context/CartContext';
+import { IconTrash } from '@tabler/icons-react';
 
 const CartPage = () => {
   const { cartItems, cartTotalAmount, addItem, removeItem, clearItem, clearCart } = useCartContext();
@@ -34,23 +36,30 @@ const CartPage = () => {
         <>
           <Group direction="column">
             {cartItems.map((item) => (
-              <Card key={item._id} shadow="sm" radius="md" withBorder>
-                <Group direction="row" spacing="md">
-                  <img src={`${process.env.NEXT_PUBLIC_API_URL}/${item.image[0]}`} alt={item.name} width={80} height={80} />
-                  <Group direction="column">
-                    <Text weight="bold">{item.name}</Text>
-                    <Text size="sm">Price: ${item.price.toFixed(2)}</Text>
+              <Card key={item._id} shadow="sm" radius="md" withBorder w={'100%'}>
+                <Grid gutter={5}>
+                  <Grid.Col span={2}>
+                    <img src={`${process.env.NEXT_PUBLIC_API_URL}/${item.image[0]}`} alt={item.name} width={'100%'} />
+
+                  </Grid.Col>
+                  <Grid.Col span={6} py={20}>
+
+                    <Text weight="bold" c="dimmed" tt={'uppercase'}>{item.category}</Text>
+                    <Text weight="bold">{item.title}</Text>
+                    <Title order={3}>₹{item.price.toFixed(2)}</Title>
+                  </Grid.Col>
+                  <Grid.Col span={4} py={20}>
+                    <Button color='red' ml={'auto'} size="xs" variant="outline" onClick={() => handleRemoveItem(item)}>
+                      <IconTrash />
+                    </Button>
                     <TextInput
                       label="Quantity"
                       placeholder="1"
                       value={item.quantity.toString()}
                       onChange={(e) => handleInputChange(item._id, parseInt(e.target.value))}
                     />
-                    <Button size="xs" variant="outline" onClick={() => handleRemoveItem(item)}>
-                      Remove
-                    </Button>
-                  </Group>
-                </Group>
+                  </Grid.Col>
+                </Grid>
               </Card>
             ))}
           </Group>

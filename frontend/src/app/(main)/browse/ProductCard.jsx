@@ -23,14 +23,15 @@ const ProductCard = ({ productData }) => {
     >
       <Card.Section className={classes.imageSection}>
         <div className={classes.Container - useHovered}>
-
           <img className={classes.prodImg} src={`${process.env.NEXT_PUBLIC_API_URL}/${productData.image}`} alt="Tesla Model S" />
         </div>
       </Card.Section>
 
       <Group justify="space-between" mt="md">
         <div>
-          <Text fw={500}>{productData.title}</Text>
+          <Text fw={500}>
+          {stringSlicer(productData.title, 30)}
+          </Text>
           <Text fz="xs" c="dimmed">
             {stringSlicer(productData.description, 40)}
           </Text>

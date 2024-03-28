@@ -7,6 +7,8 @@ import AdminNavbar from './navbar';
 import { IconKey } from '@tabler/icons-react';
 import { IconReceipt2 } from '@tabler/icons-react';
 import classes from './sidebar.module.css';
+import UserAuthoriser from '@/context/UserAuth';
+import { SnackbarProvider } from 'notistack';
 
 const data = [
     { link: '', label: 'Notifications', icon: IconBellRinging },
@@ -39,28 +41,34 @@ const Layout = ({ children }) => {
     ));
 
     return (
-        <AppShell
-            header={{ height: 0 }}
-            navbar={{
-                width: 300,
-                breakpoint: 'sm',
-                collapsed: { mobile: false },
-            }}
-            padding="md"
-            layout="alt"
-        >
+        <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+            <UserAuthoriser>
+                <AppShell
+                    header={{ height: 0 }}
+                    navbar={{
+                        width: 300,
+                        breakpoint: 'sm',
+                        collapsed: { mobile: false },
+                    }}
+                    padding="md"
+                    layout="alt"
+                >
 
-            <AppShell.Header>
-                <AdminNavbar />
-            </AppShell.Header>
+                    <AppShell.Header>
+                        <AdminNavbar />
+                    </AppShell.Header>
 
-            <AppShell.Navbar p="md">
-                <Title order={3}>Admin Options</Title>
-                {links}
-            </AppShell.Navbar>
+                    <AppShell.Navbar p="md">
+                        <Title order={3}>Admin Options</Title>
+                        {links}
+                    </AppShell.Navbar>
 
-            <AppShell.Main>{children}</AppShell.Main>
-        </AppShell>
+                    <AppShell.Main>
+                        {children}
+                    </AppShell.Main>
+                </AppShell>
+            </UserAuthoriser>
+        </SnackbarProvider>
     )
 }
 
