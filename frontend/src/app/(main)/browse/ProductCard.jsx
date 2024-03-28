@@ -1,18 +1,26 @@
 'use client';
 
-import { Badge, Button, Card, Container, Grid, Group, Text, useHovered } from "@mantine/core";
+import { Badge, Button, Card, Container, Flex, Grid, Group, Text, useHovered } from "@mantine/core";
 import classes from './browse.module.css';
 import Link from "next/link";
 import { IconShoppingCart } from "@tabler/icons-react";
 import useCartContext from "@/context/CartContext";
+import useBrowseContext from "@/context/BrowseContext";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ productData }) => {
 
   const { cartItems, addItem, checkItemExists } = useCartContext();
+  const { stringSlicer } = useBrowseContext();
+  const router = useRouter();
 
   return (
 
-    <Card withBorder radius="md" className={classes.card}>
+    <Card withBorder radius="md" className={classes.card}
+      onClick={
+        () => router.push('/productdetails/' + productData._id)
+      }
+    >
       <Card.Section className={classes.imageSection}>
         <div className={classes.Container - useHovered}>
 
@@ -24,20 +32,18 @@ const ProductCard = ({ productData }) => {
         <div>
           <Text fw={500}>{productData.title}</Text>
           <Text fz="xs" c="dimmed">
-            {productData.description}
+            {stringSlicer(productData.description, 40)}
           </Text>
         </div>
-        <Badge variant="outline">25% off</Badge>
       </Group>
 
       <Card.Section className={classes.section} mt="md">
-        <Text fz="sm" c="dimmed" className={classes.label}>
-          {productData.material}
-        </Text>
-
-        <Group gap={8} mb={-8}>
-          {/* {features} */}
-        </Group>
+        <Flex justify="space-between">
+          <Text fz="sm" c="dimmed" className={classes.label}>
+            {productData.material}
+          </Text>
+          <Badge color="red" variant="filled">{productData.offer}% off</Badge>
+        </Flex>
       </Card.Section>
 
       <Card.Section className={classes.section}>
@@ -51,17 +57,14 @@ const ProductCard = ({ productData }) => {
             </Text>
           </div>
 
-          <Button component={Link} href={'/productdetails/' + productData._id} radius="xl" style={{ flex: 1 }} className={Button}>
-            View More
+          <Button disabled={
+            checkItemExists(productData._id)
+          } fullWidth radius="xl" mt={10} style={{ flex: 1 }} onClick={() => addItem(productData)}>
+            <IconShoppingCart /> {
+              checkItemExists(productData._id) ? 'Added to cart' : 'Add to cart'
+            }
           </Button>
         </Group >
-        <Button disabled={
-          checkItemExists(productData._id)
-        } fullWidth radius="xl" mt={10} style={{ flex: 1 }} onClick={() => addItem(productData)}>
-          <IconShoppingCart /> {
-            checkItemExists(productData._id) ? 'Added to cart' : 'Add to cart'
-          }
-        </Button>
       </Card.Section>
     </Card>
   );

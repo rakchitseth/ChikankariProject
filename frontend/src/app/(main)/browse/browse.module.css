@@ -1,5 +1,6 @@
 .card {
   background-color: var(--mantine-color-body);
+  cursor: pointer;
 }
 
 .imageSection {
@@ -32,5 +33,6 @@
 .prodImg {
   height: 400px;
   object-fit: cover;
+  object-position: center;
 }
 

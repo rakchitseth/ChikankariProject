@@ -9,7 +9,6 @@ import { IconArrowRight } from '@tabler/icons-react';
 import useCartContext from '@/context/CartContext';
 
 
-
 const Browse = () => {
 
   const { selPriceRange, filterByPrice, fetchAllProducts, fetchWomenProducts, fetchMenProducts, fetchKidProducts, productList, setProductList, masterList } = useBrowseContext();
@@ -46,6 +45,7 @@ const Browse = () => {
 
   return (
     <div>
+      the main one
       <Box py={30}>
         <Container size='lg'>
           <TextInput

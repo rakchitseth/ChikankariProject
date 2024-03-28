@@ -18,8 +18,15 @@ export const BrowseProvider = ({ children }) => {
         return masterList.filter(product => product.color.toLowerCase() === color.toLowerCase());
     }
 
-    const filterBySize = (size) => {
-        return masterList.filter(product => product.size.toLowerCase() === size.toLowerCase());
+    const filterBySize = (selSizes) => {
+        return masterList.filter(product => product.size.some(size => selSizes.includes(size)));
+    }
+
+    const stringSlicer = (str, limit) => {
+        if (str.length > limit) {
+            return str.slice(0, limit) + '...';
+        }
+        return str;
     }
 
     const fetchProduct = (category) => {
@@ -81,7 +88,8 @@ export const BrowseProvider = ({ children }) => {
             fetchAllProducts,
             productList, 
             setProductList,
-            masterList
+            masterList,
+            stringSlicer
          }}>
             {children}
         </BrowseContext.Provider>
