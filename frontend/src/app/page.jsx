@@ -126,7 +126,7 @@ const Home = () => {
           slideSize={{ base: '100%', sm: '50%' }}
           slideGap={{ base: rem(2), sm: 'xl' }}
           align="start"
-          slidesToScroll={mobile ? 1 : 3}
+          slidesToScroll={1}
         >
           <Carousel.Slide>
             <TestimonialCard />

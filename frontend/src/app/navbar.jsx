@@ -201,7 +201,7 @@ export const Navbar = () => {
             <a href="/browse/men" className={classes.link}>
               Mens
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/browse/kids" className={classes.link}>
               Kids
             </a>
           </Group>
