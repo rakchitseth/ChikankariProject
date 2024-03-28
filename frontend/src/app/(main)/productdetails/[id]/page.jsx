@@ -5,7 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import useCartContext from '@/context/CartContext';
 import Link from 'next/link';
-import { IconArrowLeft } from '@tabler/icons-react';
+import { IconArrowLeft, IconCheck } from '@tabler/icons-react';
+import { enqueueSnackbar } from 'notistack';
 
 const ArticleCardVertical = () => {
 
@@ -16,6 +17,9 @@ const ArticleCardVertical = () => {
   const [reviewList, setReviewList] = useState([]);
   const [rating, setRating] = useState(3);
   const reviewRef = useRef();
+
+  const [selSize, setSelSize] = useState(null);
+  const [selColor, setSelColor] = useState(null);
 
   const router = useRouter();
 
@@ -129,12 +133,45 @@ const ArticleCardVertical = () => {
             </Grid>
 
 
-            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} >
+            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} align='center' >
               <Grid.Col span={3}>
-                <Text c='dimmed' fw={700}>Size : </Text>
+                <Text c='dimmed' fw={700}>Sizes Available : </Text>
               </Grid.Col>
-              <Grid.Col span={9} tt={'capitalize'}>
-                <Text fw={700}>{productDetails.size}</Text>
+              <Grid.Col span={9} >
+                <ActionIcon.Group>
+                  {
+                    productDetails.sizes.split(',').map((size) => (
+                      <ActionIcon px={20} variant={
+                        selSize === size ? 'filled' : 'outline'
+                      } size="lg" aria-label="Size"
+                        onClick={() => setSelSize(size)}
+                      >
+                        <Text fw={'bold'}>{size}</Text>
+                      </ActionIcon>
+                    ))
+                  }
+
+                </ActionIcon.Group>
+              </Grid.Col>
+            </Grid>
+            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} align='center' >
+              <Grid.Col span={3}>
+                <Text c='dimmed' fw={700}>Colors : </Text>
+              </Grid.Col>
+              <Grid.Col span={9} >
+                <ActionIcon.Group>
+                  {
+                    productDetails.color.split(',').map((col) => (
+                      <ActionIcon color={col} variant={'filled'} size="lg" aria-label="Size"
+                        onClick={() => setSelColor(col)}
+                      >
+                        {
+                          selColor === col ? <IconCheck color="white" size={20} /> : null
+                        }
+                      </ActionIcon>
+                    ))
+                  }
+                </ActionIcon.Group>
               </Grid.Col>
             </Grid>
 
@@ -142,6 +179,10 @@ const ArticleCardVertical = () => {
               <Button
                 disabled={checkItemExists(productDetails._id)}
                 onClick={() => {
+                  if (!selColor || !selSize) {
+                    enqueueSnackbar('Please select size and color', { variant: 'warning' });
+                    return;
+                  }
                   addItem(productDetails);
                 }}
                 radius="xl"
@@ -154,7 +195,6 @@ const ArticleCardVertical = () => {
               <Button
                 component={Link}
                 href={'/user/cartpage'}
-                disabled={cartItems.length === 0}
                 radius="xl"
                 size="lg"
                 variant="filled"
