@@ -118,7 +118,7 @@ const Home = () => {
           <Grid gutter="lg">
           </Grid>
         </Container>
-        <Link href="/admin">Admin</Link>
+        
       </div>
       <Features />
       <Container py={20}>
