@@ -19,7 +19,7 @@ import About from './AboutChikankari';
 const categoryData = [
   {
     name: 'Kurti',
-    image: 'https://imgs.search.brave.com/zaEwScMl_5VJwr-vcxvAow-ARc-mhe2O-6s8UfS3IRo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE1MncyRm5EY0wu/anBn',
+    image: 'https://imgs.search.brave.com/8XpfNFDgLKxrioCa5MhfxyIYAivwio43VikfkShufxw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90aGVj/aGlrYW5sYWJlbC5j/b20vY2RuL3Nob3Av/ZmlsZXMvMjVfY29t/cHJlc3NlZF8wZjZi/OWM5Yy00NmE2LTRk/MWYtODE3Yi01N2Yy/ZDUwNjM1MDMuanBn/P3Y9MTcwODM0NDI5/NyZ3aWR0aD04MzY',
     link: ''
   },
   {
@@ -39,7 +39,7 @@ const categoryData = [
   },
   {
     name: 'Sarees',
-    image: 'https://imgs.search.brave.com/Vol_VSPzW5kvRowy8Mz7LZRQKAPVRnGgJC94wUeAUSQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE0R29VOFJGWUwu/anBn',
+    image: 'https://imgs.search.brave.com/6rWCPfRY0yRAsItiGT-oE9l1T29jDBPVpfpxHRawnTE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGFjY2luby5j/b20vY2hpa2FuZ2Fs/aS9wcm9kdWN0cy8w/MDFhMzQ0MC01NzUx/MzBfbS5qcGc_dj01/MDI',
     link: ''
   },
   {
