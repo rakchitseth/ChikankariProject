@@ -19,27 +19,27 @@ import About from './AboutChikankari';
 const categoryData = [
   {
     name: 'Kurti',
-    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    image: 'https://imgs.search.brave.com/zaEwScMl_5VJwr-vcxvAow-ARc-mhe2O-6s8UfS3IRo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE1MncyRm5EY0wu/anBn',
     link: ''
   },
   {
-    name: 'Kurti',
-    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    name: 'Kurti Sets',
+    image: 'https://imgs.search.brave.com/hmSFEOqfPQNmIrbXYfUiq-UGlbYAMHUlTwlZNVtWXtE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9ob3Vz/ZW9ma2FyaS5pbi9j/ZG4vc2hvcC9wcm9k/dWN0cy8wNTdBNjY5/OF81ZjhkNzE5MS1l/ZmRkLTRlOGItYWUy/Zi03MjNhODNkNGUy/MzZfNTAweC5qcGc_/dj0xNjkwOTU3MTcw',
     link: ''
   },
   {
-    name: 'Kurti',
-    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    name: 'Short Kurti',
+    image: 'https://imgs.search.brave.com/gYrXhJAZ132anMIVMr3QtnCcZeauo4ilQc2WBmd__mw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMubWVlc2hvLmNv/bS9pbWFnZXMvcHJv/ZHVjdHMvMTM1Mjgx/OTE0L2FzbTRqXzQw/MC5qcGc',
     link: ''
   },
   {
-    name: 'Kurti',
-    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    name: 'Mens Kurta Sets',
+    image: 'https://imgs.search.brave.com/Gn2E9eySVMNbme9Lu0z58Yv_QbqIoTltPzyMcji68dY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90aGVj/aGlrYW5sYWJlbC5j/b20vY2RuL3Nob3Av/ZmlsZXMvQmxhY2tT/aGFhbkNoYW5kZXJp/TWVuc0NoaWthbmth/cmlLdXJ0YV9MdWNr/bm93Q2hpa2Fua2Fy/aU1lbnNfS3VydGFQ/eWphbWFTZXRfMS5q/cGc_dj0xNzA3ODkz/ODA1JndpZHRoPTgz/Ng',
     link: ''
   },
   {
-    name: 'Kurti',
-    image: 'https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp',
+    name: 'Sarees',
+    image: 'https://imgs.search.brave.com/Vol_VSPzW5kvRowy8Mz7LZRQKAPVRnGgJC94wUeAUSQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE0R29VOFJGWUwu/anBn',
     link: ''
   },
   {
