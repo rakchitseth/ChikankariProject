@@ -49,6 +49,7 @@ const categoryData = [
   }
 ];
 
+
 const TestimonialCard = () => {
   return <Box>
     <Rating value={4} />
@@ -73,7 +74,6 @@ const TestimonialCard = () => {
     </Group>
   </Box>
 }
-
 const Home = () => {
 
   const theme = useMantineTheme();
@@ -120,8 +120,18 @@ const Home = () => {
         </Container>
         
       </div>
+      <Carousel>
+        <Carousel.Slide>
+          
+        </Carousel.Slide>
+        <Carousel.Slide>
+          
+        </Carousel.Slide>
+      </Carousel>
+        <About />
       <Features />
       <Container py={20}>
+        <Title order={1} align="center">Customer Reviews</Title>
         <Carousel
           slideSize={{ base: '100%', sm: '50%' }}
           slideGap={{ base: rem(2), sm: 'xl' }}
@@ -142,7 +152,6 @@ const Home = () => {
           </Carousel.Slide>
         </Carousel>
       </Container>
-        <About />
     </>
   );
 }
