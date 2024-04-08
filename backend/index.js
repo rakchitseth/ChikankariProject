@@ -28,6 +28,8 @@ app.get('/get-permission', (req, res) => {
     const token = req.header('x-auth-token');
     console.log(token);
     if(token === 'admin'){
+        res.json({allowed: true});
+    }else{
         res.json({allowed: false});
     }
 })
