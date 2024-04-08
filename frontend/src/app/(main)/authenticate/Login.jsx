@@ -82,7 +82,7 @@ const Login = ({ setType }) => {
 
                 <Group justify="space-between" mt="xl">
                     <Anchor component="button" type="button" c="dimmed" onClick={() => setType('Signup')} size="xs">
-                        Dont't have an account? Signup
+                        Don&apos;t have an account? Signup
                     </Anchor>
                 </Group>
             </form>

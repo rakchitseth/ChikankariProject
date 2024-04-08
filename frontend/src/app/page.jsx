@@ -112,7 +112,7 @@ const Home = () => {
 
       <div>
         <Container p={10} size={'xl'}>
-          <Title order={1} align="center">The World's #1 Embroidery On A Fabric -"ChikanKari"</Title>
+          <Title order={1} align="center">The World&apos;s #1 Embroidery On A Fabric -&quot;ChikanKari&quot;</Title>
           <Text align="center">From #1 Chikankari Brand- CK Sewa Chikan Industries</Text>
           <Title order={1} align="center">Best Seller</Title>
           <Grid gutter="lg">

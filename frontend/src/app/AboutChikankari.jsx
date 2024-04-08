@@ -21,7 +21,7 @@ const About = () => {
                         </Title>
 
                         <Text className={classes.description} mt={30}>
-                            Chikankari is a traditional embroidery style from Lucknow, India. Translated, the word means embroidery (thread or wire), and it is one of Lucknow's best known textile decoration styles. The main market in Lucknow for Chikankari based products is Chowk.
+                            Chikankari is a traditional embroidery style from Lucknow, India. Translated, the word means embroidery (thread or wire), and it is one of Lucknow&apos;s best known textile decoration styles. The main market in Lucknow for Chikankari based products is Chowk.
                         </Text>
 
                         <Button
