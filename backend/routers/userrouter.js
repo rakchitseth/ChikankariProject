@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 
 const model = require('../models/usermodel');
 
@@ -60,18 +61,38 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.post('/authenticate', (req, res) => {
+router.post("/authenticate", (req, res) => {
+
+
     model.findOne(req.body)
         .then((result) => {
-            if (result) res.json(result);
-            else res.status(401).json({ message: 'Invalid credentials' })
 
-        }
-        ).catch((err) => {
+            if (result) {
+
+                const payload = { _id: result._id, email: result.email, role: result.role };
+
+                // create token
+                jwt.sign(
+                    payload,
+                    process.env.JWT_SECRET,
+                    { expiresIn: '7 days' },
+                    (err, token) => {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).json(err);
+                        }
+                        else res.status(200).json({ token: token });
+                    }
+                )
+            }
+            else res.status(401).json({ status: 'failed' });
+        })
+        .catch((err) => {
             console.log(err);
-            res.json(err);
+            res.status(500).json(err);
         });
 });
+
 module.exports = router;
 //getall
 //getbyid

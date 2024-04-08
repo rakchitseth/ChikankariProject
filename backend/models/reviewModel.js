@@ -5,7 +5,7 @@ const myschema = new Schema({
     product: {type : Types.ObjectId, ref : 'chikanproducts'},
     rating: {type : Number},
     review : {type : String},
-    createdAt: Date
+    createdAt: {type : Date, default : Date.now()}
 });
 
 module.exports = model('reviews', myschema);

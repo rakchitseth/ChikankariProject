@@ -27,7 +27,7 @@ const ArticleCardVertical = () => {
 
 
   const fetchReviews = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/review/getbytutor/${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/getbyproduct/${id}`);
     // console.log(response.status);
     const data = await response.json();
     console.log(data);
@@ -53,6 +53,7 @@ const ArticleCardVertical = () => {
   }
 
   useEffect(() => {
+    fetchReviews();
     getProductDetails();
   }, []);
 
@@ -219,7 +220,7 @@ const ArticleCardVertical = () => {
 
           <Group>
             <Avatar
-              src={`${import.meta.env.VITE_API_URL}/${review.user.avatar}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${review.user.avatar}`}
               alt={review.user.name}
               radius="xl"
             />
@@ -254,13 +255,13 @@ const ArticleCardVertical = () => {
       return;
     }
     const review = reviewRef.current.value;
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/review/add`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        tutor: id,
+        product: id,
         review,
         rating,
         user: currentUser._id
@@ -286,7 +287,7 @@ const ArticleCardVertical = () => {
             w={'100%'}
             className={classes.textarea}
           />
-          <Button variant="light" color="blue" radius="md" mt={20} onClick={submitReview}>
+          <Button variant="outline" color="blue" radius="md" mt={20} onClick={submitReview}>
             Submit
           </Button>
         </Paper>
@@ -297,7 +298,7 @@ const ArticleCardVertical = () => {
   }
 
   const deleteReview = async (reviewId) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/review/delete/${reviewId}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/delete/${reviewId}`, {
       method: 'DELETE'
     });
     if (response.status === 200) {

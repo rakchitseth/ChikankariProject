@@ -37,8 +37,8 @@ router.get("/getbyuser/:userid", (req, res) => {
     });
 });
 
-router.get("/getbytutor/:tutorid", (req, res) => {
-  Model.find({ tutor: req.params.tutorid }).populate('users')
+router.get("/getbyproduct/:productid", (req, res) => {
+  Model.find({ product: req.params.productid }).populate('user')
     .then((result) => {
       res.status(200).json(result);
     })
