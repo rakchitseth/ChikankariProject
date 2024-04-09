@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "notistack": "^3.0.1",
-    "react-time-ago": "^7.3.1"
-  }
-}
