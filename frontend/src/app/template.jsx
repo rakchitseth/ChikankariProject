@@ -1,5 +1,5 @@
 'use client';
-import { MantineProvider, createTheme } from '@mantine/core';
+import { Drawer, MantineProvider, createTheme } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { Navbar } from './navbar';
 import React from 'react';
@@ -10,11 +10,13 @@ import { AppProvider } from '@/context/AppContext';
 
 
 const Template = ({ children }) => {
+  const [opened, { open, close }] = useDisclosure(false);
   return (
-
     <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
       <AppProvider>
-        {/* <Navbar /> */}
+      <Drawer opened={opened} onClose={close} title="Authentication">
+        {/* Drawer content */}
+      </Drawer>
         {children}
       </AppProvider>
       <Footer />

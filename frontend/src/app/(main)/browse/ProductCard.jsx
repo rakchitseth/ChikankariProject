@@ -58,13 +58,13 @@ const ProductCard = ({ productData }) => {
             </Text>
           </div>
 
-          <Button disabled={
+          {/* <Button disabled={
             checkItemExists(productData._id)
           } fullWidth radius="xl" mt={10} style={{ flex: 1 }} onClick={() => addItem(productData)}>
             <IconShoppingCart /> {
               checkItemExists(productData._id) ? 'Added to cart' : 'Add to cart'
             }
-          </Button>
+          </Button> */}
         </Group >
       </Card.Section>
     </Card>
