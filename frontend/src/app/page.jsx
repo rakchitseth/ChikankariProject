@@ -8,7 +8,7 @@ import './styles.css';
 
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Navbar } from './navbar';
-import { Avatar, Box, Container, Grid, Group, Rating, Text, Title, rem, useMantineTheme } from '@mantine/core';
+import { Avatar, Box, Container, Grid, Group, Rating, Text, Title, px, rem, useMantineTheme } from '@mantine/core';
 import classes from './page.module.css';
 import Link from 'next/link';
 import Features from './Features';
@@ -116,18 +116,18 @@ const Home = () => {
           <Text align="center">From #1 Chikankari Brand- CK Sewa Chikan Industries</Text>
           <Title order={1} align="center">Best Seller</Title>
           <Grid gutter="lg">
+          <Grid.Col span={{ md:2,sm:6}}>
+            <img src="https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp" alt="" style={{width:100}} />
+          </Grid.Col>
+          <Grid.Col span={{ md:2,sm:6}}>
+            <img src="https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp" alt="" style={{width: 100}}/>
+            </Grid.Col>
           </Grid>
         </Container>
         
       </div>
-      <Carousel>
-        <Carousel.Slide>
-          
-        </Carousel.Slide>
-        <Carousel.Slide>
-          
-        </Carousel.Slide>
-      </Carousel>
+      
+
         <About />
       <Features />
       <Container py={20}>
