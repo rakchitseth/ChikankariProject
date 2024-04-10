@@ -14,6 +14,7 @@ import {
 } from '@mantine/core';
 import useCartContext from '@/context/CartContext';
 import { IconTrash } from '@tabler/icons-react';
+import Link from 'next/link';
 
 const CartPage = () => {
   const { cartItems, cartTotalAmount, addItem, removeItem, clearItem, clearCart } = useCartContext();
@@ -68,7 +69,7 @@ const CartPage = () => {
             <Text>Total: ₹{cartTotalAmount.toFixed(2)}</Text>
             <Group>
               <Button onClick={clearCart} variant="outline">Clear Cart</Button>
-              <Button variant="filled">Checkout</Button>
+              <Button component={Link} href="/user/checkout" variant="filled">Checkout</Button>
             </Group>
           </Group>
         </>

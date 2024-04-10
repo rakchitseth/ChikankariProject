@@ -222,14 +222,14 @@ export const Navbar = () => {
 
           {displayLoginOption()}
 
-          <Burger opened={drawerOpened} onClick={toggleDrawer} visibleFrom="sm" />
+          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
           <Drawer
             opened={drawerOpened}
             onClose={closeDrawer}
             size="100%"
             padding="md"
             title="Menu"
-            visibleFrom="sm"
+            hiddenFrom="sm"
             zIndex={1000000}
           >
             <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="md">
