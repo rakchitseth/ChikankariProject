@@ -7,6 +7,7 @@ import useCartContext from '@/context/CartContext';
 import Link from 'next/link';
 import { IconArrowLeft, IconCheck, IconTrashFilled } from '@tabler/icons-react';
 import { enqueueSnackbar } from 'notistack';
+import ReactTimeAgo from 'react-time-ago';
 
 const ArticleCardVertical = () => {
 
@@ -233,7 +234,7 @@ const ArticleCardVertical = () => {
           </Group>
           <Stack direction="horizontal" justify='flex-end'>
             <Rating value={review.rating} color='blue' size="sm" readOnly />
-            {
+            {/* {
               currentUser && currentUser._id === review.user._id && (
                 <ActionIcon color="red" title={'delete'} size={'sm'} variant="filled" onClick={
                   () => deleteReview(review._id)
@@ -241,7 +242,7 @@ const ArticleCardVertical = () => {
                   <IconTrashFilled size={'xs'} />
                 </ActionIcon>
               )
-            }
+            } */}
           </Stack>
         </Flex>
         <Text mt={10}>{review.review}</Text>
@@ -258,13 +259,13 @@ const ArticleCardVertical = () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/add`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-auth-token': currentUser.token
       },
       body: JSON.stringify({
         product: id,
         review,
-        rating,
-        user: currentUser._id
+        rating
       })
     });
     if (response.status === 200) {

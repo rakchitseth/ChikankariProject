@@ -9,6 +9,7 @@ const cors = require('cors')
 // initialize express app
 
 const app = express();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const port = 5000;
 

@@ -65,7 +65,7 @@ const CartPage = () => {
           </Group>
           <Divider my="md" />
           <Group direction="row" justify="space-between">
-            <Text>Total: ${cartTotalAmount.toFixed(2)}</Text>
+            <Text>Total: ₹{cartTotalAmount.toFixed(2)}</Text>
             <Group>
               <Button onClick={clearCart} variant="outline">Clear Cart</Button>
               <Button variant="filled">Checkout</Button>

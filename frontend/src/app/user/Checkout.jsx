@@ -1,7 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import PaymentGateway from './PaymentGateway';
+import PaymentGateway from './checkout/PaymentGateway';
 import { Elements } from '@stripe/react-stripe-js';
 import { Box, Button, Container, Flex, Loader, NumberInput, Text, TextInput, Title } from '@mantine/core';
 import { useParams } from 'react-router-dom';

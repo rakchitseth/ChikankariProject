@@ -68,15 +68,19 @@ const ThankYou = () => {
             params.get('redirect_status') === 'succeeded' ?
               <>
                 <IconCircleCheck size={100} color={'green'} />
-                <Title order={1}>Payment Succeeded</Title>
-                <Text size='xl' mt={20}>Your Payment has been completed successfully</Text>
+                <div style={{ textAlign: 'center', padding: '50px' }}>
+                  <h1 style={{ color: '#4CAF50' }}>Thank You For Your Purchase!</h1>
+                  <p style={{ fontSize: '18px' }}>Your order has been placed successfully.</p>
+                  <p style={{ fontSize: '18px' }}>We've sent a confirmation email to your email address.</p>
+                </div>
                 <Button color='blue' mt={20} component={Link} to="/">Go to Home</Button>
               </>
               :
               <>
                 <IconCircleX size={100} color={'red'} />
-                <Title order={1}>Payment Failed</Title>
-                <Text size='xl' mt={20}>Your Payment has failed</Text>
+                <Text size={'xl'}>Payment Failed</Text>
+                <Text size={'lg'}>Your payment was not successful. Please try again.</Text>
+                <Text size={'lg'}>If the problem persists, please contact us.</Text>
                 <Button color='blue' mt={20} component={Link} to="/">Go to Home</Button>
               </>
           }

@@ -168,7 +168,7 @@ const availableColors = [
         name: 'Crimson',
         color: '#DC143C'
     },
-    
+
 
 ]
 
@@ -186,9 +186,10 @@ const Layout = ({ children }) => {
     const [selSizes, setSelSizes] = useState([]);
 
     useEffect(() => {
-        filterBySize(selSizes);
+        if (selSizes.length > 0)
+            filterBySize(selSizes);
     }, [selSizes])
-    
+
 
     return (
         <AppShell
@@ -199,7 +200,7 @@ const Layout = ({ children }) => {
                 collapsed: { mobile: false },
             }}
             padding="md"
-            // layout="alt"
+        // layout="alt"
         >
             <AppShell.Header>
                 <Navbar />

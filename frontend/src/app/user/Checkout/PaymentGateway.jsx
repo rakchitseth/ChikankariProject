@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ElementsConsumer, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { Button, Card, Title } from '@mantine/core';
 
-const PaymentGateway = ({tutorid}) => {
+const PaymentGateway = () => {
 
     const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
@@ -27,8 +27,8 @@ const PaymentGateway = ({tutorid}) => {
             //`Elements` instance that was used to create the Payment Element
             elements,
             confirmParams: {
-                return_url: "http://localhost:5173/thankyou/"+tutorid,
-                receipt_email: currentUser.email,
+                return_url: "http://localhost:3000/thankyou",
+                receipt_email: 'sample@mail.com',
 
             },
         });

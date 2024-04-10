@@ -34,6 +34,7 @@ import { useState } from 'react';
 import cx from 'clsx';
 import useCartContext from '@/context/CartContext';
 import useAppContext from '@/context/AppContext';
+import CartPage from './user/cartpage/page';
 
 const mockdata = [
   {
@@ -82,6 +83,7 @@ export const Navbar = () => {
 
   const { cartItems } = useCartContext();
   const { loggedIn, setLoggedIn, logout } = useAppContext();
+  const { cartOpened, toggleCart } = useCartContext();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -159,6 +161,9 @@ export const Navbar = () => {
 
   return (
     <header className={classes.header}>
+      <Drawer size='xl' position='right' opened={cartOpened} onClose={toggleCart.close} title="Shopping Cart">
+        <CartPage />
+      </Drawer>
       <Box>
         <Group justify="space-between" h="100%">
 
@@ -207,7 +212,7 @@ export const Navbar = () => {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button component={Link} variant="filled" color='yellow' href="/user/cartpage">
+            <Button onClick={toggleCart.open} variant="filled" color='yellow' >
               <IconShoppingCart />
               <Badge variant="filled" color="red" radius="xl">
                 {cartItems.length}

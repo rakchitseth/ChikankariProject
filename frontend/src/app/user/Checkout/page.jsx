@@ -1,11 +1,20 @@
 'use client';
-import { Paper, Text, TextInput, Textarea, Button, Group, SimpleGrid, Container,NativeSelect } from '@mantine/core';
+import React, { useEffect, useRef } from 'react';
+import { Paper, Text, TextInput,  Button, Group, SimpleGrid, Container, Box, Flex, Loader, NumberInput, Title } from '@mantine/core';
 // import bg from './bg.svg';
 import classes from './Checkoutpage.module.css';
 import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup'; 
 import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import PaymentGateway from './PaymentGateway';
+import { Elements } from '@stripe/react-stripe-js';
+import { useParams } from 'react-router-dom';
+
+const appearance = {
+    theme: 'night'
+};
 
 
 const CheckoutSchema = Yup.object().shape({
@@ -22,6 +31,12 @@ const CheckoutSchema = Yup.object().shape({
 function CheckoutPage() {
 
     const [selFile, setSelFile] = useState('');
+    const hasRun = useRef(false);
+    const stripePromise = loadStripe(import.meta.env.NEXT_PUBLIC_PUBLIC_KEY);
+    // console.log(stripePromise);
+    const [clientSecret, setClientSecret] = useState('');
+    const [tutorDetails, setTutorDetails] = useState(null);
+
 
     const formik = useFormik({
         initialValues: {
@@ -56,6 +71,19 @@ function CheckoutPage() {
             }
         },
     });
+
+    const getPaymentIntent = async () => {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/create-payment-intent`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ amount: tutorDetails.pricing * selHrs })
+        });
+        const data = await res.json();
+        console.log(data);
+        setClientSecret(data.clientSecret);
+    }
 
     // console.log(formik.errors);
 
@@ -181,6 +209,17 @@ function CheckoutPage() {
                     </form>
                 </div>
             </Paper>
+            <Button mt={30} onClick={getPaymentIntent}>Pay Now</Button>
+            {
+                    clientSecret && (
+                        <Elements stripe={stripePromise} options={{
+                            clientSecret,
+                            appearance
+                        }}>
+                            <PaymentGateway/>
+                        </Elements>
+                    )
+                }
         </Container>
     );
 }

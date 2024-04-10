@@ -3,9 +3,8 @@ import "./globals.css";
 import { MantineProvider, createTheme } from "@mantine/core";
 import { CartProvider } from "@/context/CartContext";
 import '@mantine/carousel/styles.css';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en'
-TimeAgo.addDefaultLocale(en);
+
+
 
 const inter = Inter({ subsets: ["latin"] });
 
