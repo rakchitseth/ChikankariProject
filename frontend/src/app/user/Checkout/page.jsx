@@ -10,9 +10,10 @@ import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentGateway from './PaymentGateway';
 import { Elements } from '@stripe/react-stripe-js';
+import useCartContext from '@/context/CartContext';
 
 const appearance = {
-    theme: 'night'
+    theme: 'day'
 };
 
 
@@ -35,6 +36,7 @@ function CheckoutPage() {
     // console.log(stripePromise);
     const [clientSecret, setClientSecret] = useState('');
     const [tutorDetails, setTutorDetails] = useState(null);
+    const { getCartTotalAmount } = useCartContext();
 
 
     const formik = useFormik({
@@ -72,12 +74,13 @@ function CheckoutPage() {
     });
 
     const getPaymentIntent = async () => {
+        console.log(getCartTotalAmount());
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ amount: tutorDetails.pricing * selHrs })
+            body: JSON.stringify({ amount: getCartTotalAmount() })
         });
         const data = await res.json();
         console.log(data);

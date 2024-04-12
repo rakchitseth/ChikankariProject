@@ -39,10 +39,24 @@ app.use(express.static('./static/uploads'));
 
 app.post('/create-payment-intent', async (req, res) => {
     const { amount } = req.body;
+    console.log(amount);
+    const customer = await stripe.customers.create({
+      name: 'mmm',
+      address: {
+        line1: '510 Townsend St',
+        postal_code: '226021',
+        city: 'Lucknow',
+        state: 'UP',
+        country: 'IN',
+      },
+    });
+    console.log(customer.id);
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100,
-      currency: 'inr'
+      currency: 'inr',
+      description: 'jdhfj',
+      customer : customer.id
     });
     res.json({
       clientSecret: paymentIntent.client_secret

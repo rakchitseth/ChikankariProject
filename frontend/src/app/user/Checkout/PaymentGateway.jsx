@@ -29,7 +29,7 @@ const PaymentGateway = () => {
             confirmParams: {
                 return_url: "http://localhost:3000/thankyou",
                 receipt_email: 'sample@mail.com',
-
+                
             },
         });
 
