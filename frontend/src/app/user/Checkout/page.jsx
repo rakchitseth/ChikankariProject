@@ -31,7 +31,7 @@ function CheckoutPage() {
 
     const [selFile, setSelFile] = useState('');
     const hasRun = useRef(false);
-    const stripePromise = loadStripe(import.meta.env.NEXT_PUBLIC_STRIPE_KEY);
+    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
     // console.log(stripePromise);
     const [clientSecret, setClientSecret] = useState('');
     const [tutorDetails, setTutorDetails] = useState(null);
@@ -72,7 +72,7 @@ function CheckoutPage() {
     });
 
     const getPaymentIntent = async () => {
-        const res = await fetch(`${import.meta.env.NEXT_PUBLIC_API_URL}/create-payment-intent`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
