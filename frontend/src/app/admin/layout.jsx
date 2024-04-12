@@ -1,5 +1,5 @@
 'use client';
-import { Icon2fa, IconBellRinging, IconDatabaseImport, IconFingerprint, IconSettings } from '@tabler/icons-react';
+import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFingerprint, IconSettings, IconShirt } from '@tabler/icons-react';
 import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
@@ -9,35 +9,33 @@ import { IconReceipt2 } from '@tabler/icons-react';
 import classes from './sidebar.module.css';
 import UserAuthoriser from '@/context/UserAuth';
 import { SnackbarProvider } from 'notistack';
+import Link from 'next/link';
 
 const data = [
-    { link: '', label: 'Notifications', icon: IconBellRinging },
-    { link: '', label: 'Billing', icon: IconReceipt2 },
-    { link: '', label: 'Security', icon: IconFingerprint },
-    { link: '', label: 'SSH Keys', icon: IconKey },
-    { link: '', label: 'Databases', icon: IconDatabaseImport },
-    { link: '', label: 'Authentication', icon: Icon2fa },
-    { link: '', label: 'Other Settings', icon: IconSettings },
+    { link: '/admin/dashboard', label: 'Dashboard', icon: IconDashboard },
+    { link: '/admin/manageproduct', label: 'ManageProduct', icon: IconShirt },
 ];
 
 const Layout = ({ children }) => {
 
     const [active, setActive] = useState('Billing');
 
+    const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+    const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
     const links = data.map((item) => (
-        <a
+        <Link
             className={classes.link}
             data-active={item.label === active || undefined}
             href={item.link}
             key={item.label}
             onClick={(event) => {
-                event.preventDefault();
                 setActive(item.label);
             }}
         >
             <item.icon className={classes.linkIcon} stroke={1.5} />
             <span>{item.label}</span>
-        </a>
+        </Link>
     ));
 
     return (
@@ -48,14 +46,19 @@ const Layout = ({ children }) => {
                     navbar={{
                         width: 300,
                         breakpoint: 'sm',
-                        collapsed: { mobile: false },
+                        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
                     }}
                     padding="md"
                     layout="alt"
                 >
 
                     <AppShell.Header>
-                        <AdminNavbar />
+                        {/* <AdminNavbar /> */}
+                        <Group h="100%" px="md">
+                            <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
+                            <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
+                            
+                        </Group>
                     </AppShell.Header>
 
                     <AppShell.Navbar p="md">

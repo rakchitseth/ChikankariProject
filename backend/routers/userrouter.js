@@ -72,9 +72,10 @@ router.post("/authenticate", (req, res) => {
             jwt.sign(
                 payload,
                 process.env.JWT_SECRET,
-                {expiry: '2 days'},
+                {expiresIn : '2 days'},
                 (err, token) => {
                     if(err){
+                        console.log(err);
                         res.status(500).json({message : 'error creating token'})
                     }else{
                         res.status(200).json({token, role: result.role})
@@ -85,6 +86,36 @@ router.post("/authenticate", (req, res) => {
             res.status(401).json({message : 'Invalid Credentials'})
         }
     }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get("/authorise", (req, res) => {
+    console.log(req.body);
+    model.find(req.body)
+    .then((result) => {
+        if(result){
+            const { _id, name, email } = result;
+            const payload = {_id, name, email};
+            jwt.sign(
+                payload,
+                process.env.JWT_SECRET,
+                {expiresIn : '2 days'},
+                (err, token) => {
+                    if(err){
+                        console.log(err);
+                        res.status(500).json({message : 'error creating token'})
+                    }else{
+                        res.status(200).json({token, role: result.role})
+                    }
+                }
+            )
+        }else{
+            res.status(401).json({message : 'Invalid Credentials'})
+        }
+    }).catch((err) => {
+        console.log(err);
         res.status(500).json(err);
     });
 });

@@ -125,6 +125,9 @@ function ManageProduct() {
 
   const rows = productList.map((product) => (
     <Table.Tr key={product._id}>
+      <Table.Td>
+        <img height={50} src={`${process.env.NEXT_PUBLIC_API_URL}/${product.image[0]}`} alt="" />
+      </Table.Td>
       <Table.Td>{product.title}</Table.Td>
       <Table.Td>{product.material}</Table.Td>
       <Table.Td>{product.embroidery}</Table.Td>

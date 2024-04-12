@@ -25,7 +25,6 @@ const Login = ({ setType }) => {
 
     const LoginSubmit = async (values) => {
         console.log(values);
-
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/authenticate`, {
             method: 'POST',
             headers: {

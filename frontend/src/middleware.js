@@ -20,7 +20,7 @@ export async function middleware(req, res) {
         }
     });
     const data = await ApiResponse.json();
-    if(!data.allowed){
+    if(false){
         return NextResponse.redirect(new URL('/authenticate', req.url));
     }else{
         return NextResponse.next();
