@@ -1,3 +1,4 @@
+"use client";
 import useCartContext from '@/context/CartContext'
 import { Button, Container, Flex, Text, Title } from '@mantine/core'
 import { IconCircleCheck, IconCircleX } from '@tabler/icons-react'
