@@ -4,6 +4,7 @@ const userrouter = require('./routers/userrouter');
 const productrouter = require('./routers/productrouter')
 const utilROuter = require('./routers/utils')
 const reviewRouter = require('./routers/reviewRouter')
+const orderRouter = require('./routers/orderRouter')
 
 const cors = require('cors')
 // initialize express app
@@ -24,6 +25,7 @@ app.use('/user', userrouter);
 app.use('/product', productrouter);
 app.use('/util', utilROuter);
 app.use('/review', reviewRouter);
+app.use('/order', orderRouter);
 
 app.get('/get-permission', (req, res) => {
     const token = req.header('x-auth-token');
@@ -46,7 +48,7 @@ app.post('/create-payment-intent', async (req, res) => {
         line1: '510 Townsend St',
         postal_code: '226021',
         city: 'Lucknow',
-        state: 'UP',
+        state: 'Uttar Pradesh',
         country: 'IN',
       },
     });

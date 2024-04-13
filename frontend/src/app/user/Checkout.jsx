@@ -7,7 +7,7 @@ import { Box, Button, Container, Flex, Loader, NumberInput, Text, TextInput, Tit
 import { useParams } from 'react-router-dom';
 
 const appearance = {
-    theme: 'night'
+    theme: 'stripe'
 };
 
 const Checkout = () => {
