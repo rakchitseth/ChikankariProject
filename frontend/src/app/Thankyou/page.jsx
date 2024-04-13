@@ -1,25 +1,27 @@
-"use client";
+'use client';
 import useCartContext from '@/context/CartContext'
 import { Button, Container, Flex, Text, Title } from '@mantine/core'
 import { IconCircleCheck, IconCircleX } from '@tabler/icons-react'
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 const ThankYou = () => {
 
   const hasRun = useRef();
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
-  const location = useLocation();
-  let params = new URLSearchParams(location.search);
+
+  let params = useSearchParams();
   const { cartItems } = useCartContext();
+  console.log(params.get('redirect_status'));
   // console.log();
   // console.log(params.get('redirect_status'));
   // const navigate = useNavigate();
 
   const savePayment = async () => {
     const paymentDetails = await retrievePaymentIntent();
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/add`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,10 +31,13 @@ const ThankYou = () => {
         items: cartItems,
         details: paymentDetails,
         intentId: params.get('payment_intent'),
-        // hours: selHrs
+        items: cartItems
       })
     });
     console.log(response.status);
+    if (response.status === 200) {
+      sessionStorage.removeItem('cartItems');
+    }
     // const data = await response.json();
     // console.log(data);
   }
@@ -75,7 +80,7 @@ const ThankYou = () => {
                   <p style={{ fontSize: '18px' }}>Your order has been placed successfully.</p>
                   <p style={{ fontSize: '18px' }}>We've sent a confirmation email to your email address.</p>
                 </div>
-                <Button color='blue' mt={20} component={Link} to="/">Go to Home</Button>
+                <Button color='blue' mt={20} component={Link} href="/">Go to Home</Button>
               </>
               :
               <>
@@ -83,7 +88,7 @@ const ThankYou = () => {
                 <Text size={'xl'}>Payment Failed</Text>
                 <Text size={'lg'}>Your payment was not successful. Please try again.</Text>
                 <Text size={'lg'}>If the problem persists, please contact us.</Text>
-                <Button color='blue' mt={20} component={Link} to="/">Go to Home</Button>
+                <Button color='blue' mt={20} component={Link} href="/">Go to Home</Button>
               </>
           }
         </Flex>

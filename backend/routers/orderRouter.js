@@ -19,7 +19,7 @@ router.post("/add", verifyToken, (req, res) => {
 
 
 router.get("/getall", (req, res) => {
-  Model.find().populate('user').populate('product')
+  Model.find()
     .then((result) => {
       res.status(200).json(result);
     })
@@ -29,8 +29,8 @@ router.get("/getall", (req, res) => {
     });
 });
 
-router.get("/getbyuser/:userid", (req, res) => {
-  Model.find({ user: req.params.userid }).populate('product')
+router.get("/getbyuser", verifyToken, (req, res) => {
+  Model.find({ user: req.user._id })
     .then((result) => {
       res.status(200).json(result);
     })

@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         const storedCartItems = sessionStorage.getItem('cartItems');
-        console.log(storedCartItems);
+        // console.log(storedCartItems);
         if (storedCartItems) {
             console.log('cart item exists');
             setCartItems(JSON.parse(storedCartItems));
