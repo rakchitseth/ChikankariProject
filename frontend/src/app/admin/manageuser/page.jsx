@@ -68,7 +68,7 @@ function sortData(
   );
 }
 
-function ManageProduct() {
+function Manageuser() {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState([]);
   const [sortBy, setSortBy] = useState(null);
@@ -125,16 +125,17 @@ function ManageProduct() {
   }
 
   const rows = productList.map((user) => (
-    <Table.Tr key={product._id}>
+    <Table.Tr key={user._id}>
       {/* <Table.Td>
         <img height={50} src={`${process.env.NEXT_PUBLIC_API_URL}/${product.image[0]}`} alt="" />
       </Table.Td> */}
+      <Table.Td>{user._id}</Table.Td>
       <Table.Td>{user.username}</Table.Td>
       <Table.Td>{user.email}</Table.Td>
       <Table.Td>{user.password}</Table.Td>
       {/* <Table.Td>{user.embroidery}</Table.Td> */}
       <Table.Td>
-        <Button color='red' variant='filled' onClick={() => { deleteproduct(product._id) }} className='btn btn-danger'>Delete</Button>
+        <Button color='red' variant='filled' onClick={() => { deleteproduct(user._id) }} className='btn btn-danger'>Delete</Button>
       </Table.Td>
     </Table.Tr>
   ));
@@ -149,7 +150,7 @@ function ManageProduct() {
       <Container size="lg">
 
         <header>
-          <Title order={1} align="center" my={20}>Manage Product</Title>
+          <Title order={1} align="center" my={20}>Manage User</Title>
         </header>
 
         <ScrollArea>
@@ -164,33 +165,40 @@ function ManageProduct() {
             <Table.Tbody>
               <Table.Tr>
                 <Th
-                  sorted={sortBy === 'title'}
+                  sorted={sortBy === 'id'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('title')}
+                  onSort={() => setSorting('id')}
                 >
-                  Title
+                  Id
                 </Th>
                 <Th
-                  sorted={sortBy === 'material'}
+                  sorted={sortBy === 'username'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('material')}
+                  onSort={() => setSorting('username')}
                 >
-                  Material
+                  Name
                 </Th>
                 <Th
-                  sorted={sortBy === 'embroidery'}
+                  sorted={sortBy === 'E-mail'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('embroidery')}
+                  onSort={() => setSorting('E-mail')}
                 >
-                  Embroidery
+                  Email
                 </Th>
                 <Th
+                    sorted={sortBy === 'password'}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting('password')}
+                    >
+                    Password
+                </Th>
+                {/* <Th
                   sorted={sortBy === 'gender'}
                   reversed={reverseSortDirection}
                   onSort={() => setSorting('gender')}
                 >
                   Gender
-                </Th>
+                </Th> */}
                 <Th>
                   Actions
                 </Th>
@@ -218,4 +226,4 @@ function ManageProduct() {
   );
 }
 
-export default ManageProduct;
+export default Manageuser;
