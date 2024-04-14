@@ -104,7 +104,7 @@ export const Navbar = () => {
   ));
 
   const displayLoginOption = () => {
-    if (currentUser !== null) {
+    if (loggedIn) {
       return <Menu
         width={260}
         position="bottom-end"
@@ -134,13 +134,7 @@ export const Navbar = () => {
           >
             Account settings
           </Menu.Item>
-          <Menu.Item
-            leftSection={
-              <IconSwitchHorizontal style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            }
-          >
-            Change account
-          </Menu.Item>
+         
           <Menu.Item
             color='red'
             onClick={logout}
@@ -191,7 +185,7 @@ export const Navbar = () => {
               <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
                   <Text fw={500}>Features</Text>
-                  <Anchor href="/browse" fz="xs">
+                  <Anchor component={Link} href="/browse" fz="xs">
                     View all
                   </Anchor>
                 </Group>
@@ -203,12 +197,12 @@ export const Navbar = () => {
                 </SimpleGrid>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="/browse/men" className={classes.link}>
+            <Link href="/browse/men" className={classes.link}>
               Mens
-            </a>
-            <a href="/browse/kids" className={classes.link}>
+            </Link>
+            <Link href="/browse/kids" className={classes.link}>
               Kids
-            </a>
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">

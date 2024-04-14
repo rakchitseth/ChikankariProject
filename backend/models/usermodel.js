@@ -2,7 +2,7 @@ const {Schema,model} = require('../connection')
 
 // import Schema from 'mongoose'
 const mySchema = new Schema({
-    username:String,
+    name:String,
     email : String,
     password : String,
     age: Number,

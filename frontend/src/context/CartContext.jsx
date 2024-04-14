@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
 
     useEffect(() => {
         console.log(cartItems);
-        if (cartItems.length)
+        // if (cartItems.length)
             sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
 

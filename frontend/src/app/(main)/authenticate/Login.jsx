@@ -36,6 +36,7 @@ const Login = ({ setType }) => {
                 enqueueSnackbar('Logged in successfully', { variant: 'success' });
                 res.json()
                     .then((data) => {
+                        console.log(data);
                         setLoggedIn(true);
                         sessionStorage.setItem('user', JSON.stringify(data));
                         if(data.role === 'admin'){
