@@ -7,10 +7,13 @@ import classes from './sidebar.module.css';
 import UserAuthoriser from '@/context/UserAuth';
 import { SnackbarProvider } from 'notistack';
 import Link from 'next/link';
+import { IconUser } from '@tabler/icons-react';
 
 const data = [
     { link: '/admin/dashboard', label: 'Dashboard', icon: IconDashboard },
-    { link: '/admin/manageproduct', label: 'ManageProduct', icon: IconShirt },
+    { link: '/admin/manageproduct', label: 'Manage Product', icon: IconShirt },
+    { link: '/admin/manageuser', label: 'Manage User', icon: IconUser },
+    { link: '/admin/addproduct', label: 'Add Product', icon: IconShirt },
 ];
 
 const Layout = ({ children }) => {

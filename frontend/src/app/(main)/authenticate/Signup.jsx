@@ -9,7 +9,7 @@ const Signup = ({ setType }) => {
     const signupForm = useForm({
         initialValues: {
             email: '',
-            name: '',
+            username: '',
             password: '',
             terms: true
         },
@@ -63,7 +63,8 @@ const Signup = ({ setType }) => {
                     <TextInput
                         label="Name"
                         placeholder="Your name"
-                        value={signupForm.values.name}
+                        id='username'
+                        value={signupForm.values.username}
                         onChange={(event) => signupForm.setFieldValue('name', event.currentTarget.value)}
                         radius="md"
                     />
@@ -72,6 +73,7 @@ const Signup = ({ setType }) => {
                         required
                         label="Email"
                         placeholder="hello@mantine.dev"
+                        id='email'
                         value={signupForm.values.email}
                         onChange={(event) => signupForm.setFieldValue('email', event.currentTarget.value)}
                         error={signupForm.errors.email && 'Invalid email'}
@@ -82,6 +84,7 @@ const Signup = ({ setType }) => {
                         required
                         label="Password"
                         placeholder="Your password"
+                        id='password'
                         value={signupForm.values.password}
                         onChange={(event) => signupForm.setFieldValue('password', event.currentTarget.value)}
                         error={signupForm.errors.password && 'Password should include at least 6 characters'}
