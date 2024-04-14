@@ -5,6 +5,7 @@ import { IconCircleCheck, IconCircleX } from '@tabler/icons-react'
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
+import { Navbar } from '../navbar';
 
 const ThankYou = () => {
 
@@ -13,7 +14,7 @@ const ThankYou = () => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   let params = useSearchParams();
-  const { cartItems } = useCartContext();
+  const { cartItems, setCartItems } = useCartContext();
   console.log(params.get('redirect_status'));
   // console.log();
   // console.log(params.get('redirect_status'));
@@ -37,6 +38,7 @@ const ThankYou = () => {
     console.log(response.status);
     if (response.status === 200) {
       sessionStorage.removeItem('cartItems');
+      setCartItems([]);
     }
     // const data = await response.json();
     // console.log(data);
@@ -68,6 +70,7 @@ const ThankYou = () => {
 
   return (
     <div>
+      <Navbar/>
       <Container size={'md'}>
 
         <Flex justify={'center'} align={'center'} style={{ height: '50vh' }} direction={'column'}>

@@ -14,7 +14,7 @@ const ArticleCardVertical = () => {
   const { id } = useParams();
 
   const [productDetails, setProductDetails] = useState(null);
-  const { cartItems, addItem, checkItemExists } = useCartContext();
+  const { cartItems, addItem, checkItemExists, cartOpened, toggleCart } = useCartContext();
   const [reviewList, setReviewList] = useState([]);
   const [rating, setRating] = useState(3);
   const reviewRef = useRef();
@@ -195,8 +195,7 @@ const ArticleCardVertical = () => {
                 Add to Cart
               </Button>
               <Button
-                component={Link}
-                href={'/user/cartpage'}
+                onClick={toggleCart.open}
                 radius="xl"
                 size="lg"
                 variant="filled"

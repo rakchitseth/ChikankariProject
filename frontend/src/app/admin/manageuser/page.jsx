@@ -18,6 +18,7 @@ import {
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './TableSort.module.css';
 import { useDisclosure } from '@mantine/hooks';
+import { Navbar } from '@/app/navbar';
 
 
 function Th({ children, reversed, sorted, onSort }) {
@@ -123,7 +124,7 @@ function ManageProduct() {
     }
   }
 
-  const rows = productList.map((product) => (
+  const rows = productList.map((user) => (
     <Table.Tr key={product._id}>
       {/* <Table.Td>
         <img height={50} src={`${process.env.NEXT_PUBLIC_API_URL}/${product.image[0]}`} alt="" />
@@ -141,6 +142,7 @@ function ManageProduct() {
 
   return (
     <div>
+        
       <Drawer opened={detailsOpen} onClose={toggleDetails.close} title="Product Details">
         {/* Drawer content */}
       </Drawer>
