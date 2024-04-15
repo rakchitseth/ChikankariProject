@@ -1,16 +1,17 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
-import { Paper, Text, TextInput,  Button, Group, SimpleGrid, Container, Box, Flex, Loader, NumberInput, Title } from '@mantine/core';
+import { Paper, Text, TextInput, Button, Group, SimpleGrid, Container, Box, Flex, Loader, NumberInput, Title, Grid, Divider, Stack, Textarea } from '@mantine/core';
 // import bg from './bg.svg';
 import classes from './Checkoutpage.module.css';
 import { Formik, useFormik } from 'formik';
-import * as Yup from 'yup'; 
+import * as Yup from 'yup';
 import { enqueueSnackbar } from 'notistack';
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentGateway from './PaymentGateway';
 import { Elements } from '@stripe/react-stripe-js';
 import useCartContext from '@/context/CartContext';
+import useAppContext from '@/context/AppContext';
 
 const appearance = {
     theme: 'day'
@@ -26,7 +27,7 @@ const CheckoutSchema = Yup.object().shape({
     pincode: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
     phone: Yup.string().required('Required'),
-  });
+});
 
 function CheckoutPage() {
 
@@ -36,51 +37,33 @@ function CheckoutPage() {
     // console.log(stripePromise);
     const [clientSecret, setClientSecret] = useState('');
     const [tutorDetails, setTutorDetails] = useState(null);
-    const { getCartTotalAmount } = useCartContext();
+    const { getCartTotalAmount, cartItems } = useCartContext();
+    const { currentUser } = useAppContext();
 
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            country: '' ,
-            address: '',
-            city: '',
-            state: '',
-            pincode: '',
-            email: '',
-            phone: '',
-        },
-        validationSchema: CheckoutSchema,
-        onSubmit: async (values, { resetForm }) => {
-           
-            console.log(values);
-            // setTimeout(() => {
-            //   resetForm();
-            // },3000);
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/add`, {
-                method: 'POST',
-                body: JSON.stringify(values),
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            console.log(res.status);
-            if (res.status === 200) {
-                enqueueSnackbar('Succesfully Registered', { variant: 'success' })
-            }
-            else {
-                enqueueSnackbar("Error Occured", { variant: "error" })
-            }
-        },
-    });
+    const addressRef = useRef();
+    const pincodeRef = useRef();
+    const contactRef = useRef();
 
     const getPaymentIntent = async () => {
+        const shipping = {
+            name: currentUser.name,
+            address: {
+                line1: addressRef.current.value,
+                postal_code: pincodeRef.current.value,
+                country: 'IN',
+            },
+        }
+        sessionStorage.setItem('shipping', JSON.stringify(shipping));
         console.log(getCartTotalAmount());
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ amount: getCartTotalAmount() })
+            body: JSON.stringify({
+                amount: getCartTotalAmount(),
+                customerData: shipping
+            })
         });
         const data = await res.json();
         console.log(data);
@@ -90,138 +73,74 @@ function CheckoutPage() {
     // console.log(formik.errors);
 
     return (
-        <Container>
-            <Paper shadow="md" radius="lg">
-                <div className={classes.wrapper}>
-                    <div className={classes.contacts} >
-                        <Text fz="lg" fw={700} className={classes.title} c="#fff">
-                            Checkout information
-                        </Text>
+        <Container size={'xl'}>
+            <Paper shadow="xl" radius="lg" withBorder p={20}>
+                <Grid>
+                    <Grid.Col span={{ base: 12, md: 6 }}>
+                        <Title order={4}>Product Details</Title>
+                        <Divider my={10} />
+                        <Stack gap={10}>
 
+                            {
+                                cartItems.map(item => (
+                                    <Flex align={'start'} justify={'space-between'} >
+                                        <img src={`${process.env.NEXT_PUBLIC_API_URL}/${item.image[0]}`} alt={item.name} width={50} />
+                                        <Box style={{ flexGrow: 1 }}>
+                                            <Text size='lg' fw={'bold'}>{item.title}</Text>
+                                            <Text size='md'>Amount ₹{item.price} x {item.quantity} </Text>
+                                        </Box>
+                                        <Box>
+                                            <Text size='lg'> ₹{item.price * item.quantity}</Text>
+                                        </Box>
+                                    </Flex>
+                                ))
+                            }
+                        </Stack>
 
-                    </div>
+                    </Grid.Col>
+                    <Grid.Col span={{ base: 12, md: 6 }}>
+                        <Title order={4}>Delivery Address</Title>
+                        <Divider my={10} />
+                        <Flex gap={5}>
 
-                    <form className={classes.form} onSubmit={formik.handleSubmit}>
-                        <Text fz="lg" fw={700} className={classes.title}>
-                            Checkout Details
-                        </Text>
+                            <NumberInput
+                                ref={pincodeRef}
+                                w={'100%'}
+                                label="Pin Code"
+                                maxLength={6}
+                                minLength={6}
+                                variant='filled'
+                            />
+                            <TextInput
+                                ref={contactRef}
+                                w={'100%'}
+                                label="Contact"
+                                maxLength={10}
+                                variant='filled'
+                            />
+                        </Flex>
+                        <Textarea
+                            ref={addressRef}
+                            label="Shipping Address"
+                            variant='filled'
+                            w={'100%'}
+                            rows={8}
+                        />
 
-                        <div className={classes.fields}>
-                            <SimpleGrid cols={{ base: 1, sm: 2 }}>
-                                <TextInput
-                                    mt="md"
-                                    label="Name"
-                                    placeholder="Name"
-                                    required
-                                    value={formik.values.name}
-                                    onChange={formik.handleChange}
-                                    name="name"
-                                    error={formik.errors.name}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="Country"
-                                    placeholder="Country"
-                                    required
-                                    value={formik.values.country}
-                                    onChange={formik.handleChange}
-                                    name="country"
-                                    error={formik.errors.country}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="Address"
-                                    placeholder="Address"
-                                    required
-                                    value={formik.values.address}
-                                    onChange={formik.handleChange}
-                                    name="address"
-                                    error={formik.errors.address}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="City"
-                                    placeholder="City"
-                                    required
-                                    value={formik.values.city}
-                                    onChange={formik.handleChange}
-                                    name="city"
-                                    error={formik.errors.city}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="State"
-                                    placeholder="State"
-                                    required
-                                    value={formik.values.state}
-                                    onChange={formik.handleChange}
-                                    name="state"
-                                    error={formik.errors.state}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="Pincode"
-                                    placeholder="Pincode"
-                                    required
-                                    value={formik.values.pincode}
-                                    onChange={formik.handleChange}
-                                    name="pincode"
-                                    error={formik.errors.pincode}
-                                    />
-                                <TextInput
-                                    mt="md"
-                                    label="Email"
-                                    placeholder="Email"
-                                    required
-                                    value={formik.values.email}
-                                    onChange={formik.handleChange}
-                                    name="email"
-                                    error={formik.errors.email}
-                                />
-                                <TextInput
-                                    mt="md"
-                                    label="Phone"
-                                    placeholder="Phone"
-                                    required
-                                    value={formik.values.phone}
-                                    onChange={formik.handleChange}
-                                    name="phone"
-                                    error={formik.errors.phone}
-                                />
-
-
-                            </SimpleGrid>
-
-                            {/* <TextInput mt="md" label="Subject" placeholder="Subject" required /> */}
-
-                            {/* <Textarea
-                                mt="md"
-                                label="Your message"
-                                placeholder="Please include all relevant information"
-                                minRows={3}
-                            /> */}
-
-
-                            <Group justify="flex-end" mt="md">
-                                <Button type="submit" disabled={formik.isSubmitting}>
-                                {formik.isSubmitting ? 'submitting...' : 'submit'}
-                                </Button>
-                            </Group>
-                        </div>
-                    </form>
-                </div>
+                    </Grid.Col>
+                </Grid>
             </Paper>
             <Button mt={30} onClick={getPaymentIntent}>Pay Now</Button>
             {
-                    clientSecret && (
-                        <Elements stripe={stripePromise} options={{
-                            clientSecret,
-                            appearance
-                        }}>
-                            <PaymentGateway/>
-                        </Elements>
-                    )
-                }
+                clientSecret && (
+                    <Elements stripe={stripePromise} options={{
+                        clientSecret,
+                        appearance
+                    }}>
+                        <PaymentGateway />
+                    </Elements>
+                )
+            }
         </Container>
     );
 }

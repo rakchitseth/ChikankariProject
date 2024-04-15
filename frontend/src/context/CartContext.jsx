@@ -1,11 +1,12 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-
-    const [cartItems, setCartItems] = useState([]);
+    const runOnce = useRef(false);
+    // console.log('cart provider');
+    const [cartItems, setCartItems] = useState(JSON.parse(sessionStorage.getItem('cartItems')) || []);
     const [cartTotalAmount, setCartTotalAmount] = useState(0);
 
     const [cartOpened, toggleCart] = useDisclosure(false);
@@ -21,16 +22,22 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        const storedCartItems = sessionStorage.getItem('cartItems');
-        // console.log(storedCartItems);
-        if (storedCartItems) {
-            console.log('cart item exists');
-            setCartItems(JSON.parse(storedCartItems));
-        }
+        // if (runOnce)
+        //     return;
+        // else{
+        //     runOnce.current = true;
+        //     const storedCartItems = ;
+        //     // console.log(storedCartItems);
+        //     if (storedCartItems) {
+        //         console.log('cart item exists');
+        //         if (cartItems.length === 0)
+        //             setCartItems(JSON.parse(storedCartItems));
+        //     }
+        // }
     }, []);
 
     useEffect(() => {
-        console.log(cartItems);
+        console.log('update cart items');
         // if (cartItems.length)
             sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
@@ -89,7 +96,7 @@ export const CartProvider = ({ children }) => {
     return (
         <CartContext.Provider value={{
             cartItems,
-            setCartItems,
+            // setCartItems,
             cartTotalAmount,
             addItem,
             removeItem,

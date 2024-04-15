@@ -26,6 +26,7 @@ import { useDisclosure } from '@mantine/hooks';
 import {
 
   IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconShoppingCart, IconStar, IconSwitchHorizontal,
+  IconUser,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Link from 'next/link';
@@ -79,10 +80,10 @@ export const Navbar = () => {
   const theme = useMantineTheme();
   const router = useRouter();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
-  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   const { cartItems } = useCartContext();
-  const { loggedIn, setLoggedIn, logout } = useAppContext();
+  const { loggedIn, setLoggedIn, currentUser, logout } = useAppContext();
   const { cartOpened, toggleCart } = useCartContext();
 
   const links = mockdata.map((item) => (
@@ -128,11 +129,20 @@ export const Navbar = () => {
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item
+          onClick={() => router.push('/user/profile')}
             leftSection={
-              <IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              <IconUser style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
             }
           >
-            Account settings
+            Profile
+          </Menu.Item>
+          <Menu.Item
+          onClick={() => router.push('/user/order-history')}
+            leftSection={
+              <IconShoppingCart style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            }
+          >
+            Manage Orders
           </Menu.Item>
          
           <Menu.Item
