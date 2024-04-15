@@ -63,8 +63,8 @@ const Signup = ({ setType }) => {
                     <TextInput
                         label="Name"
                         placeholder="Your name"
-                        id='username'
-                        value={signupForm.values.username}
+                        id='name'
+                        value={signupForm.values.name}
                         onChange={(event) => signupForm.setFieldValue('name', event.currentTarget.value)}
                         radius="md"
                     />

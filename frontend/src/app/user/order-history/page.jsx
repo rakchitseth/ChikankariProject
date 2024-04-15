@@ -28,12 +28,12 @@ const OrderHistory = () => {
     <Container size="lg">
       <Title order={1} align="center" my={20}>Order History</Title>
       
-      <Paper padding="lg" shadow="lg" >
+      <Paper padding="lg" shadow="md" p={20} >
       {loading ? (
         <Loader />
       ) : (
         paymentData.map((order, index) => (
-            <Grid gutter="md" key={order._id}>
+            <Grid gutter="md" key={order._id} mb={20}>
               <Grid.Col span={6}>
                 <Text size='sm' c={'dimmed'}>Shipping Address</Text>
                 <Text>{order.shipping.name}</Text>
@@ -43,7 +43,7 @@ const OrderHistory = () => {
               <Grid.Col span={6}>
                 <Text size='sm' c={'dimmed'}>Order Details</Text>
                 <Text>Order ID: {order._id}</Text>
-                <Text>Amount: ₹{order.amount}</Text>
+                <Text>Amount: ₹{order.details.amount/100}</Text>
                 <Text>Payment Status: {order.paymentStatus}</Text>
               </Grid.Col>
             </Grid>

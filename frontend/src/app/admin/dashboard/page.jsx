@@ -487,10 +487,10 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    // fetchUsers();
+    fetchUsers();
     fetchOrders();
-    // fetchProducts();
-    // fetchFeedbacks();
+    fetchProducts();
+    fetchFeedbacks();
   }, [])
 
 
@@ -501,16 +501,16 @@ const Dashboard = () => {
         <Grid h={'15vh'}>
 
           <Grid.Col span={{ base: 12, md: 4, xl: 3 }}>
-            <StatCard stat={{ label: 'Total Users', stats: 100, progress: 80, color: 'blue' }} Icon={IconUser} />
+            <StatCard stat={{ label: 'Total Users', stats: userList.length, progress: 10, color: 'blue' }} Icon={IconUser} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 4, xl: 3 }}>
-            <StatCard stat={{ label: 'Total Orders', stats: 100, progress: 80, color: 'cyan' }} Icon={IconShoppingCart} />
+            <StatCard stat={{ label: 'Total Orders', stats: orderList.length, progress: 35, color: 'cyan' }} Icon={IconShoppingCart} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 4, xl: 3 }}>
-            <StatCard stat={{ label: 'Total Products', stats: 100, progress: 80, color: 'pink' }} Icon={IconShirt} />
+            <StatCard stat={{ label: 'Total Products', stats: productList.length, progress: 60, color: 'pink' }} Icon={IconShirt} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 4, xl: 3 }}>
-            <StatCard stat={{ label: 'Total Feedbacks', stats: 100, progress: 80, color: 'yellow' }} Icon={IconMessage} />
+            <StatCard stat={{ label: 'Total Feedbacks', stats: 0, progress: 0, color: 'yellow' }} Icon={IconMessage} />
           </Grid.Col>
         </Grid>
 

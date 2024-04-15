@@ -40,13 +40,12 @@ router.get('/getbyid/:id', (req, res) => {
 });
 
 router.put('/update/:id', (req, res) => {
-    model.findByIdAndUpdate(req.params._id, req.body, { new: true })
+    model.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((result) => {
-            res.json(result);
-
+            res.status(200).json(result);
         }).catch((err) => {
             console.log(err);
-            res.json(err)
+            res.status(500).json(err)
         });
 });
 
