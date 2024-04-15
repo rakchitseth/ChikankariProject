@@ -2,17 +2,24 @@
 
 import { Badge, Button, Card, Container, Flex, Grid, Group, Text, useHovered } from "@mantine/core";
 import classes from './browse.module.css';
-import Link from "next/link";
-import { IconShoppingCart } from "@tabler/icons-react";
+// import Link from "next/link";
+// import { IconShoppingCart } from "@tabler/icons-react";
 import useCartContext from "@/context/CartContext";
-import useBrowseContext from "@/context/BrowseContext";
+// import useBrowseContext from "@/context/BrowseContext";
 import { useRouter } from "next/navigation";
 
 const ProductCard = ({ productData }) => {
 
   const { cartItems, addItem, checkItemExists } = useCartContext();
-  const { stringSlicer } = useBrowseContext();
+  // const { stringSlicer } = useBrowseContext();
   const router = useRouter();
+
+  const stringSlicer = (str, limit) => {
+    if (str.length > limit) {
+        return str.slice(0, limit) + '...';
+    }
+    return str;
+}
 
   return (
 
