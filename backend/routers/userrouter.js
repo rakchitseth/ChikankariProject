@@ -40,13 +40,12 @@ router.get('/getbyid/:id', (req, res) => {
 });
 
 router.put('/update/:id', (req, res) => {
-    model.findByIdAndUpdate(req.params._id, req.body, { new: true })
+    model.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((result) => {
-            res.json(result);
-
+            res.status(200).json(result);
         }).catch((err) => {
             console.log(err);
-            res.json(err)
+            res.status(500).json(err)
         });
 });
 
@@ -63,11 +62,12 @@ router.delete('/delete/:id', (req, res) => {
 });
 
 router.post("/authenticate", (req, res) => {
-    console.log(req.body);
-    model.find(req.body)
+    // console.log(req.body);
+    model.findOne(req.body)
     .then((result) => {
         if(result){
-            const { _id, name, email } = result;
+            console.log(result);
+            const { _id, name, email, role, avatar } = result;
             const payload = {_id, name, email};
             jwt.sign(
                 payload,
@@ -78,7 +78,7 @@ router.post("/authenticate", (req, res) => {
                         console.log(err);
                         res.status(500).json({message : 'error creating token'})
                     }else{
-                        res.status(200).json({token, role: result.role})
+                        res.status(200).json({token, role, name, avatar})
                     }
                 }
             )
@@ -92,10 +92,11 @@ router.post("/authenticate", (req, res) => {
 });
 
 router.get("/authorise", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     model.find(req.body)
     .then((result) => {
         if(result){
+            // console.log(result);
             const { _id, name, email } = result;
             const payload = {_id, name, email};
             jwt.sign(

@@ -5,6 +5,8 @@ const myschema = new Schema({
     items: {type : Array},
     intentId: {type : String, unique : true, required : true},
     details: {type : Object},
+    shipping: {type : Object},
+    status: {type : String, default : 'placed'},
     createdAt: {type : Date, default : Date.now}
 });
 

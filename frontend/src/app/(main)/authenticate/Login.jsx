@@ -10,7 +10,7 @@ const Login = ({ setType }) => {
 
     const router = useRouter();
 
-    const { setLoggedIn } = useAppContext();
+    const { setLoggedIn, setCurrentUser } = useAppContext();
 
     const LoginForm = useForm({
         initialValues: {
@@ -36,7 +36,9 @@ const Login = ({ setType }) => {
                 enqueueSnackbar('Logged in successfully', { variant: 'success' });
                 res.json()
                     .then((data) => {
+                        console.log(data);
                         setLoggedIn(true);
+                        setCurrentUser(data);
                         sessionStorage.setItem('user', JSON.stringify(data));
                         if(data.role === 'admin'){
                             router.push('/admin/manageproduct');

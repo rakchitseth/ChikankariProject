@@ -14,7 +14,7 @@ const ThankYou = () => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   let params = useSearchParams();
-  const { cartItems, setCartItems } = useCartContext();
+  const { cartItems, clearCart } = useCartContext();
   console.log(params.get('redirect_status'));
   // console.log();
   // console.log(params.get('redirect_status'));
@@ -32,13 +32,15 @@ const ThankYou = () => {
         items: cartItems,
         details: paymentDetails,
         intentId: params.get('payment_intent'),
-        items: cartItems
+        items: cartItems,
+        shipping: JSON.parse(sessionStorage.getItem('shipping'))
       })
     });
     console.log(response.status);
     if (response.status === 200) {
       sessionStorage.removeItem('cartItems');
-      setCartItems([]);
+      sessionStorage.removeItem('shipping');
+      clearCart();
     }
     // const data = await response.json();
     // console.log(data);
@@ -61,7 +63,7 @@ const ThankYou = () => {
   useEffect(() => {
     if (!hasRun.current) {
       hasRun.current = true;
-      if (params.get('redirect_status') === 'succeeded') {
+      if (params.get('redirect_status') === 'succeeded' && sessionStorage.getItem('shipping')) {
         savePayment();
       }
     }

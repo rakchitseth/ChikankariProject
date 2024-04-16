@@ -26,6 +26,7 @@ import { useDisclosure } from '@mantine/hooks';
 import {
 
   IconChevronDown, IconHeart, IconLogout, IconMessage, IconSettings, IconShoppingCart, IconStar, IconSwitchHorizontal,
+  IconUser,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Link from 'next/link';
@@ -79,10 +80,10 @@ export const Navbar = () => {
   const theme = useMantineTheme();
   const router = useRouter();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
-  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   const { cartItems } = useCartContext();
-  const { loggedIn, setLoggedIn, logout } = useAppContext();
+  const { loggedIn, setLoggedIn, currentUser, logout } = useAppContext();
   const { cartOpened, toggleCart } = useCartContext();
 
   const links = mockdata.map((item) => (
@@ -104,7 +105,7 @@ export const Navbar = () => {
   ));
 
   const displayLoginOption = () => {
-    if (currentUser !== null) {
+    if (loggedIn) {
       return <Menu
         width={260}
         position="bottom-end"
@@ -128,19 +129,22 @@ export const Navbar = () => {
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item
+          onClick={() => router.push('/user/profile')}
             leftSection={
-              <IconSettings style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              <IconUser style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
             }
           >
-            Account settings
+            Profile
           </Menu.Item>
           <Menu.Item
+          onClick={() => router.push('/user/order-history')}
             leftSection={
-              <IconSwitchHorizontal style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              <IconShoppingCart style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
             }
           >
-            Change account
+            Manage Orders
           </Menu.Item>
+         
           <Menu.Item
             color='red'
             onClick={logout}
@@ -191,7 +195,7 @@ export const Navbar = () => {
               <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
                   <Text fw={500}>Features</Text>
-                  <Anchor href="/browse" fz="xs">
+                  <Anchor component={Link} href="/browse" fz="xs">
                     View all
                   </Anchor>
                 </Group>
@@ -203,12 +207,12 @@ export const Navbar = () => {
                 </SimpleGrid>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="/browse/men" className={classes.link}>
+            <Link href="/browse/men" className={classes.link}>
               Mens
-            </a>
-            <a href="/browse/kids" className={classes.link}>
+            </Link>
+            <Link href="/browse/kids" className={classes.link}>
               Kids
-            </a>
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">

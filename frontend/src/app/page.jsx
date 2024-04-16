@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -15,6 +15,8 @@ import Features from './Features';
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import About from './AboutChikankari';
+import { useEffect } from 'react';
+import ProductCard from './(main)/browse/ProductCard';
 
 const categoryData = [
   {
@@ -77,7 +79,27 @@ const TestimonialCard = () => {
 const Home = () => {
 
   const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const [productList, setProductList] = useState([]);
+
+  const fetchProduct = () => {
+    if (window !== undefined) {
+      //   setLoading(true);
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+        .then((result) => result.json())
+        .then(data => {
+          console.log(data);
+          setProductList(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  useEffect(() => {
+    fetchProduct();
+  }, [])
+
 
   return (
     <>
@@ -115,20 +137,20 @@ const Home = () => {
           <Title order={1} align="center">The World&apos;s #1 Embroidery On A Fabric -&quot;ChikanKari&quot;</Title>
           <Text align="center">From #1 Chikankari Brand- CK Sewa Chikan Industries</Text>
           <Title order={1} align="center">Best Seller</Title>
-          <Grid gutter="lg">
-          <Grid.Col span={{ md:2,sm:6}}>
-            <img src="https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp" alt="" style={{width:100}} />
-          </Grid.Col>
-          <Grid.Col span={{ md:2,sm:6}}>
-            <img src="https://morachikankari.com/wp-content/uploads/2023/04/Mora-Chikankari-SliderSlider.webp" alt="" style={{width: 100}}/>
-            </Grid.Col>
+          <Grid>
+            {productList.slice(0, 4).map(product => (
+              <Grid.Col span={{ xs: 12, sm: 6, lg: 4, xl: 3 }} key={product._id}>
+                <ProductCard productData={product} key={product._id} />
+              </Grid.Col>
+            ))}
           </Grid>
-        </Container>
-        
-      </div>
-      
 
-        <About />
+        </Container>
+
+      </div>
+
+
+      <About />
       <Features />
       <Container py={20}>
         <Title order={1} align="center">Customer Reviews</Title>

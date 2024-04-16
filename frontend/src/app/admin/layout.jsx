@@ -3,9 +3,6 @@ import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFinger
 import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
-import AdminNavbar from './navbar';
-import { IconKey } from '@tabler/icons-react';
-import { IconReceipt2 } from '@tabler/icons-react';
 import classes from './sidebar.module.css';
 import UserAuthoriser from '@/context/UserAuth';
 import { SnackbarProvider } from 'notistack';

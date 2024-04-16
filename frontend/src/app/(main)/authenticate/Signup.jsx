@@ -31,7 +31,7 @@ const Signup = ({ setType }) => {
             body: JSON.stringify(values)
         });
         if (res.status === 200) {
-            sendOTP();
+            // sendOTP();
             enqueueSnackbar('User added successfully', { variant: 'success' });
         } else {
             enqueueSnackbar('Some Error occured', { variant: 'error' });
@@ -52,7 +52,6 @@ const Signup = ({ setType }) => {
             } else {
                 enqueueSnackbar('Some Error occured', { variant: 'error' });
             }
-
         })
     }
 
@@ -64,8 +63,8 @@ const Signup = ({ setType }) => {
                     <TextInput
                         label="Name"
                         placeholder="Your name"
-                        id='username'
-                        value={signupForm.values.username}
+                        id='name'
+                        value={signupForm.values.name}
                         onChange={(event) => signupForm.setFieldValue('name', event.currentTarget.value)}
                         radius="md"
                     />
