@@ -1,5 +1,5 @@
 'use client';
-import { Box, Card, Center, Container, Grid, Group, Paper, RingProgress, Text, rem } from '@mantine/core';
+import { Box, Card, Center, Container, Grid, Group, Paper, RingProgress, Text, Title, rem } from '@mantine/core';
 import { IconCheck, IconMessage, IconShirt, IconShoppingCart, IconUser } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react'
 import BarChart from '../BarChart';
@@ -387,39 +387,6 @@ const lineData = [
   }
 ]
 
-const pieData = [
-  {
-    "id": "erlang",
-    "label": "erlang",
-    "value": 88,
-    "color": "hsl(327, 70%, 50%)"
-  },
-  {
-    "id": "make",
-    "label": "make",
-    "value": 459,
-    "color": "hsl(360, 70%, 50%)"
-  },
-  {
-    "id": "scala",
-    "label": "scala",
-    "value": 322,
-    "color": "hsl(156, 70%, 50%)"
-  },
-  {
-    "id": "haskell",
-    "label": "haskell",
-    "value": 588,
-    "color": "hsl(233, 70%, 50%)"
-  },
-  {
-    "id": "ruby",
-    "label": "ruby",
-    "value": 422,
-    "color": "hsl(57, 70%, 50%)"
-  }
-]
-
 const StatCard = ({ stat, Icon }) => {
   return <Paper withBorder radius="md" p="md" shadow='md' variant=''>
     <Group>
@@ -453,6 +420,56 @@ const Dashboard = () => {
   const [orderList, setOrderList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [feedbackList, setFeedbackList] = useState([]);
+  const [pieChartData, setPieChartData] = useState([]);
+  const [barChartData, setBarChartData] = useState([]);
+  const [barChartKeys, setBarChartKeys] = useState([]);
+
+  const formatPieData = (data) => {
+    const categoryData = {};
+    data.forEach(element => {
+      if(Object.keys(categoryData).includes(element.material)){
+        categoryData[element.material] += 1;
+      }else{
+        categoryData[element.material] = 1;
+      }
+    });
+    // console.log(categoryData);
+    const chatData = Object.keys(categoryData).map((key) => {
+      return {
+        id: key,
+        label: key,
+        value: categoryData[key],
+        color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`
+      }
+    })
+    // console.log(chatData);
+    setPieChartData(chatData);
+
+  }
+
+  const formBarData = (data) => {
+      setBarChartData(
+        data.map(item => (
+          {
+            name: item.title,
+            stock: item.stock 
+          }
+        ))
+      )
+
+      console.log(data.map(item => (
+        {
+          name: item.title,
+          stock: item.stock 
+        }
+      )));
+
+      setBarChartKeys(
+        data.map(item => (
+          item.title
+        ))
+      )
+  }
 
   const fetchUsers = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/getall`)
@@ -464,17 +481,20 @@ const Dashboard = () => {
 
   const fetchOrders = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/getall`)
-      .then(res => res.json())
-      .then(data => {
-        setOrderList(data);
-      })
+    .then(res => res.json())
+    .then(data => {
+      setOrderList(data);
+    })
   }
-
+  
   const fetchProducts = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
-      .then(res => res.json())
-      .then(data => {
-        setProductList(data);
+    .then(res => res.json())
+    .then(data => {
+      setProductList(data);
+      console.log(data);
+        formatPieData(data);
+        formBarData(data);
       })
   }
 
@@ -517,10 +537,12 @@ const Dashboard = () => {
         <Grid>
 
           <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
-            <BarChart data={data} />
+            <Title order={3}>Product Stock Distribution</Title>
+            <BarChart data={data} xCol={'name'} keys={[barChartKeys]} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
-            <PieChart data={pieData} />
+            <Title order={3}>Product Material Distribution</Title>
+            <PieChart data={pieChartData} />
           </Grid.Col>
           <Grid.Col span={{ base: 12 }} h={'40vh'}>
             <LineChart data={lineData} />
