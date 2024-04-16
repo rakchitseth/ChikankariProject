@@ -5,32 +5,32 @@ import classes from './FooterLinks.module.css';
 
 const data = [
   {
-    title: 'About',
+    title: 'Quick Links',
     links: [
-      { label: 'Features', link: '#' },
-      { label: 'Pricing', link: '#' },
-      { label: 'Support', link: '#' },
-      { label: 'Forums', link: '#' },
+      { label: 'Home', link: '#' },
+      { label: 'About', link: './footer/about' },
+      { label: 'Browse Collections', link: '#' },
+      { label: 'Contact Us', link: '/Contactus' },
     ],
   },
   {
-    title: 'Project',
+    title: 'Customer Service',
     links: [
-      { label: 'Contribute', link: '#' },
-      { label: 'Media assets', link: '#' },
-      { label: 'Changelog', link: '#' },
-      { label: 'Releases', link: '#' },
+      { label: 'Privacy Policy', link: '/footer/privacy' },
+      { label: 'Terms & Condition', link: '#' },
+      { label: 'Shipping Policy', link: '#' },
+      { label: 'Return & Refunds', link: '#' },
     ],
   },
-  {
-    title: 'Community',
-    links: [
-      { label: 'Join Discord', link: '#' },
-      { label: 'Follow on Twitter', link: '#' },
-      { label: 'Email newsletter', link: '#' },
-      { label: 'GitHub discussions', link: '#' },
-    ],
-  },
+  // {
+  //   title: 'Community',
+  //   links: [
+  //     { label: 'Join Discord', link: '#' },
+  //     { label: 'Follow on Twitter', link: '#' },
+  //     { label: 'Email newsletter', link: '#' },
+  //     { label: 'GitHub discussions', link: '#' },
+  //   ],
+  // },
 ];
 
 const  FooterLinks = () => {
