@@ -7,17 +7,17 @@ const data = [
   {
     title: 'Quick Links',
     links: [
-      { label: 'Home', link: '#' },
+      { label: 'Home', link: './page' },
       { label: 'About', link: './footer/about' },
-      { label: 'Browse Collections', link: '#' },
-      { label: 'Contact Us', link: '/Contactus' },
+      { label: 'Browse Collections', link: './browse' },
+      { label: 'Contact Us', link: './Contactus' },
     ],
   },
   {
     title: 'Customer Service',
     links: [
-      { label: 'Privacy Policy', link: '/footer/privacy' },
-      { label: 'Terms & Condition', link: '#' },
+      { label: 'Privacy Policy', link: './footer/privacy' },
+      { label: 'Terms & Condition', link: './footer/terms' },
       { label: 'Shipping Policy', link: '#' },
       { label: 'Return & Refunds', link: '#' },
     ],
@@ -61,7 +61,10 @@ const  FooterLinks = () => {
         <div className={classes.logo}>
           {/* <MantineLogo size={30} /> */}
           <Text size="xs" c="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+           One Stop Solutions for your all ethinic Needs 
+          </Text>
+          <Text size="xs" c="dimmed" className={classes.description}>
+           Discover the Artistry of Chikankari:Where Tradition Meets Elegance 
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>

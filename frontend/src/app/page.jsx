@@ -151,6 +151,7 @@ const Home = () => {
 
 
       <About />
+      <Title order={1} align="center">Our Facilities</Title>
       <Features />
       <Container py={20}>
         <Title order={1} align="center">Customer Reviews</Title>
