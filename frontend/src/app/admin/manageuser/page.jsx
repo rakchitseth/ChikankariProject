@@ -130,7 +130,7 @@ function Manageuser() {
         <img height={50} src={`${process.env.NEXT_PUBLIC_API_URL}/${product.image[0]}`} alt="" />
       </Table.Td> */}
       <Table.Td>{user._id}</Table.Td>
-      <Table.Td>{user.username}</Table.Td>
+      <Table.Td>{user.name}</Table.Td>
       <Table.Td>{user.email}</Table.Td>
       <Table.Td>{user.password}</Table.Td>
       {/* <Table.Td>{user.embroidery}</Table.Td> */}
@@ -172,9 +172,9 @@ function Manageuser() {
                   Id
                 </Th>
                 <Th
-                  sorted={sortBy === 'username'}
+                  sorted={sortBy === 'name'}
                   reversed={reverseSortDirection}
-                  onSort={() => setSorting('username')}
+                  onSort={() => setSorting('name')}
                 >
                   Name
                 </Th>
