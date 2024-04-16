@@ -2,22 +2,23 @@ import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 
 import classes from './FooterLinks.module.css';
+import Link from 'next/link';
 
 const data = [
   {
     title: 'Quick Links',
     links: [
-      { label: 'Home', link: './page' },
-      { label: 'About', link: './footer/about' },
-      { label: 'Browse Collections', link: './browse' },
-      { label: 'Contact Us', link: './Contactus' },
+      { label: 'Home', link: '/' },
+      { label: 'About', link: '/footer/about' },
+      { label: 'Browse Collections', link: '/browse' },
+      { label: 'Contact Us', link: '/Contactus' },
     ],
   },
   {
     title: 'Customer Service',
     links: [
-      { label: 'Privacy Policy', link: './footer/privacy' },
-      { label: 'Terms & Condition', link: './footer/terms' },
+      { label: 'Privacy Policy', link: '/footer/privacy' },
+      { label: 'Terms & Condition', link: '/footer/terms' },
       { label: 'Shipping Policy', link: '#' },
       { label: 'Return & Refunds', link: '#' },
     ],
@@ -39,9 +40,8 @@ const  FooterLinks = () => {
       <Text
         key={index}
         className={classes.link}
-        component="a"
+        component={Link}
         href={link.link}
-        onClick={(event) => event.preventDefault()}
       >
         {link.label}
       </Text>
