@@ -15,6 +15,7 @@ const ThankYou = () => {
 
   let params = useSearchParams();
   const { cartItems, clearCart } = useCartContext();
+  
   console.log(params.get('redirect_status'));
   // console.log();
   // console.log(params.get('redirect_status'));

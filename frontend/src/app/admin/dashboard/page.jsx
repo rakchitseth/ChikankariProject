@@ -421,15 +421,17 @@ const Dashboard = () => {
   const [productList, setProductList] = useState([]);
   const [feedbackList, setFeedbackList] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
+  const [pieColorChartData, setPieColorChartData] = useState([]);
   const [barChartData, setBarChartData] = useState([]);
   const [barChartKeys, setBarChartKeys] = useState([]);
+  const [ordersTimelineData, setOrdersTimelineData] = useState([]);
 
   const formatPieData = (data) => {
     const categoryData = {};
     data.forEach(element => {
-      if(Object.keys(categoryData).includes(element.material)){
+      if (Object.keys(categoryData).includes(element.material)) {
         categoryData[element.material] += 1;
-      }else{
+      } else {
         categoryData[element.material] = 1;
       }
     });
@@ -444,31 +446,75 @@ const Dashboard = () => {
     })
     // console.log(chatData);
     setPieChartData(chatData);
-
   }
 
-  const formBarData = (data) => {
-      setBarChartData(
-        data.map(item => (
-          {
-            name: item.title,
-            stock: item.stock 
-          }
-        ))
-      )
+  const formatColorPieData = (data) => {
+    const categoryData = {};
+    data.forEach(element => {
+      if (Object.keys(categoryData).includes(element.color)) {
+        categoryData[element.color] += 1;
+      } else {
+        categoryData[element.color] = 1;
+      }
+    });
+    // console.log(categoryData);
+    const chatData = Object.keys(categoryData).map((key) => {
+      return {
+        id: key,
+        label: key,
+        value: categoryData[key],
+        color: `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`
+      }
+    })
+    // console.log(chatData);
+    setPieColorChartData(chatData);
+  }
 
-      console.log(data.map(item => (
+  const formatOrdersTimelineData = (data) => {
+    const ordersData = {};
+    data.forEach(order => {
+        const orderDate = new Date(order.createdAt).toDateString();
+        if (ordersData[orderDate]) {
+            ordersData[orderDate] += 1;
+        } else {
+            ordersData[orderDate] = 1;
+        }
+    });
+
+    const chartData = Object.keys(ordersData).map(date => ({
+        x: date,
+        y: ordersData[date]
+    }));
+
+    setOrdersTimelineData([{
+      "id": 'No. of Orders',
+      "data": chartData,
+      "color": 'hsl(0, 70%, 50%)'
+    }]);
+}
+
+  const formBarData = (data) => {
+    setBarChartData(
+      data.map(item => (
         {
           name: item.title,
-          stock: item.stock 
+          stock: item.stock
         }
-      )));
+      ))
+    )
 
-      setBarChartKeys(
-        data.map(item => (
-          item.title
-        ))
-      )
+    console.log(data.map(item => (
+      {
+        name: item.title,
+        stock: item.stock
+      }
+    )));
+
+    setBarChartKeys(
+      data.map(item => (
+        item.title
+      ))
+    )
   }
 
   const fetchUsers = () => {
@@ -481,19 +527,22 @@ const Dashboard = () => {
 
   const fetchOrders = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/getall`)
-    .then(res => res.json())
-    .then(data => {
-      setOrderList(data);
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setOrderList(data);
+        formatOrdersTimelineData(data);
+      })
   }
-  
+
   const fetchProducts = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
-    .then(res => res.json())
-    .then(data => {
-      setProductList(data);
-      console.log(data);
+      .then(res => res.json())
+      .then(data => {
+        setProductList(data);
+        console.log(data);
         formatPieData(data);
+        formatColorPieData(data);
         formBarData(data);
       })
   }
@@ -537,19 +586,17 @@ const Dashboard = () => {
         <Grid>
 
           <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
-            <Title order={3}>Product Stock Distribution</Title>
-            <BarChart data={data} xCol={'name'} keys={[barChartKeys]} />
+            <Title order={3}>Product Color Distribution</Title>
+            <PieChart data={pieColorChartData} />
           </Grid.Col>
           <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
             <Title order={3}>Product Material Distribution</Title>
             <PieChart data={pieChartData} />
           </Grid.Col>
           <Grid.Col span={{ base: 12 }} h={'40vh'}>
-            <LineChart data={lineData} />
+            <LineChart data={ordersTimelineData} />
           </Grid.Col>
-
         </Grid>
-
       </Box>
     </div>
   )

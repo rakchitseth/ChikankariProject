@@ -17,6 +17,7 @@ export const AppProvider = ({ children }) => {
         setLoggedIn(false);
         router.push('/authenticate');
     }
+    
 
     return (
         <AppContext.Provider value={{
