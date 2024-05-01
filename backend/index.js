@@ -27,6 +27,8 @@ app.use('/util', utilROuter);
 app.use('/review', reviewRouter);
 app.use('/order', orderRouter);
 
+app.use(express.static('./static/uploads'));
+
 app.get('/get-permission', (req, res) => {
     const token = req.header('x-auth-token');
     console.log(token);
@@ -37,7 +39,6 @@ app.get('/get-permission', (req, res) => {
     }
 })
 
-app.use(express.static('./static/uploads'));
 
 app.post('/create-payment-intent', async (req, res) => {
     const { amount, customerData } = req.body;

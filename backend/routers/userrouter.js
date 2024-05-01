@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const model = require('../models/usermodel');
+const verifyToken = require('./verifyToken');
 
 const router = express.Router();
 router.post('/add', (req, res) => {
@@ -28,8 +29,20 @@ router.get('/getall', (req, res) => {
             res.json(err)
         });
 });
+
 router.get('/getbyid/:id', (req, res) => {
     model.findById(req.params.id)
+        .then((result) => {
+            res.json(result);
+
+        }).catch((err) => {
+            console.log(err)
+            res.json(err)
+        });
+});
+
+router.get('/getprofile', verifyToken, (req, res) => {
+    model.findById(req.user._id)
         .then((result) => {
             res.json(result);
 

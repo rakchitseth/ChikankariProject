@@ -131,7 +131,7 @@ function ManageProduct() {
       <Table.Td>{product.title}</Table.Td>
       <Table.Td>{product.material}</Table.Td>
       <Table.Td>{product.embroidery}</Table.Td>
-      <Table.Td>{product.embroidery}</Table.Td>
+      <Table.Td>{product.stock}</Table.Td>
       <Table.Td>
         <Button color='red' variant='filled' onClick={() => { deleteproduct(product._id) }} className='btn btn-danger'>Delete</Button>
       </Table.Td>
@@ -188,6 +188,9 @@ function ManageProduct() {
                   onSort={() => setSorting('gender')}
                 >
                   Gender
+                </Th>
+                <Th>
+                  In Stock
                 </Th>
                 <Th>
                   Actions

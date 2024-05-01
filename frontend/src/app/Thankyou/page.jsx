@@ -21,6 +21,10 @@ const ThankYou = () => {
   // console.log(params.get('redirect_status'));
   // const navigate = useNavigate();
 
+  const updateProductInventory = () => {
+    
+  }
+
   const savePayment = async () => {
     const paymentDetails = await retrievePaymentIntent();
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/order/add`, {
