@@ -41,6 +41,17 @@ router.get('/getbyid/:id', (req, res) => {
         });
 });
 
+router.get('/getbyemail/:email', (req, res) => {
+    model.findOne({ email: req.params.email })
+        .then((result) => {
+            if(result) res.json(result);
+            else res.status(404).json({ message: 'Email not registered' });
+        }).catch((err) => {
+            console.log(err)
+            res.json(err)
+        });
+})
+
 router.get('/getprofile', verifyToken, (req, res) => {
     model.findById(req.user._id)
         .then((result) => {
@@ -77,35 +88,35 @@ router.delete('/delete/:id', (req, res) => {
 router.post("/authenticate", (req, res) => {
     // console.log(req.body);
     model.findOne(req.body)
-    .then((result) => {
-        if(result){
-            console.log(result);
-            const { _id, name, email, role, avatar } = result;
-            const payload = {_id, name, email};
-            jwt.sign(
-                payload,
-                process.env.JWT_SECRET,
-                {expiresIn : '2 days'},
-                (err, token) => {
-                    if(err){
-                        console.log(err);
-                        res.status(500).json({message : 'error creating token'})
-                    }else{
-                        res.status(200).json({token, role, name, avatar})
+        .then((result) => {
+            if (result) {
+                console.log(result);
+                const { _id, name, email, role, avatar } = result;
+                const payload = { _id, name, email };
+                jwt.sign(
+                    payload,
+                    process.env.JWT_SECRET,
+                    { expiresIn: '2 days' },
+                    (err, token) => {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).json({ message: 'error creating token' })
+                        } else {
+                            res.status(200).json({ token, role, name, avatar })
+                        }
                     }
-                }
-            )
-        }else{
-            res.status(401).json({message : 'Invalid Credentials'})
-        }
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+                )
+            } else {
+                res.status(401).json({ message: 'Invalid Credentials' })
+            }
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 router.get("/authorise", verifyToken, (req, res) => {
-    res.status(200).json({allowed : true});
+    res.status(200).json({ allowed: true });
 });
 
 module.exports = router;

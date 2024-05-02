@@ -24,15 +24,6 @@ export async function middleware(req, res) {
     } else {
         return NextResponse.next();
     }
-    // .then((data) => {
-    //     const url = req.nextUrl.clone()
-    //     console.log(url);
-    //     url.pathname = '/authenticate'
-    //     if(data.allowed){
-    //         return NextResponse.next();
-    //     }else{
-    //     }
-    // });
 }
 
 export const config = {

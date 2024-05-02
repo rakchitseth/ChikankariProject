@@ -26,7 +26,6 @@ const ArticleCardVertical = () => {
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
-
   const fetchReviews = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/review/getbyproduct/${id}`);
     // console.log(response.status);
@@ -41,7 +40,6 @@ const ArticleCardVertical = () => {
       total += review.rating;
     });
     return total / reviewList.length;
-
   }
 
   const getProductDetails = () => {
