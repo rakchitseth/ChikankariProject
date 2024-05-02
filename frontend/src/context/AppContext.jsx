@@ -15,6 +15,8 @@ export const AppProvider = ({ children }) => {
         sessionStorage.removeItem('user');
         setCurrentUser(null);
         setLoggedIn(false);
+        // clear cookie
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         router.push('/authenticate');
     }
 

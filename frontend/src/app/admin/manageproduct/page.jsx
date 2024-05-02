@@ -82,8 +82,11 @@ function ManageProduct() {
 
   const fetchProducts = () => {
     if (window !== undefined) {
-      const res = fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
-        .then((result) => result.json())
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/product/getall`)
+        .then((res) => {
+          console.log(res.status);
+          return res.json();
+        })
         .then(data => {
           console.log(data);
           setProductList(data);

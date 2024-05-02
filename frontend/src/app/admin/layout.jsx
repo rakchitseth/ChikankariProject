@@ -1,6 +1,6 @@
 'use client';
-import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFingerprint, IconSettings, IconShirt } from '@tabler/icons-react';
-import { AppShell, Burger, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
+import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFingerprint, IconLogout, IconSettings, IconShirt } from '@tabler/icons-react';
+import { AppShell, Burger, Button, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
 import classes from './sidebar.module.css';
@@ -8,6 +8,8 @@ import UserAuthoriser from '@/context/UserAuth';
 import { SnackbarProvider } from 'notistack';
 import Link from 'next/link';
 import { IconUser } from '@tabler/icons-react';
+import { UserButton } from './UserButton/UserButton';
+import useAppContext from '@/context/AppContext';
 
 const data = [
     { link: '/admin/dashboard', label: 'Dashboard', icon: IconDashboard },
@@ -22,6 +24,10 @@ const Layout = ({ children }) => {
 
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+    const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+
+    const { logout } = useAppContext();
 
     const links = data.map((item) => (
         <Link
@@ -57,13 +63,18 @@ const Layout = ({ children }) => {
                         <Group h="100%" px="md">
                             <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
                             <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
-                            
+
                         </Group>
                     </AppShell.Header>
 
                     <AppShell.Navbar p="md">
                         <Title order={3}>Admin Options</Title>
                         {links}
+                        <div className={classes.footer}>
+                            {/* <UserButton user={currentUser} /> */}
+                            <Button fullWidth rightSection={<IconLogout />} py={10} color='red' variant='light' onClick={logout}>Logout</Button>
+
+                        </div>
                     </AppShell.Navbar>
 
                     <AppShell.Main>
