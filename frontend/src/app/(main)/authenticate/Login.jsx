@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { enqueueSnackbar } from 'notistack';
 import React from 'react';
 import useAppContext from '@/context/AppContext';
+import Link from 'next/link';
 
 const Login = ({ setType }) => {
 
@@ -86,6 +87,11 @@ const Login = ({ setType }) => {
                 <Group justify="space-between" mt="xl">
                     <Anchor component="button" type="button" c="dimmed" onClick={() => setType('Signup')} size="xs">
                         Don&apos;t have an account? Signup
+                    </Anchor>
+                </Group>
+                <Group justify="center" mt="xl">
+                    <Anchor component={Link} href="/reset-password" c="dimmed" size="xs">
+                        Forgot Password?
                     </Anchor>
                 </Group>
             </form>
