@@ -8,7 +8,8 @@ const mySchema = new Schema({
     age: Number,
     verified : {type: Boolean, default: false},
     role : {type: String, default: 'user'},
-    avatar: {type : String , default: 'avatar_placeholder.webp'}
+    avatar: {type : String , default: 'avatar_placeholder.webp'},
+    createdAt: {type : Date, default : Date.now}
 })
 
 module.exports = model('users',mySchema);

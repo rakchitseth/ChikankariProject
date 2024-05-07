@@ -9,7 +9,7 @@ const BarChart = ({ data, keys, xCol,  }) => (
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
+        colors={{ scheme: 'dark2' }}
         
         borderColor={{
             from: 'color',

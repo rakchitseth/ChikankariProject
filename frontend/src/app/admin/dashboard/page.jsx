@@ -6,114 +6,6 @@ import BarChart from '../BarChart';
 import PieChart from '../PieChart';
 import LineChart from '../LineChart';
 
-const data = [
-  {
-    "country": "AD",
-    "hot dog": 17,
-    "hot dogColor": "hsl(318, 70%, 50%)",
-    "burger": 121,
-    "burgerColor": "hsl(113, 70%, 50%)",
-    "sandwich": 40,
-    "sandwichColor": "hsl(248, 70%, 50%)",
-    "kebab": 47,
-    "kebabColor": "hsl(211, 70%, 50%)",
-    "fries": 22,
-    "friesColor": "hsl(198, 70%, 50%)",
-    "donut": 30,
-    "donutColor": "hsl(248, 70%, 50%)"
-  },
-  {
-    "country": "AE",
-    "hot dog": 6,
-    "hot dogColor": "hsl(331, 70%, 50%)",
-    "burger": 53,
-    "burgerColor": "hsl(221, 70%, 50%)",
-    "sandwich": 56,
-    "sandwichColor": "hsl(153, 70%, 50%)",
-    "kebab": 166,
-    "kebabColor": "hsl(150, 70%, 50%)",
-    "fries": 151,
-    "friesColor": "hsl(318, 70%, 50%)",
-    "donut": 126,
-    "donutColor": "hsl(174, 70%, 50%)"
-  },
-  {
-    "country": "AF",
-    "hot dog": 83,
-    "hot dogColor": "hsl(139, 70%, 50%)",
-    "burger": 150,
-    "burgerColor": "hsl(10, 70%, 50%)",
-    "sandwich": 189,
-    "sandwichColor": "hsl(327, 70%, 50%)",
-    "kebab": 30,
-    "kebabColor": "hsl(19, 70%, 50%)",
-    "fries": 27,
-    "friesColor": "hsl(205, 70%, 50%)",
-    "donut": 193,
-    "donutColor": "hsl(10, 70%, 50%)"
-  },
-  {
-    "country": "AG",
-    "hot dog": 131,
-    "hot dogColor": "hsl(152, 70%, 50%)",
-    "burger": 141,
-    "burgerColor": "hsl(167, 70%, 50%)",
-    "sandwich": 27,
-    "sandwichColor": "hsl(96, 70%, 50%)",
-    "kebab": 155,
-    "kebabColor": "hsl(132, 70%, 50%)",
-    "fries": 167,
-    "friesColor": "hsl(228, 70%, 50%)",
-    "donut": 118,
-    "donutColor": "hsl(210, 70%, 50%)"
-  },
-  {
-    "country": "AI",
-    "hot dog": 48,
-    "hot dogColor": "hsl(106, 70%, 50%)",
-    "burger": 143,
-    "burgerColor": "hsl(173, 70%, 50%)",
-    "sandwich": 168,
-    "sandwichColor": "hsl(298, 70%, 50%)",
-    "kebab": 111,
-    "kebabColor": "hsl(283, 70%, 50%)",
-    "fries": 88,
-    "friesColor": "hsl(104, 70%, 50%)",
-    "donut": 191,
-    "donutColor": "hsl(259, 70%, 50%)"
-  },
-  {
-    "country": "AL",
-    "hot dog": 69,
-    "hot dogColor": "hsl(242, 70%, 50%)",
-    "burger": 25,
-    "burgerColor": "hsl(40, 70%, 50%)",
-    "sandwich": 131,
-    "sandwichColor": "hsl(191, 70%, 50%)",
-    "kebab": 102,
-    "kebabColor": "hsl(124, 70%, 50%)",
-    "fries": 175,
-    "friesColor": "hsl(194, 70%, 50%)",
-    "donut": 160,
-    "donutColor": "hsl(143, 70%, 50%)"
-  },
-  {
-    "country": "AM",
-    "hot dog": 92,
-    "hot dogColor": "hsl(165, 70%, 50%)",
-    "burger": 177,
-    "burgerColor": "hsl(92, 70%, 50%)",
-    "sandwich": 47,
-    "sandwichColor": "hsl(34, 70%, 50%)",
-    "kebab": 142,
-    "kebabColor": "hsl(59, 70%, 50%)",
-    "fries": 28,
-    "friesColor": "hsl(256, 70%, 50%)",
-    "donut": 133,
-    "donutColor": "hsl(0, 70%, 50%)"
-  }
-]
-
 const lineData = [
   {
     "id": "japan",
@@ -425,6 +317,7 @@ const Dashboard = () => {
   const [barChartData, setBarChartData] = useState([]);
   const [barChartKeys, setBarChartKeys] = useState([]);
   const [ordersTimelineData, setOrdersTimelineData] = useState([]);
+  const [usersTimelineData, setUsersTimelineData] = useState([]);
 
   const formatPieData = (data) => {
     const categoryData = {};
@@ -472,26 +365,73 @@ const Dashboard = () => {
 
   const formatOrdersTimelineData = (data) => {
     const ordersData = {};
+
+    // Find the oldest date
+    const dates = data.map(order => new Date(order.createdAt));
+    const oldestDate = new Date(Math.min.apply(null, dates));
+
+    // Use the current date as the latest date
+    const latestDate = new Date();
+
+    // Create an array of dates for every day between the oldest date and now
+    for (let d = new Date(oldestDate); d <= latestDate; d.setDate(d.getDate() + 1)) {
+      ordersData[new Date(d).toDateString()] = 0;
+    }
+
+    // Count the number of orders for each date
     data.forEach(order => {
-        const orderDate = new Date(order.createdAt).toDateString();
-        if (ordersData[orderDate]) {
-            ordersData[orderDate] += 1;
-        } else {
-            ordersData[orderDate] = 1;
-        }
+      const orderDate = new Date(order.createdAt).toDateString();
+      if (ordersData[orderDate] !== undefined) {
+        ordersData[orderDate] += 1;
+      }
     });
 
     const chartData = Object.keys(ordersData).map(date => ({
-        x: date,
-        y: ordersData[date]
+      x: date,
+      y: ordersData[date]
     }));
 
-    setOrdersTimelineData([{
+    return [{
       "id": 'No. of Orders',
       "data": chartData,
       "color": 'hsl(0, 70%, 50%)'
-    }]);
-}
+    }];
+  }
+
+  const formatUsersTimelineData = (data) => {
+    const usersData = {};
+
+    // Find the oldest date
+    const dates = data.map(user => new Date(user.createdAt));
+    const oldestDate = new Date(Math.min.apply(null, dates));
+
+    // Use the current date as the latest date
+    const latestDate = new Date();
+
+    // Create an array of dates for every day between the oldest date and now
+    for (let d = new Date(oldestDate); d <= latestDate; d.setDate(d.getDate() + 1)) {
+      usersData[new Date(d).toDateString()] = 0;
+    }
+
+    // Count the number of orders for each date
+    data.forEach(user => {
+      const userDate = new Date(user.createdAt).toDateString();
+      if (usersData[userDate] !== undefined) {
+        usersData[userDate] += 1;
+      }
+    });
+
+    const chartData = Object.keys(usersData).map(date => ({
+      x: date,
+      y: usersData[date]
+    }));
+
+    return [{
+      "id": 'No. of Users',
+      "data": chartData,
+      "color": 'hsl(0, 70%, 50%)'
+    }];
+  }
 
   const formBarData = (data) => {
     setBarChartData(
@@ -521,7 +461,11 @@ const Dashboard = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/getall`)
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setUserList(data);
+        const temp = formatUsersTimelineData(data);
+        console.log(temp);
+        setUsersTimelineData(temp);
       })
   }
 
@@ -531,7 +475,9 @@ const Dashboard = () => {
       .then(data => {
         console.log(data);
         setOrderList(data);
-        formatOrdersTimelineData(data);
+        const temp = formatOrdersTimelineData(data);
+        console.log(temp);
+        setOrdersTimelineData(temp);
       })
   }
 
@@ -593,8 +539,11 @@ const Dashboard = () => {
             <Title order={3}>Product Material Distribution</Title>
             <PieChart data={pieChartData} />
           </Grid.Col>
-          <Grid.Col span={{ base: 12 }} h={'40vh'}>
+          <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
             <LineChart data={ordersTimelineData} />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 6 }} h={'40vh'}>
+            <LineChart data={usersTimelineData} />
           </Grid.Col>
         </Grid>
       </Box>

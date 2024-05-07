@@ -23,9 +23,9 @@ const LineChart = ({ data /* see data tab */ }) => (
         axisBottom={{
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
-            legend: 'transportation',
-            legendOffset: 36,
+            tickRotation: 45,
+            legend: 'Date',
+            legendOffset: 50,
             legendPosition: 'middle',
             truncateTickAt: 0
         }}
