@@ -1,5 +1,5 @@
 'use client';
-import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFingerprint, IconLogout, IconPackageExport, IconSettings, IconShirt } from '@tabler/icons-react';
+import { Icon2fa, IconBellRinging, IconDashboard, IconDatabaseImport, IconFingerprint, IconLogout, IconPackageExport, IconSettings, IconShirt, IconShoppingCart } from '@tabler/icons-react';
 import { AppShell, Burger, Button, Checkbox, Group, RangeSlider, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks';
 import React, { useState } from 'react'
@@ -17,6 +17,7 @@ const data = [
     { link: '/admin/manageuser', label: 'Manage User', icon: IconUser },
     { link: '/admin/addproduct', label: 'Add Product', icon: IconShirt },
     { link: '/admin/vendor', label: 'Vendor', icon: IconPackageExport },
+    { link: '/admin/manage-orders', label: 'Manage Orders', icon: IconShoppingCart },
 ];
 
 const Layout = ({ children }) => {

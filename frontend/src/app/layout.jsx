@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <MantineProvider
-          defaultColorScheme="light"
+          defaultColorScheme="dark"
           theme={theme}>
           <CartProvider>
             {children}
