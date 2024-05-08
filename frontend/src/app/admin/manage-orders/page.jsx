@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Container, Title, Text, Paper, Grid, Loader, Timeline, Select } from '@mantine/core';
+import { Container, Title, Text, Paper, Grid, Loader, Timeline, Select, Card } from '@mantine/core';
 import { IconCircleCheckFilled, IconPackageExport, IconTruck, IconTruckLoading } from '@tabler/icons-react';
+import { DateInput, DatePicker, MonthPicker } from '@mantine/dates';
 
 const ManageOrders = () => {
   const [paymentData, setPaymentData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState(new Date());
 
   const fetchPaymentHistory = async () => {
     setLoading(true);
@@ -47,9 +49,67 @@ const ManageOrders = () => {
     return 'solid';
   }
 
+  const calculateDaySale = () => {
+    let total = 0;
+    paymentData.forEach(order => {
+      const date = new Date(order.createdAt);
+      if (date.getDate() === value.getDate()) {
+        total += order.details.amount / 100;
+      }
+    });
+    return total;
+  }
+
+  const calculateMonthSale = () => {
+    let total = 0;
+    paymentData.forEach(order => {
+      const date = new Date(order.createdAt);
+      if (date.getMonth() === value.getMonth()) {
+        total += order.details.amount / 100;
+      }
+    });
+    return total;
+  }
+
+  const sortDayOrders = () => {
+    return paymentData.filter(order => {
+      const date = new Date(order.createdAt);
+      return date.getDate() === value.getDate();
+    });
+  }
+
+  const sortMonthOrders = () => {
+    return paymentData.filter(order => {
+      const date = new Date(order.createdAt);
+      return date.getMonth() === value.getMonth();
+    });
+  }
+
   return (
     <Container size="lg">
       <Title order={1} align="center" my={20}>Order History</Title>
+
+      <Grid>
+        <Grid.Col span={4}>
+          <Title order={3} align="center" weight="bold">Selected Date : </Title>
+          <Title order={3} align="center" weight="bold">{value.toDateString()}</Title>
+          <Card shadow="xs" padding="sm" withBorder mb={20}>
+            <Text align="center">Monthly Sale</Text>
+            <Title order={2} align="center" weight="bold">₹ {calculateMonthSale()}</Title>
+          </Card>
+          <Card shadow="xs" padding="sm" withBorder mb={20}>
+            <Text align="center">Daily Sale</Text>
+            <Title order={2} align="center" weight="bold">₹ {calculateDaySale()}</Title>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={4}>
+          <DatePicker ml={40} value={value} onChange={setValue} onDateChange={sortDayOrders} />
+        </Grid.Col>
+        <Grid.Col span={4}>
+
+          <MonthPicker value={value} onChange={setValue} onDateChange={sortMonthOrders} />
+        </Grid.Col>
+      </Grid>
 
       {loading ? (
         <Loader />
@@ -65,6 +125,7 @@ const ManageOrders = () => {
               </Grid.Col>
               <Grid.Col span={6}>
                 <Text size='sm' c={'dimmed'}>Order Details</Text>
+                <Text>Placed On: {new Date(order.createdAt).toDateString()}</Text>
                 <Text>Order ID: {order._id}</Text>
                 <Text>Amount: ₹{order.details.amount / 100}</Text>
                 <Text>Payment Status: {order.details.status}</Text>
@@ -80,22 +141,30 @@ const ManageOrders = () => {
 
             <Timeline active={getActive(order.status)} bulletSize={24} lineWidth={2} bulletSize={30}>
               <Timeline.Item lineVariant={getLineVariant(1, order.status)} bullet={<IconCircleCheckFilled size={16} />} title="Order Placed">
-                <Text c="dimmed" size="sm">You&apos;ve created new branch <Text variant="link" component="span" inherit>fix-notifications</Text> from master</Text>
-                <Text size="xs" mt={4}>2 hours ago</Text>
+                <Text c="dimmed" size="sm">
+                  Order has been placed successfully.
+                </Text>
+                {/* <Text size="xs" mt={4}>2 hours ago</Text> */}
               </Timeline.Item>
               <Timeline.Item lineVariant={getLineVariant(2, order.status)} bullet={<IconTruckLoading size={16} />} title="Shipped">
-                <Text c="dimmed" size="sm">You&apos;ve created new branch <Text variant="link" component="span" inherit>fix-notifications</Text> from master</Text>
-                <Text size="xs" mt={4}>2 hours ago</Text>
+                <Text c="dimmed" size="sm">
+                  Product has been shipped and is on the way to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>2 hours ago</Text> */}
               </Timeline.Item>
 
               <Timeline.Item lineVariant={getLineVariant(3, order.status)} bullet={<IconTruck size={16} />} title="On the Way">
-                <Text c="dimmed" size="sm">You&apos;ve pushed 23 commits to<Text variant="link" component="span" inherit>fix-notifications branch</Text></Text>
-                <Text size="xs" mt={4}>52 minutes ago</Text>
+                <Text c="dimmed" size="sm">
+                  Product is on the way to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>52 minutes ago</Text> */}
               </Timeline.Item>
 
-              <Timeline.Item title="Pull request" bullet={<IconPackageExport size={16} />} lineVariant="dashed">
-                <Text c="dimmed" size="sm">You&apos;ve submitted a pull request<Text variant="link" component="span" inherit>Fix incorrect notification message (#187)</Text></Text>
-                <Text size="xs" mt={4}>34 minutes ago</Text>
+              <Timeline.Item title="Delivered" bullet={<IconPackageExport size={16} />} lineVariant="dashed">
+                <Text c="dimmed" size="sm">
+                  Product has been delivered to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>34 minutes ago</Text> */}
               </Timeline.Item>
             </Timeline>
 

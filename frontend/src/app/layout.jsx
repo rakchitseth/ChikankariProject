@@ -3,6 +3,7 @@ import "./globals.css";
 import { MantineProvider, createTheme } from "@mantine/core";
 import { CartProvider } from "@/context/CartContext";
 import '@mantine/carousel/styles.css';
+import '@mantine/dates/styles.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

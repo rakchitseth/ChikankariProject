@@ -65,22 +65,30 @@ const OrderHistory = () => {
 
             <Timeline active={getActive(order.status)} bulletSize={24} lineWidth={2} bulletSize={30}>
               <Timeline.Item lineVariant={getLineVariant(1, order.status)} bullet={<IconCircleCheckFilled size={16} />} title="Order Placed">
-                <Text c="dimmed" size="sm">You&apos;ve created new branch <Text variant="link" component="span" inherit>fix-notifications</Text> from master</Text>
-                <Text size="xs" mt={4}>2 hours ago</Text>
+                <Text c="dimmed" size="sm">
+                  Order has been placed successfully.
+                </Text>
+                {/* <Text size="xs" mt={4}>2 hours ago</Text> */}
               </Timeline.Item>
               <Timeline.Item lineVariant={getLineVariant(2, order.status)} bullet={<IconTruckLoading size={16} />} title="Shipped">
-                <Text c="dimmed" size="sm">You&apos;ve created new branch <Text variant="link" component="span" inherit>fix-notifications</Text> from master</Text>
-                <Text size="xs" mt={4}>2 hours ago</Text>
+                <Text c="dimmed" size="sm">
+                  Product has been shipped and is on the way to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>2 hours ago</Text> */}
               </Timeline.Item>
 
               <Timeline.Item lineVariant={getLineVariant(3, order.status)} bullet={<IconTruck size={16} />} title="On the Way">
-                <Text c="dimmed" size="sm">You&apos;ve pushed 23 commits to<Text variant="link" component="span" inherit>fix-notifications branch</Text></Text>
-                <Text size="xs" mt={4}>52 minutes ago</Text>
+                <Text c="dimmed" size="sm">
+                  Product is on the way to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>52 minutes ago</Text> */}
               </Timeline.Item>
 
-              <Timeline.Item title="Pull request" bullet={<IconPackageExport size={16} />} lineVariant="dashed">
-                <Text c="dimmed" size="sm">You&apos;ve submitted a pull request<Text variant="link" component="span" inherit>Fix incorrect notification message (#187)</Text></Text>
-                <Text size="xs" mt={4}>34 minutes ago</Text>
+              <Timeline.Item title="Delivered" bullet={<IconPackageExport size={16} />} lineVariant="dashed">
+                <Text c="dimmed" size="sm">
+                  Product has been delivered to the customer.
+                </Text>
+                {/* <Text size="xs" mt={4}>34 minutes ago</Text> */}
               </Timeline.Item>
             </Timeline>
 
