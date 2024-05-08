@@ -46,7 +46,7 @@ const Login = ({ setType }) => {
                         if(data.role === 'admin'){
                             router.push('/admin/manageproduct');
                         }else if(data.role === 'user'){
-                            router.push('/browse');
+                            router.push('/');
                         }
                     })
             } else {
