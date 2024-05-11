@@ -3,7 +3,7 @@ const {Schema,model} = require('../connection')
 // import Schema from 'mongoose'
 const mySchema = new Schema({
     name:String,
-    email : String,
+    email : {type:String, unique:true, required:true},
     password : String,
     age: Number,
     verified : {type: Boolean, default: false},
