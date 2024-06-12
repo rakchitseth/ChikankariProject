@@ -7,6 +7,7 @@ import useBrowseContext from '@/context/BrowseContext';
 import { IconSearch } from '@tabler/icons-react';
 import { IconArrowRight } from '@tabler/icons-react';
 import useCartContext from '@/context/CartContext';
+import './style.css'
 
 
 const Browse = () => {

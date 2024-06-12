@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Title, Text, Paper, Grid, Loader, Timeline, Select, Card } from '@mantine/core';
 import { IconCircleCheckFilled, IconPackageExport, IconTruck, IconTruckLoading } from '@tabler/icons-react';
 import { DateInput, DatePicker, MonthPicker } from '@mantine/dates';
+import './styles.css';
 
 const ManageOrders = () => {
   const [paymentData, setPaymentData] = useState([]);

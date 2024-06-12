@@ -1,3 +1,8 @@
+body
+{
+  background-color: black;
+}
+
 .privacy-container {
     display: flex;
     flex-direction: column;
@@ -7,10 +12,10 @@
   
   .privacy-title {
     font-size: 2em;
-    color: #4CAF50;
-  }
-  
-  .privacy-text {
-    font-size: 1.2em;
-    color: #333;
+    color: #ee2d2d;
+    }
+    
+    .privacy-text {
+      font-size: 1.2em;
+      color: #ece8e8;
   }

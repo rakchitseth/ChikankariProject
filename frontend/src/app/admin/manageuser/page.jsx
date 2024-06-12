@@ -19,6 +19,7 @@ import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@table
 import classes from './TableSort.module.css';
 import { useDisclosure } from '@mantine/hooks';
 import { Navbar } from '@/app/navbar';
+import './styles.css';
 
 
 function Th({ children, reversed, sorted, onSort }) {

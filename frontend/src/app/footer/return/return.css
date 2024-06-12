@@ -1,21 +1,22 @@
 body
 {
-  background-color: black;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
-.terms-container {
+.return-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
   }
   
-  .terms-title {
+  .return-title {
     font-size: 2em;
     color: #ee2d2d;
     }
     
-    .terms-text {
+    .return-text {
       font-size: 1.2em;
       color: #ece8e8;
   }

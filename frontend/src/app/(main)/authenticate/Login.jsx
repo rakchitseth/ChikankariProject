@@ -80,7 +80,7 @@ const Login = ({ setType }) => {
                         label="Keep me logged in"
                     />
 
-                    <Button color='pink' type='submit'>Login</Button>
+                    <Button color='black' type='submit'>Login</Button>
 
                 </Stack>
 

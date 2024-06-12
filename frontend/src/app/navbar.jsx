@@ -120,7 +120,7 @@ export const Navbar = () => {
           >
             <Group gap={7}>
               <Avatar src={currentUser.avatar} alt={currentUser.name} radius="xl" size={20} />
-              <Text fw={500} size="sm" lh={1} mr={3}>
+              <Text fw={500} size="sm" lh={1} mr={3} style={{color: 'white'}} >
                 {currentUser.name}
               </Text>
               <IconChevronDown style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
@@ -171,18 +171,18 @@ export const Navbar = () => {
       <Box>
         <Group justify="space-between" h="100%">
 
-          <a href="../" className={classes.link}><img src="/logo.png" alt="" width={400} />  </a>
+          <a href="../" className={classes.link}><img src="https://wayoutwebapp.web.app/static/media/Final%20Logo.659ab236dcd241067c99.png" alt="" width={200} />  </a>
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            {/* <a href="./" className={classes.link}>
+            <a href="./" className={classes.link}>
               Home
-            </a> */}
+            </a>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-              <HoverCard.Target>
+              {/* <HoverCard.Target>
                 <a href="#" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Shop For Womens
+                      Apparel
                     </Box>
                     <IconChevronDown
                       style={{ width: rem(16), height: rem(16) }}
@@ -190,9 +190,9 @@ export const Navbar = () => {
                     />
                   </Center>
                 </a>
-              </HoverCard.Target>
+              </HoverCard.Target> */}
 
-              <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
+              {/* <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
                   <Text fw={500}>Features</Text>
                   <Anchor component={Link} href="/browse" fz="xs">
@@ -205,13 +205,13 @@ export const Navbar = () => {
                 <SimpleGrid cols={3} spacing={0}>
                   {links}
                 </SimpleGrid>
-              </HoverCard.Dropdown>
+              </HoverCard.Dropdown> */}
             </HoverCard>
-            <Link href="/browse/men" className={classes.link}>
-              Mens
+            <Link href="/browse" className={classes.link}>
+              New Arrivals
             </Link>
-            <Link href="/browse/kids" className={classes.link}>
-              Kids
+            <Link href="/Contactus" className={classes.link}>
+              Contact Us
             </Link>
           </Group>
 
@@ -245,7 +245,7 @@ export const Navbar = () => {
               <UnstyledButton className={classes.link} onClick={toggleLinks}>
                 <Center inline>
                   <Box component="span" mr={5}>
-                    Shop For Womens
+                    Apparel
                   </Box>
                   <IconChevronDown
                     style={{ width: rem(16), height: rem(16) }}
@@ -255,10 +255,10 @@ export const Navbar = () => {
               </UnstyledButton>
               <Collapse in={linksOpened}>{links}</Collapse>
               <a href="#" className={classes.link}>
-                Mens
+                New Arrivals
               </a>
               <a href="#" className={classes.link}>
-                Kids
+                Contact Us
               </a>
 
               <Divider my="sm" />

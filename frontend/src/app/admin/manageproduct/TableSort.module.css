@@ -16,3 +16,10 @@
     height: rem(21px);
     border-radius: rem(21px);
   }
+
+  .td
+  {
+    padding: 0;
+    color: white;
+    background-color: white;
+  }

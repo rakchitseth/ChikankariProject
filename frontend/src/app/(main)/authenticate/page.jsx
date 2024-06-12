@@ -13,21 +13,23 @@ const Authenticate = () => {
     
 
     return (
+        
         <div className='card'>
 
             <Paper radius="md" p="xl" withBorder>
                 <Text size="lg" fw={500}>
-                    Welcome to CK Sewa Chikan Industries , {type} with
+                    Welcome to WayOut, {type} with
                 </Text>
 
-                <SegmentedControl value={type} onChange={v => setType(v)} fullWidth color='pink' data={['Login', 'Signup']} />
-
+                <SegmentedControl value={type} onChange={v => setType(v)} fullWidth color='black' data={['Login', 'Signup']} />
+                
                 {
                     type === 'Login' ? <Login /> : <Signup setType={setType} />
                 }
                 
             </Paper>
         </div>
+        
     )
 }
 

@@ -18,6 +18,7 @@ import {
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
 import classes from './TableSort.module.css';
 import { useDisclosure } from '@mantine/hooks';
+import './styles.css';
 
 
 function Th({ children, reversed, sorted, onSort }) {

@@ -1,3 +1,7 @@
+body
+{
+  background-color: black;
+}
 .about-container {
     display: flex;
     flex-direction: column;
@@ -7,10 +11,10 @@
   
   .about-title {
     font-size: 2em;
-    color: #4CAF50;
+    color: #ee2d2d;
   }
   
   .about-text {
     font-size: 1.2em;
-    color: #333;
+    color: #ece8e8;
   }

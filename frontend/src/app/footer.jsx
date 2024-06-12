@@ -10,7 +10,6 @@ const data = [
     links: [
       { label: 'Home', link: '/' },
       { label: 'About', link: '/footer/about' },
-      { label: 'Browse Collections', link: '/browse' },
       { label: 'Contact Us', link: '/Contactus' },
     ],
   },
@@ -19,8 +18,8 @@ const data = [
     links: [
       { label: 'Privacy Policy', link: '/footer/privacy' },
       { label: 'Terms & Condition', link: '/footer/terms' },
-      { label: 'Shipping Policy', link: '#' },
-      { label: 'Return & Refunds', link: '#' },
+      { label: 'Shipping Policy', link: '/footer/shipping' },
+      { label: 'Return & Refunds', link: '/footer/return' },
     ],
   },
   // {
@@ -61,17 +60,18 @@ const  FooterLinks = () => {
         <div className={classes.logo}>
           {/* <MantineLogo size={30} /> */}
           <Text size="xs" c="dimmed" className={classes.description}>
-           One Stop Solutions for your all ethinic Needs 
+           The Wayout to your fashion
           </Text>
           <Text size="xs" c="dimmed" className={classes.description}>
-           Discover the Artistry of Chikankari:Where Tradition Meets Elegance 
+            
           </Text>
+          <img  src="https://wayoutwebapp.web.app/static/media/Final%20Logo.659ab236dcd241067c99.png" alt="" width={200} />
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2016 cksewachikan.com All rights reserved.
+          © 2024 Wayout ltd All rights reserved.
         </Text>
 
         <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">

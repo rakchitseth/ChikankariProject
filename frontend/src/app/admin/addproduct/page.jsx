@@ -19,9 +19,7 @@ const LoginSchema = Yup.object().shape({
     description: Yup.string().required('Required'),
     color: Yup.string().required('Required'),
     material: Yup.string().required('Required'),
-    embroidery: Yup.string().required('Required'),
     price: Yup.number().required('Required'),
-    // stiched: Yup.boolean().required('Required'),
     discount: Yup.number(),
     gender: Yup.string().required('Required'),
     stock: Yup.number().required('Required')
@@ -37,9 +35,7 @@ function AddProduct() {
             description: '' ,
             color: '',
             material: '',
-            embroidery: '',
             price: '',
-            stitched: true,
             discount: '',
             gender:'',
             stock: '',
@@ -98,7 +94,7 @@ function AddProduct() {
                                 <TextInput label="Product Description" placeholder="description" id="description"   onChange={formik.handleChange} value={formik.values.description} error={ formik.touched.description && formik.errors.description} />
                                 <TextInput label="Color" placeholder="Color" id="color"   onChange={formik.handleChange} value={formik.values.color} error={ formik.touched.color && formik.errors.color} />
                                 <TextInput label="Material" placeholder=" Material description" id="material"   onChange={formik.handleChange} value={formik.values.material} error={ formik.touched.material && formik.errors.material} />
-                                <TextInput label="Embroidery type" placeholder="Type of embroidery" id="embroidery"   onChange={formik.handleChange} value={formik.values.embroidery}  error={ formik.touched.embroidery && formik.errors.embroidery} />
+                                {/* <TextInput label="Embroidery type" placeholder="Type of embroidery" id="embroidery"   onChange={formik.handleChange} value={formik.values.embroidery}  error={ formik.touched.embroidery && formik.errors.embroidery} /> */}
                                 <TextInput label="Price" id="price"   onChange={formik.handleChange} value={formik.values.price} error={ formik.touched.price && formik.errors.price} />
                                 {/* <TextInput label="Stitched" placeholder="stitching type" id="stitched"   onChange={formik.handleChange} value={formik.values.stitched} error={ formik.touched.stitched && formik.errors.stitched} /> */}
                                 <NativeSelect label="gender"   id="gender" data={['men', 'women','kids']}   onChange={formik.handleChange} value={formik.values.gender } error={ formik.touched.gender && formik.errors.gender} />

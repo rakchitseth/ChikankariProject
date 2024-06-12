@@ -97,7 +97,7 @@ const Signup = ({ setType }) => {
                         onChange={(event) => signupForm.setFieldValue('terms', event.currentTarget.checked)}
                     />
 
-                    <Button color='pink' type='submit'>Submit</Button>
+                    <Button color='black' type='submit'>Submit</Button>
 
                 </Stack>
 

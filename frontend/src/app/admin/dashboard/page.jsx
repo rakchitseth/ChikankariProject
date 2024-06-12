@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import BarChart from '../BarChart';
 import PieChart from '../PieChart';
 import LineChart from '../LineChart';
+import './styles.css';
 
 const lineData = [
   {

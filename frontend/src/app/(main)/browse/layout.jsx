@@ -6,20 +6,21 @@ import React, { useEffect, useState } from 'react'
 import appConfig from '@/utils/constants'
 import { Navbar } from '@/app/navbar';
 import { IconCheck } from '@tabler/icons-react';
+
 // import checkboxClasses from './checkbox.module.css';
 
 const { minPrice, maxPrice } = appConfig;
 
 const priceMarks = [
-    { value: 100, label: '₹100' },
-    { value: 2000, label: '₹2000' },
-    { value: 5000, label: '₹5000' },
-    { value: 10000, label: '₹10000' },
+    { value: 1000, label: '₹1K' },
+    { value: 2000, label: '₹2K' },
+    { value: 5000, label: '₹5K' },
+    { value: 10000, label: '₹10K' },
 ];
 
-const sizeOptions = [
-    38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60
-]
+// const sizeOptions = [
+//     38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60
+// ]
 
 const availableColors = [
     {
@@ -193,17 +194,21 @@ const Layout = ({ children }) => {
 
     return (
         <AppShell
-            header={{ height: 60 }}
+            header={{ height: 80 }}
             navbar={{
-                width: 400,
+                width: 280,
                 breakpoint: 'sm',
                 collapsed: { mobile: false },
+                position: 'flex',
+                
+
             }}
             padding="md"
         // layout="alt"
         >
             <AppShell.Header>
                 <Navbar />
+                
             </AppShell.Header>
 
             <AppShell.Navbar p="xl" >
@@ -211,7 +216,7 @@ const Layout = ({ children }) => {
 
                 <Title order={4}>Price</Title>
                 <RangeSlider
-                    min={minPrice}
+                    min={1000}
                     max={maxPrice}
                     marks={priceMarks}
                     defaultValue={[minPrice, maxPrice]}
@@ -219,7 +224,7 @@ const Layout = ({ children }) => {
 
                 />
 
-                <Title order={4} mt={30}>Category</Title>
+                {/* <Title order={4} mt={30}>Category</Title>
                 <Checkbox.Group
                     defaultValue={['react']}
                     // label="Select your favorite frameworks/libraries"
@@ -233,7 +238,7 @@ const Layout = ({ children }) => {
                         <Checkbox value="vue" label="Vescose" />
                         <Checkbox value="vue" label="Premium" />
                     </Group>
-                </Checkbox.Group>
+                </Checkbox.Group> */}
                 <Title order={4} mt={20}>Select Color</Title>
                 <Grid mt={10}>
                     {

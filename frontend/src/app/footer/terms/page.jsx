@@ -5,7 +5,7 @@ const TermsAndConditions = () => {
   return (
     <div className="terms-container">
       <h1 className="terms-title">Terms and Conditions</h1>
-      <p className="terms-text">Welcome to CK Sewa Chikan Industries. These terms and conditions outline the rules and regulations for the use of our website. By accessing or using our website, you accept and agree to be bound by these terms and conditions. If you do not agree with any part of these terms, please refrain from using our website.
+      <p className="terms-text">Welcome to Wayout ltd. These terms and conditions outline the rules and regulations for the use of our website. By accessing or using our website, you accept and agree to be bound by these terms and conditions. If you do not agree with any part of these terms, please refrain from using our website.
 <br />
 <br />
 Intellectual Property:

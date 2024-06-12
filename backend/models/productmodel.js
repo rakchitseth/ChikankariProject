@@ -7,9 +7,7 @@ const mySchema = new Schema({
     description: { type: String, required: true },
     color: String,
     material: String,
-    embroidery: String,
     price: { type: Number, required: true },
-    stitched: Boolean,
     discount: { type: Number, default: 0 },
     gender: { type: String, required: true },
     stock: { type: Number },
@@ -17,5 +15,5 @@ const mySchema = new Schema({
     offer: { type: Number, default: 0 },
 })
 
-module.exports = model('chikanproducts', mySchema);
+module.exports = model('products', mySchema);
 

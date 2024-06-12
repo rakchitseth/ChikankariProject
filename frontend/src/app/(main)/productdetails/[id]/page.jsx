@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { IconArrowLeft, IconCheck, IconTrashFilled } from '@tabler/icons-react';
 import { enqueueSnackbar } from 'notistack';
 import ReactTimeAgo from 'react-time-ago';
+import './style.css';
 
 const ArticleCardVertical = () => {
 
@@ -70,9 +71,13 @@ const ArticleCardVertical = () => {
         <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }}>
           <Grid.Col span={{ md: 6, sm: 12 }}>
             <img
-              src={`${process.env.NEXT_PUBLIC_API_URL}/${productDetails.image[0]}`}
-              width={'100%'}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${productDetails.image[0]}`}
+            width={'100%'}
             />
+            {/* <img
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${productDetails.image[1]}`}
+            width={'100%'}
+            /> */}
           </Grid.Col>
           <Grid.Col span={{ md: 6, sm: 12 }}>
             <ActionIcon mb={'xl'} size={'lg'} onClick={
@@ -115,23 +120,22 @@ const ArticleCardVertical = () => {
               </Grid.Col>
             </Grid>
 
-            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} >
+            {/* <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} >
               <Grid.Col span={3}>
                 <Text c='dimmed' fw={700}>Embroidery : </Text>
               </Grid.Col>
               <Grid.Col span={9} tt={'capitalize'}>
                 <Text fw={700}>{productDetails.embroidery}</Text>
               </Grid.Col>
-            </Grid>
-            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} >
+            </Grid> */}
+            {/* <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} >
               <Grid.Col span={3}>
                 <Text c='dimmed' fw={700}>Stitched : </Text>
               </Grid.Col>
               <Grid.Col span={9} tt={'capitalize'}>
                 <Text fw={700}>{productDetails.stitched ? 'Yes' : 'No'}</Text>
               </Grid.Col>
-            </Grid>
-
+            </Grid> */}
 
             <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }} align='center' >
               <Grid.Col span={3}>

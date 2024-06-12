@@ -2,6 +2,7 @@
     position: relative;
     padding-top: var(--mantine-spacing-xl);
     padding-left: var(--mantine-spacing-xl);
+    background-color: rgb(0, 0, 0);
   }
   
   .overlay {
@@ -17,6 +18,7 @@
   .content {
     position: relative;
     z-index: 2;
+    color: white;
   }
   
   .icon {
@@ -24,5 +26,5 @@
   }
   
   .title {
-    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    color: white
   }

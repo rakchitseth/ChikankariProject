@@ -8,8 +8,8 @@ import '@mantine/dates/styles.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Sewa Chikan",
-  description: "Chikankari products from Sewa Chikan Industries",
+  title: "Way Out",
+  description: "Way Out - The best way to stand out in the crowd!",
 };
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <MantineProvider
-          defaultColorScheme="light"
+          defaultColorScheme="auto"
           theme={theme}>
           <CartProvider>
             {children}
